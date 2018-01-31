@@ -1,0 +1,393 @@
+---
+title: "Thesis Outline"
+author: "Nick Zinck"
+date: "Jan 2018"
+output: 
+  pdf_document:
+    toc: true
+    toc_depth: 4
+    fig_caption: true
+    number_sections: true
+urlcolor: black
+linkcolor: black
+fontsize: 12pt
+geometry: margin = 1.2in
+header-includes:
+- \usepackage{placeins}
+- \usepackage{setspace}
+- \usepackage{chngcntr}
+- \onehalfspacing
+- \counterwithin{figure}{section}
+- \counterwithin{table}{section}
+
+---
+
+```{r loadpack, include=FALSE}
+# Load Packages
+library(rmarkdown)
+library(knitr)
+library(tidyverse)
+library(shiny)
+library(kableExtra)
+require(DiagrammeR)
+require(DiagrammeRsvg)
+require(rsvg)
+#library(RefManageR)
+
+```
+
+
+# Introduction
+
+## Objective
+
+## WAVE (Watershed data Analysis and Visualization Environment)
+
+### Application Overview
+
+### Visualization and Analysis
+
+## WIT (Watershed data Importer Tool)
+
+### Application Overview
+
+### Data Import
+
+
+
+
+# Background
+
+## Water Quality Sampling Plan
+
+### Site Locations
+
+### Collection Frequency
+
+## Previous Watershed Studies for Quabbin and Wachsuett Reservoir
+
+## Other Watershed Visualization Applications
+
+### Propritary
+
+### Open-Source
+
+## Web App Develpement Frameworks 
+
+### R (Shiny)
+
+### Python (Pyramid, Django, Flask)
+
+### Other (Ruby on Railsm, node.js)
+
+
+
+
+
+# WAVE Setup Manual
+
+## R download
+
+## RStudio download
+
+## Database Connections
+
+## Shortcut Creation
+
+
+
+
+
+# WIT Setup Manual
+
+## R 
+
+## RStudio download
+
+## Database Connections
+
+## Shortcut Creation
+
+
+
+
+
+# WAVE User Manual
+
+## Overview
+
+## How it works
+
+## Startup
+
+## Home Tab
+
+## Filter Tab
+
+## Tributary Tab
+
+### Time-Series
+
+#### Input Widgets 
+
+### Correlation
+
+## Reservoir Tab - Bacteria
+
+### Time-Series
+
+### Correlation
+
+## Reservoir Tab - Physiochemical
+
+### Time-Series
+
+### Correlation
+
+## Reservoir Tab - Profile
+
+### Time-Series
+
+### Correlation
+
+## MapPlot Tab
+
+## Forestry Tab
+
+## Hydro/Met Tab
+
+## Report Tab
+
+
+
+# WIT User Manual
+
+## Overview
+
+## How it works
+
+## Startup
+
+### Datasets
+
+## File Selection
+
+## Process Data
+
+## Import Data
+
+
+
+
+
+# Developer Guide for WAVE and WIT
+
+## R
+
+## RStudio
+
+## Shiny
+
+### What is a Shiny App
+
+### User Interface
+
+### Server
+
+### Reactivity
+
+### Capabilities
+
+### Limitations
+
+## Github
+
+## Database
+
+### Tributary Data
+
+### Reservoir Data
+
+### Site Location Data
+
+### Parameter Data
+
+## Remote Connection
+
+## Tidy Data
+
+## R Packages
+
+### Packages
+
+See Section __ for Shiny Package information
+
+### tidyverse
+
+#### dplyr
+
+#### tidyr
+
+#### ggplot
+
+#### leaflet
+
+#### DT
+
+### Plotly
+
+### stringr
+
+### scales
+
+### RMarkdown
+
+### knitr
+
+### knitr
+
+### Leaflet
+
+### js
+
+
+
+
+# WAVE Developement Manual
+
+## App Layout
+
+### Home
+
+### Filter
+
+### Tributary
+
+### Reservoir
+
+### MapPlot
+
+### Hydro
+
+### Report
+
+## Main Script
+
+### App.R
+
+### LoadMSAccess.R
+
+### LaunchApp.R
+
+## Modules (General)
+
+### Module overview
+
+### Module Syntax
+
+### Module Naming
+
+### Passing Reactives in and out of Modules
+
+## Primary Modules
+
+### Home.R
+
+### Filter-WQ.R
+
+### Time.R
+
+### Correlation.R
+
+### Time-Depth.R
+
+### Corrlation-Depth.R
+
+### Profile-Line
+
+### Profile-Heatmap
+
+### Profile-Summary
+
+### Phyto
+
+### Mapplot (module)
+
+The MapPlot module is  incorporated in the App in under the MapPlot tab.
+
+### Hydro.R
+
+### Forestry.R
+
+### Report.R
+
+## Secondary Modules - Input
+
+### CheckboxSelectAll.R
+
+### SelectInputSelectAll.R
+
+### SiteCheckbox.R
+
+### StationLevelCheckbox.R
+
+### Date Select.R
+
+### ParameterCheckbox.R
+
+### ParameterSelect.R
+
+### Saving Inputs (Widget Memory)
+
+## Secondary Modules - Output
+
+### Plot-Time.R
+
+### Plot-Time-Depth.R
+
+### Plot-Correlation.R
+
+### Plot-Correlation-Depth.R
+
+### Plot-Profheat.R
+
+### Plot-Profline.R
+
+### Summary.R
+
+### Summary-Depth.R
+
+### Summary-Profile.R
+
+## Functions
+
+### CircleSizeLegends.R
+
+### GetSeasons.R
+
+### Phytoplots.R
+
+## General Notes
+
+### 1. Conditional Panel in Module
+
+### 2. Conditional Panel in Module
+
+## Future Work
+
+
+
+
+# WIT Developement Manual
+
+## Dataset Spreadsheet
+
+## App Script
+
+## Process Scripts
+
+## Import Scripts
+
+
+# Appendix
+# References

@@ -1,0 +1,137 @@
+---
+title: "Masters Thesis"
+author: "Nick Zinck"
+date: "May 2017"
+output: 
+  pdf_document:
+    toc: true
+    toc_depth: 3
+    number_sections: true
+bibliography: "F:/Nick Zinck/Shiny Water Quality/Thesis/Thesis.bib"
+
+nocite: | 
+  @noauthor_shiny_nodate, @noauthor_shiny_nodate-1
+---
+
+```{r loadpack, include=FALSE}
+# Load Packages
+library(rmarkdown)
+library(knitr)
+library(tidyverse)
+library(shiny)
+library(kableExtra)
+require(DiagrammeR)
+require(DiagrammeRsvg)
+require(rsvg)
+```
+
+```{r enter data,include=FALSE}
+pdf_digraph <- function(filename, code, width = 500, height = NULL){
+  capture.output({
+  g <- grViz(paste("digraph{", code, "}"))
+  DiagrammeRsvg::export_svg(g) %>% charToRaw %>% rsvg::rsvg_pdf(filename, width = width, height = height)
+  },  file='NUL')
+  knitr::include_graphics(filename)
+}
+```
+
+# Introduction
+
+## Objective
+
+A comprehensive watershed monitoring program includes collecting much water quality, meteorological, and hydrological data. Although data collection is always important, much of this data is underutilized due to a timely processes of searching, displaying, and analyzing data. Spreadsheet applications are likely not an effective way to store large datasets and visualization and analysis tools are limited. Relational database applications serve as a better home for these large datasets, yet visualization and analysis tools are commonly even more limited. A logical solution is to store large datasets within a relational database and pair this database with an outside application specialized for data visualization, analysis, and automation.
+
+This project specifically is working to facilitate the DCR's (Department of Conservation and Recreation's) data entry, searching, visualization, and analysis process through an R-based application creation tool called Shiny. R is an open source programming language used largely for data statistics and visualization. Shiny is an open source application that allows one to create applications which have a friendly user interface component as well as a server component which uses R to do all the work. A Shiny application can be fully customized by the designer for unique tasks. Features of the DCR Shiny application include easy data searching, water quality time series plotting and analysis, water quality regression analysis, geospatial data visualization and analysis, and more. Through the insight that this application brings, future data collection needs can be better assessed which will direct changes to the current watershed monitoring program.
+
+Automation is a useful, yet underutilized tool that can save an organization much time day to day on decreasing the number of repeated tasks that come along with searching, displaying, and analyzing water quality data.
+The Application is shared openly through Github and can be ran locally on any computer with two lines of code. Hosting the application online at a URL is also a possibility. 
+
+
+The objective of this project is to create an application that facilitates the data entry, searching, visualization, and analysis of water quality data and other related watershed data. 
+
+## Quabbin and Wachusett Reservoir System
+
+The Wachusett Reservoir is located in central Massachusetts and is the main supply of the Boston metropolitan area. The reservoir has a capacity of about 65 billion gallons with a length of 8.4 miles. The reservoir is part of the Massachusetts Water Resource Authority's (MWRA) water supply system which is managed in partnership with the Department of Conservation and Recreation (DCR).
+
+## Data Collection
+
+
+There are various types of data collected in the watershed. Due to the vast amount of data from various sources the raw data can be in very different formats. Storing data in a central database in similar format is crucial to set up a platform for efficient data analysis. The application provides a connection to this data in the database with an easy-to-use user interface for a human user to interact with the data.
+
+Water quality data includes tributary data grab samples and well as.
+
+Reservoir data includes grab samples, ____, and profile data.
+
+Water quality data related to forestry practices is also collected to compare water quality parameters between managed and unmanaged forests. 
+
+This Application will give insight to data collection needs
+
+Data external to the DCR can is also incorporated into the application including hydrological data and meteorological data. Precipitation data is collected from the . River Flow data is collected by the USGS, some gauges in collaboration with the DCR and some independently. Weather data is collected by ____ . 
+
+
+# Background
+
+## Water Quality Sampling Plan
+
+The water quality sampling plan consists of routine sampling at various sites. These sites are Core Sites and EQA sites. 
+
+### Site Locations
+
+### Collection Frequency
+
+## Other Watershed Visualization Application Programs
+
+### Propritary
+
+### Open-Source
+
+## Previous Watershed Studies for Quabbin and Wachsuett Reservoir
+
+## Something Else (look at what I wrote down from Tobiason)
+
+
+# Application Overview
+
+## DWSPA
+
+The Drinking Water Supply Protection Analysis Application (DWSPA) allows the visualization and analysis of the water quality data and watershed data. There main features of the App include data query and export, data visualization, and data analysis.
+
+### Data query and export
+
+### Visulaization and Analysis
+#### Temporal Trends
+
+Temporal plots are created based on the data that is queried. These plots are interactive and have many customization options including grouping and adding trendlines. Temporal Statistics can be computed with ease which include the maximum, minimum, average, etc statistics and can be grouped by years, months, seasons, parameters, and sites.
+
+#### Spatial Trend Analysis
+
+Spatial trend analysis is incorporated in many locations in the app but primarily lives on the map plot tab. Geospatial plots allows the user to easily compare a parameter statistic across all sites in a visual of plots on their choice of map. Spatial analysis also exists in any tab when multiple sites are chosen for analysis.
+
+#### Correlation Trend Analysis
+
+Correlation trend analysis in this application consists of correlation between many types of parameters including water quality, hydrological, and meteorological parameters. Correlation plots can be easily created to see the correlation between parameters with regression lines. correlation statistics can also be computed and shown in an easy to read table. Both of these methods compare parameters taken from the same day and site to minimize temporal and spatial discrepancies.
+
+Two y-axis plots also allows to compare temporal trends between parameters. This is similar to correlation analysis although, shows less of the direct relationship but allows to keep more of the temporal information.
+
+
+## DWSPI
+
+### Data import
+
+The Drinking Water Supply Protection Import Application (DWSPI) facilitates importing raw data from multiple sources into the database. Each Data Type has a formatting function script that is written in R to format the data. As more data sources are added or data sources are changed, these can be uploaded into the database. The user is prompted to select dataset type and the user will be shown a list of raw data files in the appropriate dataset type location on their computer. The user then selects a file from their computer and then press a button to format the data. A Warning message will be sent to the user if their was a problem with the data or if the data already exists in the database. After a successful formatting, the user will be able to see the formatted data in a table on the screen and an import button will appear that the user can press to import the data if they are satisfied with how the data looks.  Once the data is imported, the raw data file is moved from the unprocessed folder on their computer to the processed folder.
+
+
+
+# Appendix A - R package Resources
+# Appendix B - Database Tables
+## Tributary Data
+## Reservoir Data
+## Site Location Data
+## Parameter Data
+# Appendix C -Reports
+## Annual Water Quality Report
+## Monthly Water Quality Report
+## Custom Report
+# Appendix D - Application Scripts
+
+# References

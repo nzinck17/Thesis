@@ -1,0 +1,56 @@
+---
+title: "Masters Thesis"
+author: "Nick Zinck"
+date: "May 2017"
+output: 
+  pdf_document:
+    toc: true
+    toc_depth: 3
+    number_sections: true
+bibliography: "F:/Nick Zinck/Shiny Water Quality/Thesis/Thesis.bib"
+
+nocite: | 
+  @noauthor_shiny_nodate, @noauthor_shiny_nodate-1
+---
+
+```{r loadpack, include=FALSE}
+# Load Packages
+library(rmarkdown)
+library(knitr)
+library(tidyverse)
+library(shiny)
+library(kableExtra)
+require(DiagrammeR)
+require(DiagrammeRsvg)
+require(rsvg)
+```
+
+```{r enter data,include=FALSE}
+pdf_digraph <- function(filename, code, width = 500, height = NULL){
+  capture.output({
+  g <- grViz(paste("digraph{", code, "}"))
+  DiagrammeRsvg::export_svg(g) %>% charToRaw %>% rsvg::rsvg_pdf(filename, width = width, height = height)
+  },  file='NUL')
+  knitr::include_graphics(filename)
+}
+```
+
+
+# Shiny Developer Guide
+
+## R
+### Packages
+## RStudio
+## Shiny
+### What is a Shiny App
+### User Interface
+### Server
+### Reactivity
+### Capabilities
+### Limitations
+## Github
+## Database
+## Remote Connection
+## Tidy Data
+
+# References

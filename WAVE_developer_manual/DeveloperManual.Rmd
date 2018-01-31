@@ -1,0 +1,531 @@
+---
+title: "SPAV Developer's Manual"
+author: "Nick Zinck"
+date: "May 2017"
+output: 
+  pdf_document:
+    toc: true
+    toc_depth: 3
+    fig_caption: true
+    number_sections: true
+bibliography: "F:/Nick Zinck/Shiny Water Quality/GitHub/DCRShinyApp/Manual/DeveloperManual/Thesis.bib"
+urlcolor: black
+linkcolor: black
+fontsize: 12pt
+geometry: margin = 1.2in
+header-includes:
+- \usepackage{placeins}
+- \usepackage{setspace}
+- \usepackage{chngcntr}
+- \onehalfspacing
+- \counterwithin{figure}{section}
+- \counterwithin{table}{section}
+
+nocite: | 
+  @noauthor_shiny_nodate, @noauthor_shiny_nodate-1
+---
+
+```{r loadpack, include=FALSE}
+# Load Packages
+library(rmarkdown)
+library(knitr)
+library(tidyverse)
+library(shiny)
+library(kableExtra)
+require(DiagrammeR)
+require(DiagrammeRsvg)
+require(rsvg)
+#library(RefManageR)
+
+```
+
+```{r enter data,include=FALSE}
+pdf_digraph <- function(filename, code, width = 500, height = NULL){
+  capture.output({
+  g <- grViz(paste("digraph{", code, "}"))
+  DiagrammeRsvg::export_svg(g) %>% charToRaw %>% rsvg::rsvg_pdf(filename, width = width, height = height)
+  },  file='NUL')
+  knitr::include_graphics(filename)
+}
+```
+
+
+
+
+# Overview
+
+This text is meant for a person with some knowlege of R and Shiny. Please read and be familiar with the overall Shiny Developement Guide before attempting to understand this. It will be beneficial to follow some of the tutorials and leaner directions, rather than trying to dive right in. 
+
+There are multiple script files that the Application comprises of. The App needs each of these files to be located in the correct location in order for the App to run. These files are organized into four main categories: Main, Functions, Modules, and Sources. The App is told to source all of these vairous types of script in the beginning of the App.R script, which essentially means these sripts are open, then read and run by RStudio (or computer?).  
+
+
+# App Layout
+
+```{r App, echo=FALSE, fig.cap="App Main Layout"}
+knitr::include_graphics("DiaApp.pdf", dpi = 50)
+```
+
+## Home
+
+
+## Filter
+
+```{r FilterTab, echo=FALSE}
+knitr::include_graphics("FiltertTab.pdf", dpi = 60)
+```
+
+## Tributary
+
+```{r TribTab, echo=FALSE}
+knitr::include_graphics("TribTab.pdf", dpi = 60)
+```
+
+## Reservoir
+
+```{r ResTab, echo=FALSE}
+knitr::include_graphics("ResTab.pdf", dpi = 60)
+```
+
+## MapPlot
+
+```{r MapplotTab, echo=FALSE}
+knitr::include_graphics("MapPlotTab.pdf", dpi = 60)
+```
+
+## Hydro
+
+## Report
+
+
+# Main Scripts
+
+```{r scripts, echo=FALSE}
+knitr::include_graphics("diaModuls.pdf", dpi = 60)
+```
+
+## App.R
+## LoadMSAccess.R
+## LaunchApp.R
+
+# Modules (General)
+
+## Module overview
+## Module Syntax
+## Module Naming
+## Passing Reactives in and out of Modules
+
+It can be tricky when dealing with passing reactive expressions into and out of modules. Reactive expressions must be passed in the unresolved reactive expression form ("input1") rather than the resolved reactive expression form ("input1()"). Since reactive expressions are a type of function in R, one is essentially passing the unresolved function into the module instead of the resolved value that the function produces. If one incorrectly passes a resolved reactive expression value through modules, the reactivity will not work correctly.
+
+Passing a reactive expression out of a module is useful when one wants to access a value in an upper level module that is created inside an inner module. An example of when this is used in the App is when the selected value from Check Box Select All UI Widget (checkBoxSelectAll.R). 
+
+It is best to understand the underlying principle of modules when dealing with this task. 
+
+## Primary Modules
+
+## Home.R
+
+```{r Home, echo=FALSE}
+knitr::include_graphics("Home.pdf", dpi = 60)
+```
+## Filter-WQ.R
+
+```{r Filter, echo=FALSE}
+knitr::include_graphics("Filter.pdf", dpi = 60)
+```
+
+## Time.R
+
+The parameter widget display all the parameters that the data has based on the site selected. The parameter list updates each time a site location is added or removed to the list. The parameter list was built in a way to remember which parameter was selected, so when the site list is changed, the parameter list updates but the previously selected parameter will be reselected automatically. If the previously selected parameter is not in the new updated list, than no parameter is selected and the user will be prompted to select a parameter. If a parameter was selected and than the user deselects all of the sites, the code would want to set the parameter list to an empty list, and therefore the parameter could not be saved. A work around for this was to tell the program that if no site is selected than make the parameter list consist of just the previously selected parameter and have this parameter be selected.
+
+
+```{r Time, echo=FALSE}
+knitr::include_graphics("Time.pdf", dpi = 60)
+```
+
+## Correlation
+
+
+
+ 
+```{r Corr, echo=FALSE}
+knitr::include_graphics("Corr.pdf", dpi = 60)
+```
+
+
+## Time-Depth
+
+
+
+```{r TimeDepth, echo=FALSE}
+knitr::include_graphics("TimeDep.pdf", dpi = 60)
+```
+
+## Corrlation-Depth
+
+selected parameter is not in the new updated list, than no parameter is selected and the user will be prompted to select a parameter. If a parameter was selected and than the user deselects all of the sites, the code would want to set the parameter list to an empty list, and therefore the parameter could not be saved. A work around for this was to tell the program that if no site is selected than make the parameter list consist of just the previously selected parameter and have this parameter be selected.
+
+
+```{r CorrDepth, echo=FALSE}
+knitr::include_graphics("CorrDep.pdf", dpi = 60)
+```
+
+## Profile-Line
+
+```{r ProfileLine, echo=FALSE}
+knitr::include_graphics("ProfileLine.pdf", dpi = 60)
+```
+
+## Profile-Heatmap
+
+```{r ProfileHeatma, echo=FALSE}
+knitr::include_graphics("ProfileHeatmap.pdf", dpi = 60)
+```
+
+## Profile-TableStat
+
+```{r ProfileTableStat, echo=FALSE}
+knitr::include_graphics("ProfileTableStat.pdf", dpi = 60)
+```
+
+## Phyto
+
+```{r Phyto, echo=FALSE}
+knitr::include_graphics("Phyto.pdf", dpi = 60)
+```
+
+## Mapplot (module)
+
+```{r MapPlot, echo=FALSE}
+knitr::include_graphics("MapPlot.pdf", dpi = 60)
+```
+
+The MapPlot module is  incorporated in the App in under the MapPlot tab.
+
+
+When the Base Leaflet Map contains the Map Tiles and the Circle Markers for the Site Locations. It is not neccesary to 
+to specify the starting min/max Lat/Long coordinates becuase the location of the markers tell it where to start.
+Leaflet and RenderUI do not work well together. If this is needed, an action button is a solution but from my experience still causes some problems
+
+## Hydro.R
+## Forestry.R
+## Report.R
+
+```{r Report, echo=FALSE}
+knitr::include_graphics("Report.pdf", dpi = 60)
+```
+
+
+# Secondary Modules - Input
+
+
+
+ Secondary Input modules serve the purpose of creating more complex input widgets that are used in multiple places throughout the App. Just like all modules, these are separated into their own modules to create more efficient writing of code. 
+ 
+## CheckboxSelectAll.R
+
+```{r checkboxSelectAll, echo=FALSE}
+knitr::include_graphics("checkboxSelectAll.pdf", dpi = 60)
+```
+
+## SelectInputSelectAll.R
+
+```{r SelectInputSelectAll, echo=FALSE}
+knitr::include_graphics("SelectInputSelectAll.pdf", dpi = 60)
+```
+
+## SiteCheckbox.R
+
+```{r SiteSelection, echo=FALSE}
+knitr::include_graphics("SiteSelection.pdf", dpi = 60)
+```
+
+## StationLevelCheckbox
+
+```{r StationLevelCheckbox, echo=FALSE}
+knitr::include_graphics("StationLevelCheckbox.pdf", dpi = 60)
+```
+
+## DateSelect
+
+```{r DateSelect, echo=FALSE}
+knitr::include_graphics("DateSelect.pdf", dpi = 60)
+```
+
+## ParameterCheckbox.R
+
+```{r ParamCheckbox, echo=FALSE}
+knitr::include_graphics("ParamCheckbox.pdf", dpi = 60)
+```
+
+## ParamSelect.R
+
+```{r ParamSelect, echo=FALSE}
+knitr::include_graphics("ParamSelect.pdf", dpi = 60)
+```
+
+## Saving Inputs (Widget Memory)
+
+Related Scripts: 
+
+The functioning of these aforementioned input widgets, is actually much more complex than previously mentioned due to the want for the App to remember an input widget's previously selected value when an input is updated. For example, when a user changes the selected site(s) on the Site Input Widgets, the Parameter Input Widget choices update to a new list of corresponding parameters contained within the new Site's data. The updated Parameter Input Widget will not automatically select the previously selected choice. This will not be problematic, if the user follows the prefered order of selection: 
+
+1. Select the "full" or "filtered" data options. If the "filtered" data option is selected than the user should select any filters on the Filter Tab. 
+2. Select desired site(s).
+3. Select Parameter and Date Range. The order of selection between these two do not matter.
+
+Figure 2 shows a simplistic view of how these widgets react with eachother. 
+
+To unconstrain the user from this specific work flow, the Application is programmed to have more or less a memory, of these Input Widget's selected values. A few questions arise that the developer must ask himself/herself when programming the App to memorize the previously selected values and automatically select them:
+
+1. If one does program an Input Widget to have an initial selected value be the previously selected value, what happens when the App is first started and there is no previously selected value? How will this value be defined in the Apps beginning state?
+
+The seemingly best resolution to the first question lies in the set of input updater functions (e.g. *updateCheckboxGroupInput, updateSelectInput, updateDateRangeInput*) that Shiny has created for this type of problem. The input updater funtions send a message to change the settings of the output object (@updateCheckBoxGroupInput). The input updater functions should be contained within an observer function, whether be observe() or observeEvent(). The updater function essentially allows to seperate the initial rendering of the Input Widget with the updating renderings of the Input Widget based on the changing of inputs and reactive expressions that the Input Widget depends on. Code segment 1 shows a simplified portion of the ParamSelect.R script for the purpose of illustraing the seperate selectInput() and updateSelectInput() functions for the same Input Object. In this code, the *selectInput* function's "selected" argument is set undefined and thus defaulted to NULL for a multiple select selectInput Object. The *updateSelectInput* function's "selected" argument is defined as **save.selected** which is the previously selected value. The"save selected" value will be discusses at depth in the next section  "___". . Please note that the code that defines the param.choices reactive expression is not shown in this segment for "______" reasons but essentially is all the parameter types within the active dataframe filtered for the selected sites.
+
+```{r Code 1, eval=FALSE}
+
+  # Parameter Selection UI
+  output$type.ui <- renderUI({
+    ns <- session$ns # see General Note 1
+    selectInput(ns("type"), "Parameter:", choices=c(param.choices()), multiple = TRUE)
+  })
+  
+  
+  # Update Parameter Selection for new choices
+  observe({
+      updateSelectInput(session, inputId = "type", label = "Parameter:", 
+                        choices=c(param.choices()),
+                        selected = save.selected)
+  })
+  
+```
+
+2. How do you set the selected value of an Input Widget to it's own previously selected value, when in this process the App destroys the previous Input Widget before it builds the updated Input Widget?
+
+To answer the second question, one may first attept to assign the selected value of an Input Widget to it's own reactive expression which we will call "Saved_Value_Reactive". This however does not work, due to "Saved_Value_Reactive" being reactively dependent on the value of the Input Widget. Once the Input Widget is deemed "___", than all of its reactive dependencies are also deemed "___" . Due to the order that Shiny executes reactive objects, the . Even if Shiny did not have this property , this would theortically create a reactive loop, due the the Input Widget depending on the value of the "Saved_Value_Reactive" to know what value to have inially selected and the "Saved_Value_Reactive" depending on the selected value of the Input Widget. To solve this problem, there actually needs to be a forced break in reactivity with the *isolate* function. The **save.selected** variable is set to the "current" value of the Input Widget before the input updater function is executed, thus saving what will become the "previous" value once the input updater function is executed in the next code chunk. Becuase **save.selected** is surrounded by the *isolate* function, it will not try to update itself during the updating of the Input Widget. Code Segment 2 shows how the *isolate* function is used to assign an Input Widget value as a means of saving a previous value.
+
+```{r Code 2, eval=FALSE}
+  
+  # Parameter Selection UI
+  output$type.ui <- renderUI({
+    ns <- session$ns # see General Note 1
+    selectInput(ns("type"), "Parameter:", choices=c(param.choices()), multiple = TRUE)
+  })
+
+
+  # Update Parameter Selection for new choices and TO AUTOMATICALLY SELECT THE PREVIOUSLY SELECTED INPUT
+  observe({
+    
+    # sAVE THE INPUT WHEN CHOICES CHANGE, BEFORE INPUT IS UPDATED. ISOLATE DISRUPTS REACTIVITY
+    isolate({
+        save.selected <- input$type
+    })
+
+      updateSelectInput(session, inputId = "type", label = "Parameter:", 
+                        choices=c(param.choices()),
+                        selected = save.selected)
+  })
+  
+```
+
+3. What should happen if the previously selected value does not exist in the updated Input Widget's choices?
+
+If an Input Widget is told to start with an inital selection that is not within the choices that the widget has, the widget will start with nothing selected. We will think about the situation when a user is viewing data for the Turbidity parameter and changes then selects a site that does not contain any Turbidity data. Keep in mind that when the user selected the site, he/she may not have been aware that the site does not contain Turbidity data. Due to the Turbidity parameter not being one of the updated parameter choices, The Input Widget will have nothing inially selected (it be blank). This naturally behavior of Shiny is seems to be desirable for this application, and yet no additional code was written in response to this question, yet the bahavior is good to keep in mind. If the user is scanning through various sites with set parameters and/or date ranges, he/she would like to be notified when a site by seeing blank data, rather than seeing other data than is expected to see and addicentally mistaking this data for the previous parameter and date ranges. Generally, notifying the user when inputs have changed that are not directly caused by the user's click is preferable than to not notifying the user and risking that he/she is unaware of the change. This is behavior is likely the cause anytime, an input object with this type of "memory" becomes blank during the session.
+
+
+
+4. What if the user deselects all sites?
+
+Based on the previously written code (code segment 2), an issue arises if the user deselects all sites (all sites are unselected) which would create an Input Widget with zero parameter choices (an empty list). This does not seem troublesome at first thought, but when the Input Widget is generated with an empty list, it therefore loses it ability to store the previously selected value. Let's take the situation where a user was curious about Turbidity data and has site "A" at has the proper Input Widgets selected to view this data. If the user now wants to select site "B", the user has two approaches of doing so:
+
+* Approach 1: The user deselects Site "A" and then selects Site "B"
+* Approach 2: The user selects Site "B" and then deselects Site "A"
+
+Given approach 1 is taken, Once Site "A" is selected than the Input Widget is generated with an empty choice list. Becuase the previously stored value of Turbidity (**save.selected**) is not contained within this empty site list, the selected value will be set to nothing (blank). When the user then selecsts Site "B" then the input updater function updates the Input Widget and it thinks that the previously selected value is nothing (blank). To alleviate this unpleasantness, an if statement is added for the two discrete situations where the site list is empty (NULL) and isn't empty (NULL).
+
+```{r Code 3, eval=FALSE}
+
+  # Parameter Selection UI
+  
+  output$type.ui <- renderUI({
+    ns <- session$ns # see General Note 1
+    selectInput(ns("type"), "Parameter:", choices=c(param.choices()), multiple = TRUE)
+  })
+  
+  
+  
+  # To fill back in previously selected
+  
+  observe({
+    
+    # save the Parameter Type input for when the site selection changes. 
+    # Isolate so does not cause reactivity
+    isolate({
+        save.selected <- input$type
+    })
+    
+    # If Site list is changed but not empty then generate a Select Input with the... 
+    # parameters for that site and autoselect previous selected parameter 
+    if(!is.null(site())){
+      
+      updateSelectInput(session, inputId = "type", label = "Parameter:", 
+                        choices=c(param.choices()),
+                        selected = save.selected)
+    
+      # If site list is empty than make a parameter list of just the previously listed item to save it.
+    } else {
+      updateSelectInput(session, inputId = "type", label = "Parameter:", 
+                        choices= save.selected,
+                        selected = save.selected)
+    }
+    
+  })
+  
+```
+
+
+
+It is common 
+
+
+This difference in simplicity occurs due to the fact that the Selection Widgets choices only depends on the full or filtered data the complication of Parameter Widget and Date Range Widget arises becuase the choices that the user is allowed to select is limited to that 
+
+The Parameter Input Widget was built in a way to remember which parameter was selected, so when the site list is changed, the parameter list updates but the previously selected parameter will be reselected automatically. If the previously selected parameter is not in the new updated Parameter Widget choices, than no parameter is selected and the user will be prompted to select a parameter. If a parameter was selected and than the user deselects all of the sites, the program will create a parameter list just containing the previously selected parameter for saving purposes, even though there should actually be no parameters contained within the empty site list.
+
+
+The Date Range Widget acts similar to the Parameter Widget. The Date Range Widget is also updated each time a location is added or removed from the list. The Date Range was built to remember which Date Range was previously selected and when the site list is changed by the user, the Date Range updates but the previously selected Dates will be selected automatically. If the previously date range is not within the limits of the new updated Date Rnage Widget choice range, than no date range is selected and the user will be promted to select a date. If a date range was 
+
+
+
+
+
+* need to make Site Selection reactive to the filter data
+
+
+
+# Secondary Modules - Output
+
+## SiteMap
+
+```{r SiteMap, echo=FALSE}
+knitr::include_graphics("SiteMap.pdf", dpi = 60)
+```
+
+
+## Plot-Time.R
+
+```{r PlotTime, echo=FALSE}
+knitr::include_graphics("PlotTime.pdf", dpi = 60)
+```
+
+
+## Plot-Corr.R
+
+```{r PlotCorr, echo=FALSE}
+knitr::include_graphics("PlotCorr.pdf", dpi = 60)
+```
+
+## Plot-Time-Depth.R
+
+```{r PlotTimeDepth, echo=FALSE}
+knitr::include_graphics("PlotTimeDepth.pdf", dpi = 60)
+```
+
+
+
+## Plot-Correlation-Depth.R
+
+```{r PlotCorrDepth, echo=FALSE}
+knitr::include_graphics("PlotCorrDepth.pdf", dpi = 60)
+```
+
+
+## Summary.R
+
+```{r Summary, echo=FALSE}
+knitr::include_graphics("Summary.pdf", dpi = 60)
+```
+
+
+## Summary-Depth.R
+
+```{r SummaryDepth, echo=FALSE}
+knitr::include_graphics("SummaryDepth.pdf", dpi = 60)
+```
+
+
+
+# Functions
+
+## GetSeasons.R
+## Phytoplots.R
+
+## General Notes
+
+## 1. Modules and Namespaces
+
+## 1. Conditional Panel in Module
+
+Conditional panels and shiny modules don't work well togethr due to the ns() wrapper requrement. Javascript must be used in the conditions of the conditional panel.
+
+## 2. Req()
+
+The most common use of req() is when you want to delay the execution/creation of an output object until a user input is not empty. For example, if a plot output depends on two inputs (e.g. x and y parameters), there is no need to generate the plot output until these two inputs are both selected. Moreover, this will likely cause an error and leave unwanted red error text on the screen. Req() can provide a solution to delay the execution of the plot output object.
+
+The first key property of req() is that it not only stops the execution of the reactive expression it is in but also but stops the execution of other reactive expressions and objects that use this first reactive expression (or in other words depend on this first reactive expression). It stops all of the objects up the reactive chain all the way to the ouput objects that use them. Therefore, the best practice is to use req() directly in output objects. Req() can can also be used in reactive expressions, but caution should be taken on the effects that this req() will have upstream to all the output objects that use (depend on) this reactive expression. If a reactive expression is used in mulitple output objects and the desired execution/creation timing of these output objects are the same then it is probably okay to use the req() in this reactive expression rather than writing multiple req() statements in each of the outputs.  
+
+The second key propoerty to req() is how it determines if a value is "empty"" or "not empty". Due to the various types of input widgets and the corresponding empty values, the code to say if a input is empty or not empty is a bit more complex than previously mentioned. For example an empty textinput value is an empty string ("") value, an empty numericinput is NA, and an empty fileInput is NULL. Shiny uses the terms "falsy" or "truthy" which correspond to whether a user input is "empty" or "not empty", respectively. Shiny has made "Falsy" values contain all possible empty input widget values for the developer's conveniance. The full list can be seen in the req() documentation on the Shiny website, but the developer should not usually need these values if one follows the suggested methods listed below:
+
+Delay when input "x" is empty (falsy):
+
+```{r req1, eval=FALSE}
+
+  output$plot <- renderPlot({
+    req(input$x)
+    ggplot(df) + 
+      geom_point(aes(x = input$x, y= input$y, shape = input$z))
+  })
+```
+
+Delay when either input "x", input "y", or input "z" is empty (falsy). This needs both inputs to be non empty (truthy) to execute:
+
+```{r req2, eval=FALSE}
+
+  output$plot <- renderPlot({
+    req(input$x, input$y, input$z)
+    ggplot(df) + 
+      geom_point(aes(x = input$x, y= input$y, shape = input$z))
+  })
+```
+
+A more complicated situation arises when one would like for an output to be delayed if all declared inputs are empty, but if just one is selected for it to execute. This best approach to write this code is to use isTruthy within the req() function. We pass a *vector* (c()) of the list of inputs to the first and only argument that isTruthy() takes.
+
+```{r req3, eval=FALSE}
+
+  output$plot <- renderPlot({
+    req(isTruthy(c(input$x, input$y, input$z)))
+    ggplot(df) + 
+      geom_point(aes(input$x, input$y, input$z))
+  })
+```
+
+An even more complicated situation can be solved with isTruthy(). Say if we want an output to execute when a user selects a value for input X OR if a user selects a value for input Y AND input Z. We would use:
+
+```{r req4, eval=FALSE}
+
+  output$plot <- renderPlot({
+    req(isTruthy(input$x) | isTruthy(input$y) & isTruthy(input$z))
+    ggplot(df) + 
+      geom_point(aes(input$x, input$y, input$z))
+  })
+```
+
+There is a documentation on the req() on Shiny website that covers this topic somewhat differently than this document does.
+
+Other resources:
+
+Related Sections:
+
+## Future Work
+
+
+# References

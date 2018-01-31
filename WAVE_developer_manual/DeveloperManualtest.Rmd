@@ -1,0 +1,70 @@
+---
+title: "SPAV Developer's Manual"
+author: "Nick Zinck"
+date: "May 2017"
+output: 
+  pdf_document:
+    toc: true
+    toc_depth: 3
+    fig_caption: true
+    number_sections: true
+bibliography: "F:/Nick Zinck/Shiny Water Quality/Thesis/Thesis.bib"
+urlcolor: black
+linkcolor: black
+fontsize: 12pt
+geometry: margin = 1.2in
+header-includes:
+- \usepackage{placeins}
+- \usepackage{setspace}
+- \usepackage{chngcntr}
+- \onehalfspacing
+- \counterwithin{figure}{section}
+- \counterwithin{table}{section}
+
+nocite: | 
+  @noauthor_shiny_nodate, @noauthor_shiny_nodate-1
+---
+  
+```{r loadpack, include=FALSE}
+# Load Packages
+library(rmarkdown)
+library(knitr)
+library(tidyverse)
+library(shiny)
+library(kableExtra)
+require(DiagrammeR)
+require(DiagrammeRsvg)
+require(rsvg)
+#library(RefManageR)
+
+```
+
+```{r enter data,include=FALSE}
+pdf_digraph <- function(filename, code, width = 500, height = NULL){
+  capture.output({
+    g <- grViz(paste("digraph{", code, "}"))
+    DiagrammeRsvg::export_svg(g) %>% charToRaw %>% rsvg::rsvg_pdf(filename, width = width, height = height)
+  },  file='NUL')
+  knitr::include_graphics(filename)
+}
+```
+
+
+# DWSPA Developement Manual
+
+This text is meant for a person with some knowlege of R and Shiny. Please read and be familiar with the overall Shiny Developement Guide before attempting to understand this. It will be beneficial to follow some of the tutorials and leaner directions, rather than trying to dive right in. 
+
+There are multiple script files that the Application comprises of. The App needs each of these files to be located in the correct location in order for the App to run. These files are organized into four main categories: Main, Functions, Modules, and Sources. The App is told to source all of these vairous types of script in the beginning of the App.R script, which essentially means these sripts are open, then read and run by RStudio (or computer?).  
+
+
+## App Layout
+
+```{r App, echo=FALSE, fig.cap="It worked"}
+
+knitr::include_graphics("DiaApp.pdf")
+
+```
+
+### Home
+
+hey
