@@ -112,13 +112,30 @@ knitr::include_graphics("diaModuls.pdf", dpi = 60)
 ## Module overview
 ## Module Syntax
 ## Module Naming
+
 ## Passing Reactives in and out of Modules
+
+### Into a module
 
 It can be tricky when dealing with passing reactive expressions into and out of modules. Reactive expressions must be passed in the unresolved reactive expression form ("input1") rather than the resolved reactive expression form ("input1()"). Since reactive expressions are a type of function in R, one is essentially passing the unresolved function into the module instead of the resolved value that the function produces. If one incorrectly passes a resolved reactive expression value through modules, the reactivity will not work correctly.
 
 Passing a reactive expression out of a module is useful when one wants to access a value in an upper level module that is created inside an inner module. An example of when this is used in the App is when the selected value from Check Box Select All UI Widget (checkBoxSelectAll.R). 
 
 It is best to understand the underlying principle of modules when dealing with this task. 
+
+### Out of a module
+
+### Into and out of a Module Issues
+
+ouput execution order reactivity and hidden tabs
+
+One can call a module in the main script (App.R) or in other modules. Yes, Modules can and are used inside of other modules. The UI function is called just like any other UI function. Please see __
+The server side of the module is called with callmodule. 
+
+A potential troublesome area is that it is sometimes neccesary to put the UI function inside the server function (in a renderUI ouput object) rather than directly in the Ui. The renderUI function purpose is generally to allow an input object/widget to be determined by . See renderUI andUioutput documentation. This is needed in the filter tab due to output delay. output options must be changed so than the filter tab executes the filters before. This is not a must but it is nice to have so it does not draw errors in the other tabs when the filtered data frame options is chosen. Therefore, the input ojects (most of which are created with my Select All widgets) must be put inside the server funciton in a renderUI output object in order for the setting of output objects to be changed. Conceptually, if htere were input options (as well as output options), than one would think that this renderUI could be avoided. The order that Shiny executes code does not agree with this though, becuase Shiny only executes code that is needed. Somehow the connection between the ouput object in the active tab does not trigger the uiOutput to execute. This hsold 
+
+Filter module
+
 
 ## Primary Modules
 

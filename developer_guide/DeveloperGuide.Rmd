@@ -49,8 +49,90 @@ pdf_digraph <- function(filename, code, width = 500, height = NULL){
 ### Capabilities
 ### Limitations
 ## Github
+
+Moving and renaming files should be done within Github.
+If one does it in the window's explorer, Github will think this is a new file and that the previous version is deleted. Thus, for a track record, it is best to rename and move files via Github. Heere is a link for help.
+
+
+https://github.com/blog/1436-moving-and-renaming-files-on-github
+
+
 ## Database
 ## Remote Connection
 ## Tidy Data
+
+
+
+# Developer Guide for WAVE and WIT
+
+## R
+
+## RStudio
+
+## Shiny
+
+### What is a Shiny App
+
+### User Interface
+
+### Server
+
+### Reactivity
+
+### Capabilities
+
+### Limitations
+
+## Github
+
+## Database
+
+### Tributary Data
+
+### Reservoir Data
+
+### Site Location Data
+
+### Parameter Data
+
+## Remote Connection
+
+## Tidy Data
+
+## R Packages
+
+### Packages
+
+See Section __ for Shiny Package information
+
+### tidyverse
+
+#### dplyr
+
+#### tidyr
+
+#### ggplot
+
+#### leaflet
+
+#### DT
+
+### Plotly
+
+### stringr
+
+### scales
+
+### RMarkdown
+
+### knitr
+
+### knitr
+
+### Leaflet
+
+### js
+
+
 
 # References

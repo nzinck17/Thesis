@@ -39,355 +39,124 @@ require(rsvg)
 
 # Introduction
 
+## Problem Statement
+
 ## Objective
 
-## WAVE (Watershed data Analysis and Visualization Environment)
-
-### Application Overview
-
-### Visualization and Analysis
-
-## WIT (Watershed data Importer Tool)
-
-### Application Overview
-
-### Data Import
+## Scope of Work
 
 
 
 
 # Background
 
-## Water Quality Sampling Plan
+## Applications for Watershed Data Science
 
-### Site Locations
+## Application Developement Frameworks
 
-### Collection Frequency
+R - Shiny
 
-## Previous Watershed Studies for Quabbin and Wachsuett Reservoir
+Python - Pyramid, Django, Flask)
 
-## Other Watershed Visualization Applications
+Other (Ruby on Railsm, node.js)
 
-### Propritary
+## Department of Conservation and Recreation Watershed Department
 
-### Open-Source
+### Quabbin and Wachusett Reservoir
 
-## Web App Develpement Frameworks 
+### Water Quality Sampling Plan
 
-### R (Shiny)
+### Previous Watershed Studies
 
-### Python (Pyramid, Django, Flask)
 
-### Other (Ruby on Railsm, node.js)
 
+# Application Developement Overview (Method)
 
+## R and RStudio
 
+### Shiny
 
-
-# WAVE Setup Manual
-
-## R download
-
-## RStudio download
-
-## Database Connections
-
-## Shortcut Creation
-
-
-
-
-
-# WIT Setup Manual
-
-## R 
-
-## RStudio download
-
-## Database Connections
-
-## Shortcut Creation
-
-
-
-
-
-# WAVE User Manual
-
-## Overview
-
-## How it works
-
-## Startup
-
-## Home Tab
-
-## Filter Tab
-
-## Tributary Tab
-
-### Time-Series
-
-#### Input Widgets 
-
-### Correlation
-
-## Reservoir Tab - Bacteria
-
-### Time-Series
-
-### Correlation
-
-## Reservoir Tab - Physiochemical
-
-### Time-Series
-
-### Correlation
-
-## Reservoir Tab - Profile
-
-### Time-Series
-
-### Correlation
-
-## MapPlot Tab
-
-## Forestry Tab
-
-## Hydro/Met Tab
-
-## Report Tab
-
-
-
-# WIT User Manual
-
-## Overview
-
-## How it works
-
-## Startup
-
-### Datasets
-
-## File Selection
-
-## Process Data
-
-## Import Data
-
-
-
-
-
-# Developer Guide for WAVE and WIT
-
-## R
-
-## RStudio
-
-## Shiny
-
-### What is a Shiny App
-
-### User Interface
-
-### Server
-
-### Reactivity
-
-### Capabilities
-
-### Limitations
-
-## Github
+### Tidyverse
 
 ## Database
 
-### Tributary Data
+## Github
 
-### Reservoir Data
+## Developement Strategy/Goals/Practice
 
-### Site Location Data
+Modules and Functions
+Naming Conventions
 
-### Parameter Data
+## Application Packaging and Deployment
 
-## Remote Connection
+Desktop Shortcut, portable R, portable chrome
 
-## Tidy Data
 
-## R Packages
 
-### Packages
+# Application Features and Findings (Results)
 
-See Section __ for Shiny Package information
+## Data Query and Export
 
-### tidyverse
+## Temporal Analysis
 
-#### dplyr
+### Scatter Plot
 
-#### tidyr
+### Statistics
 
-#### ggplot
+## Correlation
 
-#### leaflet
+### Scatter Plot
 
-#### DT
+### Pearson Correlation Matrix
 
-### Plotly
+## Distribution
 
-### stringr
+## Profile Data
 
-### scales
+### Interpolated Color Profile Plot
 
-### RMarkdown
+### Profile Line Plot
 
-### knitr
+### Profile Statistics
 
-### knitr
+## Phytoplankton
 
-### Leaflet
+## Geospatial Plotting
 
-### js
+## MetaData
 
+## Data Import
 
 
 
-# WAVE Developement Manual
 
-## App Layout
 
-### Home
 
-### Filter
 
-### Tributary
+# Discussion and Reccomendations
 
-### Reservoir
+## Pros and Cons of Application
 
-### MapPlot
+Custombility
 
-### Hydro
+Upkeep
 
-### Report
-
-## Main Script
-
-### App.R
-
-### LoadMSAccess.R
-
-### LaunchApp.R
-
-## Modules (General)
-
-### Module overview
-
-### Module Syntax
-
-### Module Naming
-
-### Passing Reactives in and out of Modules
-
-## Primary Modules
-
-### Home.R
-
-### Filter-WQ.R
-
-### Time.R
-
-### Correlation.R
-
-### Time-Depth.R
-
-### Corrlation-Depth.R
-
-### Profile-Line
-
-### Profile-Heatmap
-
-### Profile-Summary
-
-### Phyto
-
-### Mapplot (module)
-
-The MapPlot module is  incorporated in the App in under the MapPlot tab.
-
-### Hydro.R
-
-### Forestry.R
-
-### Report.R
-
-## Secondary Modules - Input
-
-### CheckboxSelectAll.R
-
-### SelectInputSelectAll.R
-
-### SiteCheckbox.R
-
-### StationLevelCheckbox.R
-
-### Date Select.R
-
-### ParameterCheckbox.R
-
-### ParameterSelect.R
-
-### Saving Inputs (Widget Memory)
-
-## Secondary Modules - Output
-
-### Plot-Time.R
-
-### Plot-Time-Depth.R
-
-### Plot-Correlation.R
-
-### Plot-Correlation-Depth.R
-
-### Plot-Profheat.R
-
-### Plot-Profline.R
-
-### Summary.R
-
-### Summary-Depth.R
-
-### Summary-Profile.R
-
-## Functions
-
-### CircleSizeLegends.R
-
-### GetSeasons.R
-
-### Phytoplots.R
-
-## General Notes
-
-### 1. Conditional Panel in Module
-
-### 2. Conditional Panel in Module
 
 ## Future Work
 
+### Meteorological and Hydrological Data
 
+### Forestry
 
+### Reports
 
-# WIT Developement Manual
-
-## Dataset Spreadsheet
-
-## App Script
-
-## Process Scripts
-
-## Import Scripts
 
 
 # Appendix
+
+## WAVE Developer Manual
+
+## WIT Developer Manual
+
+
 # References
