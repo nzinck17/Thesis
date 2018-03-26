@@ -1,0 +1,48 @@
+Parameter,Type,Location,Frequency
+,,,
+Specific Conductance,Tributary,Quabbin,Biweekly
+Turbidity,Tributary,Quabbin,Biweekly
+Water Temperature,Tributary,Quabbin,Biweekly
+E. coli,Tributary,Quabbin,Biweekly
+Mean UV254,Tributary,Quabbin,Quarterly
+Ammonia,Tributary,Quabbin,Variable
+Nitrate,Tributary,Quabbin,Quarterly
+Total Phosphorus,Tributary,Quabbin,Quarterly
+Total Kjeldahl Nitrogen,Tributary,Quabbin,Quarterly
+Dissolved Oxygen,Tributary,Quabbin,Biweekly
+Dissolved Oxygen Saturation,Tributary,Quabbin,Biweekly
+pH,Tributary,Quabbin,Biweekly
+Calcium(II),Tributary,Quabbin,Biweekly
+Total Coliform,Tributary,Quabbin,Biweekly
+Nitrite,Tributary,Quabbin,Biweekly
+Alkalinity,Tributary,Quabbin,Variable
+Fecal Coliform,Tributary,Quabbin,Variable
+Specific Conductance,Tributary,Ware River,Biweekly
+Turbidity,Tributary,Ware River,Biweekly
+Water Temperature,Tributary,Ware River,Biweekly
+E. coli,Tributary,Ware River,Biweekly
+Mean UV254,Tributary,Ware River,Quarterly
+Ammonia,Tributary,Ware River,Variable
+Nitrate,Tributary,Ware River,Quarterly
+Total Phosphorus,Tributary,Ware River,Quarterly
+Total Kjeldahl Nitrogen,Tributary,Ware River,Quarterly
+Dissolved Oxygen,Tributary,Ware River,Biweekly
+Dissolved Oxygen Saturation,Tributary,Ware River,Biweekly
+pH,Tributary,Ware River,Biweekly
+Calcium(II),Tributary,Ware River,Biweekly
+Total Coliform,Tributary,Ware River,Biweekly
+Nitrite,Tributary,Ware River,Biweekly
+Alkalinity,Tributary,Ware River,Variable
+Fecal Coliform,Tributary,Ware River,Variable
+Specific Conductance,Tributary,Wachusett,Weekly
+Turbidity,Tributary,Wachusett,Weekly
+Water Temperature,Tributary,Wachusett,Weekly
+E. coli,Tributary,Wachusett,Weekly
+Mean UV254,Tributary,Wachusett,Monthly
+Ammonia,Tributary,Wachusett,Monthly
+Nitrate,Tributary,Wachusett,Monthly
+Total Phosphorus,Tributary,Wachusett,Monthly
+Total Kjeldahl Nitrogen,Tributary,Wachusett,Variable
+Total Organic Carbon,Tributary,Wachusett,Monthly
+Total Suspended Solids,Tributary,Wachusett,Monthly
+Discharge,Tributary,Wachusett,Weekly

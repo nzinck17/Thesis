@@ -1,7 +1,9 @@
 ---
-title: "Thesis"
-author: "Nick Zinck"
+title: | 
+  | \vspace{2cm} \Large{Developement of Application Software for Watershed Data Management, Visualization, and Analysis}
+author: "Nick Zinck, University of Massachusetts"
 date: "March 2018"
+indent: true
 output: 
   pdf_document:
     toc: true
@@ -11,12 +13,12 @@ output:
 urlcolor: black
 linkcolor: black
 fontsize: 12pt
-geometry: margin = 1.2in
+geometry: margin = 1in
 header-includes:
 - \usepackage{placeins}
 - \usepackage{setspace}
 - \usepackage{chngcntr}
-- \onehalfspacing
+- \doublespacing  #\onehalfspacing
 - \counterwithin{figure}{section}
 - \counterwithin{table}{section}
 bibliography: "Thesis.bib"  #F:/Nick Zinck/Shiny Water Quality/Thesis/
@@ -27,7 +29,7 @@ nocite: |
 
 ```{r loadpack, include=FALSE}
 # Load Packages
-library(rmarkdown)
+library(rmarkdown)  
 library(knitr)
 library(tidyverse)
 library(shiny)
@@ -37,49 +39,28 @@ require(DiagrammeRsvg)
 require(rsvg)
 ```
 
-```{r enter data,include=FALSE}
-# pdf_digraph <- function(filename, code, width = 500, height = NULL){
-#   capture.output({
-#   g <- grViz(paste("digraph{", code, "}"))
-#   DiagrammeRsvg::export_svg(g) %>% charToRaw %>% rsvg::rsvg_pdf(filename, width = width, height = height)
-#   },  file='NUL')
-#   knitr::include_graphics(filename)
-# }
-```
 
-\newpage 
+\newpage
+
 # Introduction
 
-## Problem Statement
-
-A Reservoirs water quality effects the type and extent of neccesary treatment process of the water supply prior to distribution. Generally, less treatment is required for a water utility who's source is a remote, healthy reservoir than a reservoir which has been degraded by anthroppologic or other means. It is often infeasible to obtain water from completely pristine areas, especially for water utilities who supply water to urban areas. Watershed management can help ensure the water quality of a reservoir and as well as predict, lessen, or prevent reservoir water quality degredation. from occuring. (Quantity as well.)
-
-Water Quality data collection and analysis can assist on decision making for utilities. It is not feasible to know every, yet an adequate sampling plan can bring insight about the condition of the reservoir as well as the tributaries entering the reservoir. It is not just enough to collect this data, the task fo water quality monitoring does not stop after the field or after the lab.  Water Qulaity data analysi scan help answer questions and suggest solutions once problems arise. Even in the case of non problemtic situations water qualit data can help one understand the unique processes of the reservoir in question, calibrate water quality models, and suggest the updated sampling plans. Questions must be asked like is the current sampling plan adequate to get as good of an undestanding of the water quality processes that are happeing in the reservoir and watershed, within reasonable time and cost constraints. 
+A comprehensive watershed monitoring program includes the collection of water quality, meteorological, and hydrological data. Large amounts of data can be strenous to manage if proper systems are not put in place for proper data management. Poor data management can result in poor data quality as well as underutilizion of data due to the timely process of querying, visualizing, and analyzing poorly-managed data. Spreadsheet software is likely not an effective way to store large datasets and the visualization and analysis tools that spreadsheet software offer are often limited. Database software is a great solution to store and organize large datasets, yet database software often lack data visualization and analysis tools. Commonly, large datasets stored within a database are paired with an outside application specialized for data querying, visualization, and analysis. An application program was developed for watershed data visualization and analysis by means of a free and open source application developement framework. A second application program was developed to facilitate importing watershed data into a database. This project is a product of the collaboration between UMass and the Massachusetts Department of Conservation and Recreation (DCR).
 
 ## Objective
 
-A comprehensive watershed monitoring program includes collecting much water quality, meteorological, and hydrological data. Although data collection is always important, much of this data is underutilized due to a timely processes of searching, displaying, and analyzing data. Spreadsheet applications are likely not an effective way to store large datasets and visualization and analysis tools are limited. Relational database applications serve as a better home for these large datasets, yet visualization and analysis tools are commonly even more limited. A logical solution is to store large datasets within a relational database and pair this database with an outside application specialized for data visualization, analysis, and automation.
+This project works to facilitate the DCR's data entry, querying, visualization, and analysis process through an R-based application creation tool called Shiny. An application can automate many of the tedious day to day processes of managing a watershed as well as allow for powerful and expeditious visualization and analysis. Developing an application, rather than using propritery software, allows for full customization by the developer to better target specific needs of the agenecy responsible for watershed management and protection. A well fitting application can greatly increase the timeliness and ability to explain data and generate insights which can direct decision making for these agencies. Increased water quality data insight can also greatly influence an agency's sampling plan to better represent the watershed and focus on certain areas of high interest. The overall objective of this project is to maximize the efficiency of the DCR's ability to manage, visualize, and analyize data to inform decision making. The application developed in this project can be used as an example for other watershed management agencies.
 
-This project specifically is working to facilitate the DCR's (Department of Conservation and Recreation's) data entry, searching, visualization, and analysis process through an R-based application creation tool called Shiny. R is an open source programming language used largely for data statistics and visualization. Shiny is an open source application that allows one to create applications which have a friendly user interface component as well as a server component which uses R to do all the work. A Shiny application can be fully customized by the designer for unique tasks. Features of the DCR Shiny application include easy data searching, water quality time series plotting and analysis, water quality regression analysis, geospatial data visualization and analysis, and more. Through the insight that this application brings, future data collection needs can be better assessed which will direct changes to the current watershed monitoring program.
+## Scope of Work
 
-Automation is a useful, yet underutilized tool that can save an organization much time day to day on decreasing the number of repeated tasks that come along with searching, displaying, and analyzing water quality data. A custom application with dashboard toallow a user to easily perform data science with the power of R, with little knowlege of R programming language is highly desired. This application should include but not limited to facilitated data entry, querying, visualization, and analysis of water quality data and other related watershed data. Save Tiem an dMoney , inrease quality control
+Two applications were created to facilitate with watershed data management at the DCR. These applications will be used across the three watersheds: Quabbin, Ware River, and Wachusett, which are under the management of two seperate DCR offices, the Quabbin and Wachusett Offices. The applications are designed to meet the needs of both offices which require neccesary variations in the application features to address the variation between the two offices needs including differing sampling plans. Although some variations are inevitable, efforts have been made to make the data management of the two offices more congruent. A large piece of this congruency has been in the form of database alterations to make the organizization and formatting as similiar as possible between the two offices. This effort has also included moving data that exists outisde of a database into a common database where data observations all share a similiar tidy data regimen. Naming conventions were also examined and modified to simplify the application creation and decrease potential for mistakes.
 
-## Scope of Work (Application Purpose)
+Watershed data Importer Tool (WIT) is the smaller of the two applications which is designed an interface for facilitated raw data import of watershed field and laboratory data. Raw data from a number of predetermined sources can be imported through a simple user interface. WIT transforms raw data into the desired database format, provides quality control checks, and imports the data to the right location in the database. WIT will help ensure in the future that all data remains stored in databases as this tool makes database storage timely and efficient.
 
-The scope of this project is to create a Watershed Data Management System for the Quabbin and Wachusett Watersheds.
-This project worked to develope a custom dashboard-like application software called Watershed data Analysis and Visualization Environment (WAVE). As its name indicates, this application allows for data querying, visualization, and data analysis. The application opens in a web browser and allows the user to select desired locations, parameters, dates, as well as more advanced filters and the corresponding queried dataset will be presented in a table and the user will be able to output this data. This data query as well as all components of the application are seperated by water quality type (e.g. Tributary, Reservoir bacteria, Reservoir Profile data) and by watershed (e.g. Quabbin and Wachusett). Customboility and variablity between the watersheds is desired and the application design reflects this.
+Watershed data Analysis and Visualization Environment (WAVE) is the larger of the two applications and as its name suggests it is designed to facilitate data querying, visualization, and analysis of water quality. The application opens in a web browser and allows the user to query data by user selection inputs including locations, parameters, and dates. More advanced filters for data querying are also offered including filtering data based on meteoroligical events and excluding flagged data. The corresponding queried dataset will be presented in an interactive table which the user will be able to output as a csv file. Discrepencies between watersheds and datasets exist (and are desired) which are reflected in variations of query selections and filters in WAVE.
 
-Visualization dashboards were created to view data in a speciofic customized fashion based on a user selected inputs. Statitical Analysis of parameters is useful to understand watershed and reservoir water quality in regards to temporal and spatial trends of water quality parameters and also correlations between water qualitiy parameters.
+WAVE consists of numerous visualization and analysis tools to give more insight on a queried dataset. Visualization tools for tributary and reservoir data include time-series plots, correlation plots, and distribution charts (histograms, density curves, and box-and-whisker plots) to visualize trends and patterns on selected water quality parameters. Geospatial data visualization and analysis allows one to spatitally view data statistics on an interactive map. Heatmap and profile line plot tools are also available for reservoir profile data. Statistics can be quickly generated with WAVE including min, max, average for user selected temporal and spatial groupings. More advanced statistical analysis includes Mann-kendall statistics and pearson correlation matrixes. WAVE also makes information related to the sampling history of a specific site or a specific parameters easily accesible.
 
-Temporal Analysis and spatial analysis (do more (some) reading)
-
-Raw Data from various sources can be imported by a common importer tool that transforms raw data into the desired database format, provide quality control checks, and add the data to the right location in the database. 
-
-The Application is shared openly through Github and can be ran locally on any computer with two lines of code. Hosting the application online at a URL is also a possibility. 
-
-
-
-
+Both WAVE and WIT are shared openly through Github and are ran locally on a computer with minimal setup, although hosting the application online is also a possibility. The application is organized in a modular manner which eases future updates to the code as well as minimizes code repitition. Future additions to WAVE can be added as a seperate and independent module. A developer manual was also created to help future developers of WAVE as well as user setup guides for WAVE and WIT. As the needs of the DCR changes, both applications can dynamically change with it.
 
 
 
@@ -88,115 +69,66 @@ The Application is shared openly through Github and can be ran locally on any co
 \newpage 
 # Background
 
-
 ## Watershed Overview
 
 ### Quabbin and Wachusett Reservoir
 
-The metropolitan area of Boston, Massachusetts, recieves its drinking water from the Massachusetts Water Resource Association (MWRA) water supply system. The water supply consists the Quabbin Reservoir and the Wachusett Reservoir which is managed in partnership with the Department of Conservation and Recreation (DCR). Both the reservoirs combined supply about 200 million gallons per day to consumers (MWRA website). The Quabbin and Wachusett Reservoirs are protected and over 85% of the watershed lands that surround the reservoirs are covered in forest and wetlands. Because they are well-protected, the water in the Quabbin and Wachusett Reservoirs is considered to be of very high quality (MWRA website). The water supply system is rather unique in that the Quabbin Aqueduct, a 24.6 mile long tunnel, connects the Quabbin Reservoir to the Wachusett Reservoir. The MWRA transfes water (i.e. Quabbin Transfer) from the Quabbin reservoir intermittingly to the Wachusett Reservoir to maintain the water level and water quality of the Wachusett Reservoir [DCR, 2007]. In a given year, the Quabbin Transfer most always makes up the majority of the total inflow to the Wachusett River. The MWRA can also divert water from the Ware River watershed, located between the two reservoir watersheds, to either the Quabbin Reservoir (preferable) or the Wachusett Reservoir through the Quabbin Aqueduct, but these diversions are rare. The Ware River usually has poorer water quality which makes an input location with a long hydraulic retention time desirable, thus the Ware River is most always diverted to a locaiton in the Quabbin Reservoir that is hydraulicly far from the Quabbin Aquaduct. Transfers generally occur from June through November and can last for weeks at a time to meet higher water demands, maintain the water level, and mitigate water quality concerns in the Wachusett Reservoir (DCR, 2007).
+The metropolitan area of Boston, Massachusetts, recieves its drinking water from the Massachusetts Water Resource Association (MWRA) water supply system. The sources of the water supply are the Quabbin Reservoir and the Wachusett Reservoir which are managed in partnership with the Department of Conservation and Recreation (DCR). Both the reservoirs combined supply about 200 million gallons per day to consumers [MWRA "  "]. The Quabbin and Wachusett Reservoirs are protected and over 85% of the watershed lands that surround the reservoirs are covered in forest and wetlands [MWRA]. The water supply system is rather unique in that the Quabbin Aqueduct, a 24.6 mile long tunnel, connects the Quabbin Reservoir to the Wachusett Reservoir. The MWRA transfers water from the Quabbin reservoir intermittingly to the Wachusett Reservoir to maintain the water level and water quality of the Wachusett Reservoir [DCR, 2007] which most always makes up the majority of the total inflow to the Wachusett Reservoir. The MWRA can also divert water from the Ware River, located between the two reservoirs, to either the Quabbin Reservoir (preferable) or the Wachusett Reservoir through the Quabbin Aqueduct. The MWRA water supply system can be seen in figure 2.1, Transfers generally occurs from June through November and can last for weeks at a time to meet higher water demands, maintain the water level, and mitigate water quality concerns in the Wachusett Reservoir (DCR, 2007).
 
+```{r MWRA System, echo=FALSE, out.width = "6.5in", fig.cap="MWRA Water Supply System"}
+knitr::include_graphics("images/MWRAsystem.png") #
+```
 
-The complex nature of the system allows for decisions to be made that can alter the water quality that ends up in the Boston Supply System. Although all water enters from one locaiton in the Wachusett Reservoir, it is essential to monitor the water quality in the whole watershed to best understand why the processes that might create a water quality issue and  to address the source or cuase of the problem. The streams and the reservoirs water quality are frequently tested by the Massachusetts Department of Conservation and Recreation. Stream guages are insstalled to estimate the flow of major tributaries to hte reservoirs, both by the United States Geological Survey (USGS) and by the DCR. The Quinapoxet and the Stillwater River are gauged by the USGS which were installed in the 1990's. Some meteroligcal data is also collected at various locations in the watersheds and additional data can be attained from the NOAA /  NCDC. 
+The complex nature of the system allows for decision making in reservoir management that can alter the water quality that ends up in the Boston Supply System. Although all water enters from one location in the Wachusett Reservoir, it is essential to monitor the water quality in the whole watershed to best understand reservoir processes. A greater understanding of reservoir processes can allow for more informed actions when water quality issues occur. Tributaries and reservoirs are routinely sampled by the DCR through specified sampling plans for various water quality parameters. Stream guages and meteorological instruments also are used to collect tributary dscharge and  watershed meterological data, respectively.
 
 ### Water Quality Sampling Plan
 
+The task of water quality sampling of the three watersheds in the water supply system are divided between the Quabbin and Wachusett office of the DCR Water Supply Protection Division. Each office creates their own sampling plan for the reservoirs and tributaries in their respective watersheds which consists of a schedule of routine sampling and storm sampling at various sites. The Quabbin Office is responsible for the sampling of the tributaries in the Quabbin and Ware River watersheds and sampling in the Quabbin Reservoir itself. The Wachuchesett Office is responsible for the sampling of the tributaries in the Wachusett watershed and the Wachusett Reservoir itself. Each Office has sites that they sample consistantly every year which are considered core sites. Other Site locations are temporarily selected for various reasons including to target areas of emerging concern and to target areas that are usually under-represented in the sampling plan. Figure 2.2 shows all of the historical and active documented sampling locations of the DCR.
 
-The water quality sampling plan consists of routine sampling at various sites. The task of water quality sampling plan of the watersheds in the water supply system are divided between the Quabbin and Wachusett office of the DCR Water Supply Protection Division. Each office creates their own sampling plan for the reservoirs and tributaries in their watersheds each are responisble for. The Quabbin Office is responsible for the sampling of the tributaries in the Quabbin and Ware River watersheds and sampling in the Quabbin Reservoir itself. The Wachuchesett Office is responsible for the sampling of the tributaries in the Wachusett watershed and the Wachusett Reservoir itself. Each Office has sites that they sample consistantly every year which are considered core sites. Other Site locations are temporaraily selected for various reasons including to target areas of concerns and to target areas that are usually underrepresented in the sampling plan.
+```{r Watershed Sampling, echo=FALSE, out.width = "6.5in", fig.cap="Watershed Sampling Locations"}
+knitr::include_graphics("images/WatershedSampling.png")
+```
 
-The tributary Water quality parameters sampled in both offices are Turbidity, Water Temperature, E. coli, Mean UV254, Ammonia, Nitrate, Nitrite, Specific Conductance, Total Kjeldahl Nitrogen, Total Phosphorus. Most of these parameters are sampled on a biweekly basis, although (    ) are sampled (  ). The sampling frequencys of water quality parameters in each watershed is displayed in image 1. The Sampling frequency is for the Core Sites at the sampling frequency that had the longest duration between the five years of 2013 to 2017. In most cases the frequencies of the core samples are the same as the frequencies of the other non-core sites? Water quality data related to forestry practices is also collected to compare water quality parameters between managed and unmanaged forests. 
-
-Do not need this text: replace with graphic: The QUabbin Office additionally samples Dissolved Oxygen, Dissolved Oxygen Saturation, pH, Alkalinity, Calcium(II), Fecal Coliform, Total Coliform (Colilert). The Wachusett Reservoir additionally samples phosphate-phosphorous, total organic carbon, and total suspended solids as well as operates. 
-
-Reservoir water quality samples are conducted in by various means depending on the parameter. All reservoir samples are taken by boat during the time of the year with no ice freeze. ( ) are collected at reservoir locations, at three depths: surface, mid, and deep. The parameters cllected at both reservoirs include . Profile Data is collected in both reservoirs at about a meter depth. Bacteria Samples are collected in the Wachusett at the surface only which include (). Phytoplankton data is also collected at both Reservoirs. Do I include Bacteria? brief? The sampling frequencys of water quality parameters sampled in within each reservoir is displayed in image 2 for five consecutive years, 2013 to 2017. If the sampling frequency parameter happened to change during this time period, the sampling frequency that had the longest duration between the five years was chosen. In most cases the frequencies of the core samples are the same as the frequencies of the other non-core sites?
-
-
-Trib Plot geom_tile
-Parameters on y. Location on X. Quabbin, Ware, Wachusett. Color Grid - COlor discrete by frequency, make kind of scale-ey.
-
-Res Plot Geom_tile
-Parameters on y. Locaiton on X. Quabbin, Wach. Color by frequency. Facet a geom_tile for Type: Profile, a
+The tributary Water quality parameters sampled in both offices are turbidity, water temperature, E. coli, mean UV254, ammonia, nitrate, nitrite, specific conductance, total kjeldahl nitrogen, total phosphorus. Most of these parameters are sampled on a biweekly basis, although (    ) are sampled (  ). Reservoir water quality samples are collected by boat during the time of the year with no ice freeze. Various collection methods are used including surface grab samples, grab samples taken from three depths, and profile sampling by means of probe instruments. The surface grab sampling method is used for water quality parameters including E. coli and fecal coliform at the Wachusett Reservoir. More commonly, samples are collected at three distinct reservoir depths: surface, mid-depth, and deep. Profile measurements are collected in both reservoirs at about a meter depth seperation between mesurements. Phytoplankton data is also collected at both Reservoirs. The sampling frequencys of water quality parameters sampled within each reservoir and watershed are displayed in image 2.3. The Sampling frequency denoted in the graphic are for the years 2013 to 2017.
 
 
-Checks marks papers for other graphic ideas. 
+```{r res, echo=FALSE, out.width = "6.5in", fig.cap="Reservoir and Tributary Sampling Frequencies (Double Check)"}
+knitr::include_graphics("images/sampling_frequencies.pdf")
+```
 
-
-Turbidity, Water Temperature, E. coli, Mean UV254, Ammonia, Nitrate, Nitrite, Specific Conductance, Total Kjeldahl Nitrogen, Total Phosphorus, 
-
-Quabbin
-Dissolved Oxygen, Dissolved Oxygen Saturation, pH, Alkalinity, Calcium(II), Fecal Coliform, Total Coliform (Colilert),  
-
-Wach
-Discharge,  
-
-Core Sites and EQA Sites
-
-
-Questions should be asked  the sampling plato make informed decisions to update the sampling plan on a continuous basis. The reservoir and watershed is always changing, as well should the strategies to maintain adequate water quality. It is likely that as more information is disscovered about the reservoir, more quesitons can be asked. Are there locations that we should be samplin gmore? Is the sampling frequent enough to see trends? Is the sampling more frequent than neccesary to see trends? Are there parameters that should be added to the sampling plan? Are there any parameters that should be removed from the sampling plan? This Application will give insight to data collection needs 
+In addition to sampling plans for water qualitiy, stream guages are insstalled to estimate the flow of major tributaries to the reservoirs, both by the United States Geological Survey (USGS) and by the DCR. The majority tributaries to the reservoirs are guaged by the USGS which are the Quinapoxet River, Stillwater River, Branch Swift River, ?? [USGS]. Some meteroligcal data is also collected at various locations in the watersheds and additional data can be attained from the National NOAA /  NCDC [  ]. Additional sampling related to forestry practices is also collected to compare water quality parameters between managed and unmanaged forests.
 
 ### Previous Watershed Studies
 
-Lily and marks paper. Look at Lit review.
-Many studies have been conducted under the partnership of University of Massachusetts and the DCR. Many of these studies have benefitted from the vast amount of water quality and hydroogical data that is collected in the Quabbin, Ware River, and Wachusett Watersheds. These studies have included many hydraulic and water quality models and analysis on the Wachusett Reservoir. The water quality impacts from extreme precipitation events have been studied through statistical forcasting? of potential loads coupled with a reservoir hydraluic and water quality model (Jeznach HageMan). The fate of a contaminant spill in the Wachusett Reservoirs have also been modeled (Lily 2013, 2011 Devonis) (Sojkowski) (more). Other water quality modeling topics have included the effects of climate change on the Wachusett reservoir (Loly) and modeling the fate of Natural Organic Matter and fecal pollution (  ). Having a propper sampling plan can allow for more informed research studies. Water Quality (profile) data is essential for the calibration and validation of hydraluic and water quality models of a Reservoir. Well maintained data further facilitates this process.
+Many studies have been conducted under the partnership of University of Massachusetts and the DCR. Many of these studies have benefitted from the vast amount of water quality and hydroogical data that is collected in the Quabbin, Ware River, and Wachusett watersheds for data analysis and model calibration and validation. The water quality impacts from extreme precipitation events have been studied through statistical forcasting? of potential loads coupled with a reservoir hydraluic and water quality model (Jeznach HageMan). The fate of a contaminant spill in the Wachusett Reservoirs have also been modeled (Lily 2013, 2011 Devonis) (Sojkowski) (more). Other water quality modeling topics have included the effects of climate change on the Wachusett reservoir (Lily) and modeling the fate of Natural Organic Matter and fecal pollution (  ). Having a proper sampling plan can allow for more informed research studies. Water Quality (profile) data is essential for the calibration and validation of hydraluic and water quality models of a Reservoir. Well maintained data further facilitates this process.
 
 
-## Watershed Data Managament System.
 
-For the respect of simplicity, a watershed data management system, or really any data management system, can be broken down into three aspects: 1. data importation, 2. data storage, and 3. data utilization. Data importation includes the act of getting data measurements from the field or a lab into a database. This data can span from manually read data to data that is transmitted automatically SCADA. Data storage is the location in which the data lives and is ever changing as more data is collected. Data usage is includes the querying, visualization, analysis, or any other process from which conclusions can be drawn from the data to benefit decision making. 
 
-Proprietary software exists that accomplish all of three of these features. Aquarius, created by Aquatic Informatics, is a leading software service for water supply management. Aquarius Time-Series software is used for rating curve creation. The USGS uses Aquarius Time-Series for their rating curve generation.  Aquarius-Samples is used also used specifically storage of a variety of field and laboratory data. An internal watershed management system is also a possibility to meet. An internal watershed management system could be developed using multiple components, (software, databases, programming languages) to create watershed management system.
+## Watershed Data Management System.
 
-Watershed data collection varies within each watershed. Proprietary software attempt to supply versatile a product that can be widely used on any watershed. This can be a very difficult task due to the discrepancies in water quality data collected as in the types of parameters, the instruments used. The analysis and visualization for more complex analysis can also differ. These software programs seem to be a good solution to data management alone, but lack on data visualization. Also, it is useful to have data in house if analysis wants to be done on it. Data in some of these systems can be stored on a cloud and harder to access than if they are stored internally. Aquarius costs money, which can be an economic , although the benefit of a data management system can save money due to time saved and a quality control.
+A simple depiction of a watershed data management system can be divided into three parts: 1. data collection, 2. data storage, and 3. data utilization. Data collection includes the act measuring data observations in the field or a lab as well as importing data measurements into a database. Data storage is the location in which the data lives and is ever changing as more data is collected. Data utilization includes the querying, visualization, analysis, or any other process from which conclusions can be drawn from the data to benefit decision making.
 
-With the development of coding languages, it is getting easier to build a custom dashboard or application with a application development framework. Creating an application, rather than using a proprietary software allows for more flexibility. It is time consuming creating an application. the pay off of customizability and . Also, a proprietary software like Aquatic Informatics software will be responsible for bug fixes and adding new features. A custom App requires the water management facility to add more features as well as keep in touch with updating and changing software libraries that could, but shouldn't, effect the application's performance (If this happens the application can always fall back on a previous version of a library).
+Proprietary software exists that incorporate all three parts of a watershed data management system. Aquarius, created by Aquatic Informatics, is a group of leading software services for water supply management and include AQUARIUS Samples and AQUARIUS Time-Series. AQUARIUS Samples is designed for watershed data management for a variety of field and laboratory data. amples streamlines the production and management of environmental lab and field sample data, saving time while increasing the quality of final data [aquaticinformatics]. Aquatic Informaticas also created Aquarius Time-Series software is the most powerful platform for managing water resources and is used by the USGS as well as many other agencies [aquaticinformatics]. This paper will focus on water quality data management and thus AQUARIUS Samples better resembles the watershed data management system that this paper describes. Proprietary software like AQuARIUS Samples attempt to supply versatile a product that can be widely used on any watershed. This can be a difficult task due to the variations in water quality data and variations of specific agency needs. Data visualization and analysis of the software is often limited and cannot be customized within the software. Propietary software is also costly.
 
-### Data Storage
+A personalized watershed management system is another approach for a watershed data management system which can be developed using an open source application developement framework paired with a database. With the advancement of programming languages, it is getting easier to build a custom dashboard or application with a application development framework. Creating an application, rather than using a proprietary software allows for more flexibility and customization. This is a less expensive solution than paying for proprietary software, though it can be time consuming creating an application, so cost and time are a trade off.
 
-There are various types of data collected in the watershed. Due to the vast amount of data from various sources the raw data can be in very different formats. Storing data in a central database in similar format is crucial to set up a platform for efficient data analysis. The application provides a connection to this data in the database with an easy-to-use user interface for a human user to interact with the data.
+### Data Storage (needs work)
 
-Relational databases are a common way to store data, I think that data
-
-many databases have the ability to be a back-end server. This means that the database has ability for queries. Most of these databases use a form of SQL language , although there are non-SQL databases like MongoDB. Microsoft Access is an example of a SQL database and one can write.  A front end is even possible with visual basic language for a sense of a user interface. Visual Basic is slow and is not well developed in comparison to other more.
-
-There are many open source and free sources of 
-
-Aquarius stores data in their own database in the cloud. It is unknown to the author of this paper what type of database that Aquarius uses, although it is likely a relational database.
-
-### Data Importation and Data Utilization
-
-There are many different effective ways to go about data importation but importing data by hand is no longer one of them. Most always data that one collects is not in the same format as how the data is store. Data transformations must be made including but not limited to column name changes, adding or removing columns, data type, and spreading or gathering columns. Spreadsheets also can be used to import data, though manually typing data and making format changes can be timely and prone to errors. Programming languages can be used as a tool to transform data to a particular format. R and Python are just two of the many programming languages that can be used for this process. A code script written with a programming languages can additional perform set quality control measures including checking for duplicate data or alerting a user when their is an usual data value. Even further, a user interface can be created for a user to be able to run this code without being familiar with the programming language or integrated development environment (IDE) is note required. A common user interface can be built to input data of all types.
+There are various types of data collected in the watershed. Due to the vast amount of data from various sources the raw data can be in very different formats. Storing data in a central database in similar format is crucial to set up a platform for efficient data analysis. The application provides a connection to this data in the database with an easy-to-use user interface for a human user to interact with the data. Relational databases are a common way to store data which all use a common API SQL. MYSQL, Microsoft Access, are examples of a database. There are many open source and free sources of databases.
 
 ### Application Developement Frameworks
 
-Applications can be created to access the data from the database and allow for more customizability and data use than what is offered in most database software. The same programming languages used to transform and import the data can likely be used for the the more popular programming languages to facilitate query, export, visualization, and analysis of the data. Spreadsheets can also be used for data analysis and visualization, though this is slower. An application with a friendly user interface can be built from writing code in one of the programming languages to allow for user to more easily create visualizations, perform data analysis. This user does not need to have any program experience. 
+Applications can be created to assist in data import, querying, visualization, and analysis. Application frameworks can assist on application creationwhich are essentially a a reusable, "semi-complete" template  application that can be specialized to produce custom applications [  ]. Selection of a proper application development framework can greatly decrease the amount of work must do and knowledge one must possess to create an application. Most application development frameworks can be considered either a front-end framework or a back-end framework which help create a front-end server and a back-end server, respectively. The front-end server and the back-end server communicate through a common API, usually JSON, which is considered the universal binary []. A front-end server is responsible for the construction and layout of the user interface, which is what the user sees and interacts with, commonly in their web browser. The user does not see the back-end server but this does the computational work. The seperation of front-end server and back-end server can allow for increased customization as various front-end and back-end frameworks can be paired. Some frameworks serve as both a front-end and back-end framework which usually have a benefit of simplicity in the developement process. This paper focuses on this latter type of application framework that function as both a front-end and back-end due to the type of application desired. Only a mimimilistic user interface is needed and most of the focus will be on the data science potential of the the programming language that the framework uses. 
 
-Selection of a proper application development framework can greatly decrease the amount of knowledge one must have to create an application. Most application development frameworks can be considered either a front-end framework or a back-end framework which communicate through a common API, usually JSON, which is considered the universal Binary. The frontend framework is responsible for the construction and layout of the user interface, which is essentially what the user sees and interacts with. The backend is responsible for actual computational operations of the application and accepts information from the front end when the user requests it. The seperation of front end and backend can allow for full costumization and allow for front end and back end specialists to cleanly on each part seperately. In the case of relatively simple data science applications, this paper explores application developement frameworks that function as both a front end and back end framework (or "full stack" framework). This approach is deemed appropriate becuase only a mimimilistic user interface is needed and most of the focus will be on the data science potential of the backend framework which is likely restricted by the programming language that the framework uses. 
-
-The application that this paper is focused on is Shiny, a package in R. Data Science Application lobraries in Python include Bokeh, Spyre, Dash, Pyxley, IPython notebook, Bowtie. D3 for javascript is also. All of these libraries are free and open source. These all differ in certain ways but all are capable of producting web applications focused on data science. many of these application frameworks leverage javascript to render the user interface inputs and outputs in a way that little knowlege of Javascript is neccesary.
-
-Python is a much more widely used, more developed language than R. Python is used for many purposes outside of data science. Python has a total of___ packages compared to  . Pandas package is debatedly the leading data scienceframework within Python. Pandas Package in python is meant for data science. It is similiar o R DPLYR. same users?
-
-Shiny is web application framework for R data projects. A user can create an application in the form of a website, an html document, or a dashboard. Shiny offers hosting services which cost some money in which a user can easily launch an application without the knowlege or hastle of hosting their own application as well as recieve customer support. Shiny is designed for people with people who have experience with R but do not have nay application developement experience.  No web development skills are required. Shiny is well ducumented including many tutorial documents and videos as well as extra webinars and Github and Stackoverflow help. 
-
-Bokeh is a web application framework for Python Projects and is similiar to Shiny. Bokeh seems to offer more in depth interactive ability of plots and other graphics, yet Shiny does offer basic interactive graphic features as well. "Bokeh is a Python interactive visualization library for large datasets that natively uses the latest web technologies. Its goal is to provide elegant, concise construction of novel graphics in the style of Protovis/D3, while delivering high-performance interactivity over large data to thin clients." - Bokeh. A benefit of Bokeh is that the visualizations can be connected to almost any web tool, widget, or framework, outside of Bokeh itself (Bokeh). Python frameworks like Django, Pyramid, or Flask have greater customobility than Shiny and can be used for things outside of data science.
-
-Spyre is another web application framework for providing a simple user interface for Python data projects. Dash created by Plotly is another alternative to build dashboards using Python which utilizes plotly.js, a leading web chart library, without the use of Javascript. Pyxley python package makes it easier to deploy Flask-powered dashboards using a collection of common JavaScript charting libraries. UI components are powered by PyxleyJS. Bowtie is also an interactive dashboard toolkit in python which can be used to create web applications for data science. D3 is a javascript library which combines powerful visualization and interaction techniques.
-
-For the reson of simplicity, documentation, and previous familiarity in R, decided that Shiny is the best option. This decision should be made on a case to case basis depending on desired use and previous familiarity with a language. Resources outside of this paper should be used to determine which is the best fit for one's data needs. Little porgramming knowlege
-
-Aquarius Time-Series and Aquarius Sample have a data import feature. Aquarius has the ablility to import data from common more main stream instruments which basically has an internally built code to correctly transform this data into the neccesary format for the database. A user can also import their create custom transformation "  " to transform a particular dataset. Auquarius has the ability to perform queries and see basic plots of data including scatter plots and box plots.
-
-
-R was developed for statistics and specializes in visualization. 
-
-
+R and Python are common programming languages for data science and both have their own collection of data science application framework libraries. Python is a much more widely used, more developed language than R, though R specializes in statistics and data visualization. Shiny is a developement framework library in R which allows a relatively unexperienced developer to build an application in the R language. Shiny is an open source application that consists of a front-end user interface component which can be opened with any common web browser as well as a back-end server component which utilizes the data science power of R for visualization and statistical analysis. Shiny is a developement framework library in R created by RStudio nd is very well documented with thorough tutorials. Application Framworks libraries in Python focused on data science include Bokeh, Spyre, and Dash [source]. All of these libraries are free and open source and require little application developement experience, although programming experience is required (or highly preffered). These application frameworks leverage JavaScript and HTML to render the user interface inputs and outputs in a way that little knowlege of JavaScript or HTML is neccesary. Each framework has its differences and some might work better than others for a particular application design. Familiarity of a partcular programming language can also influence the decision of which application developement framwork to choose.
 
 
 
 
 
 \newpage 
-
-# Application Developement process
+# Application Developement Process
 
 
 
@@ -238,6 +170,9 @@ Developer Manual
 
 ### WIT
 
+
+There are many different effective ways to go about data importation but importing data by hand is no longer one of them. Most always data that one collects is not in the same format as how the data is store. Data transformations must be made including but not limited to column name changes, adding or removing columns, data type, and spreading or gathering columns. Spreadsheets also can be used to import data, though manually typing data and making format changes can be timely and prone to errors. Programming languages can be used as a tool to transform data to a particular format. R and Python are just two of the many programming languages that can be used for this process. A code script written with a programming languages can additional perform set quality control measures including checking for duplicate data or alerting a user when their is an usual data value. Even further, a user interface can be created for a user to be able to run this code without being familiar with the programming language or integrated development environment (IDE) is note required. A common user interface can be built to input data of all types.
+
 ## Application Deployment
 
 There were many possibilities of ways to launch hte application. A large driver of this decision is based on the answer to the question: who do we want to be able to have access to the app. Becuase this application is to be used primarily by the DCR internally, it was not neccesary to host the application on the worled wide web. Since there was a discrete small set of computers that need to have access to the application, it is feasible to install this application on each of these computers to run locally. This would not be possible if it was desired for an application with access from users on any computer connected to teh internet. If it was neccesary to do so we would have had to set uop our own server, pay for the hosting service taht Shiny drectly offers, or pay for another outside cloud hosting sevice. This also felt like the safer bet for any data security purposes since not hosting the data on the web allows for the data to stay on the DCR's internal network.
@@ -253,10 +188,19 @@ The Application can also be packaged. Include link to this details. A portable C
 
 
 
+\newpage 
+# WIT Features
 
+## Raw Data File Lookup
+
+## Data Processing
+
+## Quality Control
+
+## Data Importation
 
 \newpage 
-# Application Features and Findings (Results)
+# WAVE Features
 
 
 ## Data Query and Export
@@ -348,6 +292,18 @@ The Watershed data Importer Tool (WIT) facilitates importing raw data from multi
 \newpage 
 # Discussion and Reccomendations
 
+Through the insight that this application brings, future data collection needs can be better assessed which will direct changes to the current watershed monitoring program. Automation is a useful, yet underutilized tool that can save an organization much time day to day on decreasing the number of repeated tasks that come along with searching, displaying, and analyzing water quality data. A custom application with dashboard toallow a user to easily perform data science with the power of R, with little knowlege of R programming language is highly desired. This application should include but not limited to facilitated data entry, querying, visualization, and analysis of water quality data and other related watershed data. Save Tiem an dMoney , inrease quality control
+
+Visualization dashboards were created to view data in a speciofic customized fashion based on a user selected inputs. Statitical Analysis of parameters is useful to understand watershed and reservoir water quality in regards to temporal and spatial trends of water quality parameters and also correlations between water qualitiy parameters.
+
+Temporal Analysis and spatial analysis (do more (some) reading)
+
+Questions should be asked  the sampling plato make informed decisions to update the sampling plan on a continuous basis. The reservoir and watershed is always changing, as well should the strategies to maintain adequate water quality. It is likely that as more information is disscovered about the reservoir, more quesitons can be asked. Are there locations that we should be samplin gmore? Is the sampling frequent enough to see trends? Is the sampling more frequent than neccesary to see trends? Are there parameters that should be added to the sampling plan? Are there any parameters that should be removed from the sampling plan? This Application will give insight to data collection needs 
+
+A Reservoirs water quality effects the type and extent of neccesary treatment process of the water supply prior to distribution. Generally, less treatment is required for a water utility who's source is a remote, healthy reservoir than a reservoir which has been degraded by anthroppologic or other means. It is often infeasible to obtain water from completely pristine areas, especially for water utilities who supply water to urban areas. Watershed management can help ensure the water quality of a reservoir and as well as predict, lessen, or prevent reservoir water quality degredation. from occuring. (Quantity as well.)
+
+
+
 ## Pros and Cons of Application
 
 Custombility
@@ -370,6 +326,20 @@ Upkeep
 ## WAVE Developer Manual
 
 ## WIT Developer Manual
+
+# Extras and Trash Bin (Not a real Section)
+
+
+Shiny is web application framework for R data projects. A user can create an application in the form of a website, an html document, or a dashboard. Shiny offers hosting services which cost some money in which a user can easily launch an application without the knowlege or hastle of hosting their own application as well as recieve customer support. Shiny is designed for people with people who have experience with R but do not have nay application developement experience.  No web development skills are required. Shiny is well ducumented including many tutorial documents and videos as well as extra webinars and Github and Stackoverflow help. 
+
+Bokeh is a web application framework for Python Projects and is similiar to Shiny. Bokeh seems to offer more in depth interactive ability of plots and other graphics, yet Shiny does offer basic interactive graphic features as well. "Bokeh is a Python interactive visualization library for large datasets that natively uses the latest web technologies. Its goal is to provide elegant, concise construction of novel graphics in the style of Protovis/D3, while delivering high-performance interactivity over large data to thin clients." - Bokeh. A benefit of Bokeh is that the visualizations can be connected to almost any web tool, widget, or framework, outside of Bokeh itself (Bokeh). Python frameworks like Django, Pyramid, or Flask have greater customobility than Shiny and can be used for things outside of data science.
+
+Spyre is another web application framework for providing a simple user interface for Python data projects. Dash created by Plotly is another alternative to build dashboards using Python which utilizes plotly.js, a leading web chart library, without the use of Javascript. Pyxley python package makes it easier to deploy Flask-powered dashboards using a collection of common JavaScript charting libraries. UI components are powered by PyxleyJS. Bowtie is also an interactive dashboard toolkit in python which can be used to create web applications for data science. D3 is a javascript library which combines powerful visualization and interaction techniques.
+
+For the reson of simplicity, documentation, and previous familiarity in R, decided that Shiny is the best option. 
+
+Aquarius Time-Series and Aquarius Sample have a data import feature. Aquarius has the ablility to import data from common more main stream instruments which basically has an internally built code to correctly transform this data into the neccesary format for the database. A user can also import their create custom transformation "  " to transform a particular dataset. Auquarius has the ability to perform queries and see basic plots of data including scatter plots and box plots.
+
 
 \newpage 
 # References

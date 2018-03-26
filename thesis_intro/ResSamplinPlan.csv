@@ -1,0 +1,42 @@
+Parameter,Type,Location,Frequency
+Alkalinity,Reservoir,Quabbin Three Depths,Monthly
+Ammonia,Reservoir,Quabbin Three Depths,Quarterly
+Nitrate,Reservoir,Quabbin Three Depths,Quarterly
+Total Kjeldahl Nitrogen,Reservoir,Quabbin Three Depths,Quarterly
+Total Phosphorus,Reservoir,Quabbin Three Depths,Quarterly
+Mean UV254,Reservoir,Quabbin Three Depths,Quarterly
+Turbidity,Reservoir,Quabbin Three Depths,Monthly
+Specific Conductance,Reservoir,Quabbin Three Depths,Monthly
+Total Coliform,Reservoir,Quabbin Three Depths,Monthly
+Fecal Coliform,Reservoir,Quabbin Three Depths,Monthly
+E. coli,Reservoir,Quabbin Three Depths,Monthly
+Mean UV254,Reservoir,Quabbin Three Depths,Monthly
+Silicon Dioxide,Reservoir,Quabbin Three Depths,Quarterly
+Specific Conductance,Reservoir,Quabbin Profile,Monthly
+Water Temperature,Reservoir,Quabbin Profile,Monthly
+Dissolved Oxygen,Reservoir,Quabbin Profile,Monthly
+Dissolved Oxygen Saturation,Reservoir,Quabbin Profile,Monthly
+pH,Reservoir,Quabbin Profile,Monthly
+Chlorophyll,Reservoir,Quabbin Profile,Variable
+Blue Green Algae,Reservoir,Quabbin Profile,Variable
+E. coli,Reservoir,Wachusett One Depth,Variable
+Fecal Coliform,Reservoir,Wachusett One Depth,Variable
+Calcium(II),Reservoir,Wachusett One Depth,Variable
+Alkalinity,Reservoir,Wachusett Three Depths,Monthly
+Ammonia,Reservoir,Wachusett Three Depths,Monthly
+Nitrate,Reservoir,Wachusett Three Depths,Monthly
+Total Kjeldahl Nitrogen,Reservoir,Wachusett Three Depths,Monthly
+Total Phosphorus,Reservoir,Wachusett Three Depths,Monthly
+Silicon Dioxide,Reservoir,Wachusett Three Depths,Monthly
+Mean UV254,Reservoir,Wachusett Three Depths,Quarterly
+Dissolved Silica,Reservoir,Wachusett Three Depths,Monthly
+Total Suspended Solids,Reservoir,Wachusett Three Depths,Monthly
+Specific Conductance,Reservoir,Wachusett Profile,Monthly
+Water Temperature,Reservoir,Wachusett Profile,Monthly
+Dissolved Oxygen,Reservoir,Wachusett Profile,Monthly
+Dissolved Oxygen Saturation,Reservoir,Wachusett Profile,Monthly
+pH,Reservoir,Wachusett Profile,Monthly
+Chlorophyll,Reservoir,Wachusett Profile,Monthly
+Blue Green Algae,Reservoir,Wachusett Profile,Monthly
+Turbidity,Reservoir,Wachusett Profile,Monthly
+Total Dissolved Solids,Reservoir,Wachusett Profile,Monthly
