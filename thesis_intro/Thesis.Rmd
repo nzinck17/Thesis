@@ -162,17 +162,27 @@ R and Python are common programming languages for data science and both have the
 
 
 \newpage 
-# Application development Process
+# System Development
 
-## System Overview
+## System Architecture
 
-The application is a relatively simple application network. Figure 3.1 depicts a simplified version of the system components. The user opens the application and the server runs in the background. The server is Shiny that both executes R code for data computations and creates the user interface through rendering javascript and HTML. The user (client) sends information to the server through interactions with the user interface and the server will update the user interface accordingly. The server also will reach can fetch and retirieve data from the database (or intermediary data storage).
+WAVE and WIT have a relatively simple application architecture relatively to other web applications. Shiny is both a front-end and back-end framework which allows one unified server component, rather than a seperate front-end server and a back-end server. The application also ran locally at the DCR which means that the client and server are both being ran on the users computer . Figure 3.1 depicts a simplified version of the system components. The user (or the client) uses with the application on their computer. In this case the application server that handles the users requests is the users own computer, which defines running the application locally. An application that is hosted on the web has an additional process of sending the requests of a user through a proxy to the. Also, depending on the amount traffic to the application site, there can be need of multiple servers and the proxies help balance the amount of traffic that each server takes on. The server is Shiny that both executes R code for data computations and creates the user interface through rendering javascript and HTML. The user (client) sends information to the server through interactions with the user interface and the server will update the user interface accordingly. The server also will reach can fetch and retrieve data from the database (or intermediary data storage). Each application is individually more complex and unique that the simple architecture depicted in Figure 3.1.
 
-```{r dev system 1, echo=FALSE, out.width = "4in", fig.cap="Needs to be changed!! (incorrect data!)"}
-knitr::include_graphics("images/development/system1.pdf")
+Prior to the start of a session, a configuration file is read into R which gives information about the desired configuraration adn settings like the location of database, Github repository, the office the user is in, and other settings. The configuration file is used for the purpose of allowing variability in application per user preferences. The Wachusett and Quabbin Office have different raw data and thus they will need different. They also have different databases and different directories where they store the raw data files. The configuration file can be the place of any future settings. Once the configuration file is read, the application files are fetched from the specified GitHub repository and ran which opens the application and starts at a session.
+
+The WIT application acrhitecture can be seen in Figure 3.2. This architecture differs than the more basic previously described architecture with the added components of raw data, RDS files, and USGS NOAA data. WIT allows raw data on a users computer to be selected, processed, and imported into a database. When the session terminates, an R script is ran which fetches data from a database and transforms it and saves in as RDS files. As previously mentioned, this essentially works to keep the RDS files updated as new data is added to the database. The RDS files containing USGS and NOAA data is also updated be fetching USGS and NOAA data from _____ on the portal.
+
+```{r dev WIT, echo=FALSE, out.width = "6.5in", fig.cap="WIT Architecture - update remove green from db"}
+knitr::include_graphics("images/development/WIT_Arch.pdf")
 ```
 
-## Database Development
+The WAVE applcication architecture can be seen in figure 3.3. The WAVE applciation runs as peviously discussed with the added features of outputs in the form of visualizations and data and statistic tables. It is not desired to have a user of WAVE alter the database or data, so there is a on-way flow of data into the aplication. The data is read in to R prior to thw application session. As previously discussed the data that is read in is in the form of RDS files for mainly speed considerations. The RDS files also already have the dataframes (a data storage ___ in R ) in organized and seperated in the way that the Application uses them which simplifies the application code.
+
+```{r dev WAVE, echo=FALSE, out.width = "6.5in", fig.cap="WAVE Architecture"}
+knitr::include_graphics("images/development/WAVE_Arch.pdf")
+```
+
+## Database development
 
 Water quality data at the DCR has been collected since as early as 1984(8). Computer data storage was not yet common, and records were filed on pieces of paper. As computers became more relevant a mix of spreadsheet storage and database storage was used for data storage. Today, an effort is being made to move all data from historical paper records and those in spreadsheets to the database. Database are a much more efficient method of storing large amounts of data than either paper records or spreadsheets. The DCR currently uses the Microsoft Access relational database management system for their data storage needs. The Wachusett Office has runs three databases, one for water quality data, one for aquatic biological data and profile water quality data, and one for hydrlogical data. The Quabbin Office has one database for all of its water quality data. As a database can be seen as a collections of tables, it is not very important if all tables are stored in one database or if three seperate databases are used, though it makes sense to keep all tables that are related (i.e. have common keys that link them) in one database.
 
@@ -185,6 +195,10 @@ There are many types of tables in each database. Within a particular table, simi
 \begin{tabular}{| l | l | l | l |}
 \hline \\ [-1.5ex]
 Location & Date & Parameter & Result\\ [1ex]
+Riverbend & 01/01/2020 & Turbidity & 12\\ [1ex]
+Riverbend & 01/01/2020 & Nitrate & 13\\ [1ex]
+Riverbend & 01/01/2020 & Ammonium & 14\\ [1ex]
+Riverbend & 01/01/2020 & Spec. Cond & 15\\ [1ex]
 \end{tabular}
 \end{table}
 
@@ -195,45 +209,21 @@ Location & Date & Parameter & Result\\ [1ex]
 \begin{tabular}{| l | l | l | l | l | l |}
 \hline \\ [-1.5ex]
 Location & Date & Turbidity & Nitrate & Ammonium & Specific Conductance \\ [1ex]
+Riverbend & 01/01/2020 & 12 & 13 & 14 & 15\\ [1ex]
 \end{tabular}
 \end{table}
 
 Due to the focus on data which represents field or laboratory measurements, tables for information other than this are considered metadata tables in this report and in the application. Metadata is a term used for a set of data that describes and gives information about other data [Google]. Metadata tables in the database include tables with information on parameters, locations, flags, sample flag index, and more. Location Tables gives location information like  . Parameter tabels gives . Flag tables give informatin on what a flag ID . Sample flag index table is used to relate the sample tables with the flag tables which is needed due to the one-to many relationship of samples to flags. Becuase a sample measurement can have zero, one, or many flags associated with it, an intermediate table is used to relate a sample ID with a falg ID, which are both foreign keys. An example of these database tables are shown in the appendix.
 
-Both WAVE and WIT need to connect and access data from the four Access Databases. Connections are made with an open Database Connectivity (ODBC) application program interface to externally fetch data from a database and to write data to a database. WIT, wich is used to process and import data to the database, both writes adn reads data to and from the database. WAVE only needs to read in data from the database. There are commonly two schemes of reading data with an application, either read all data in at first and close the connection or connect each time the user asks for specific information and only return that information. Although the latter approach is more common, both applications use the prior approach to load in all data to the R session at the start of a user session. This is beneficial in our case for less opening and closing of connections since opening and closing a connection in Microsoft Access can be timely as well as lock the database fromother use if a proper system is not put in place to avoid this. In many cases, there may be too much data to be feasible to load in all at once. Other alternative database maanagemment sytems which are faster at this process than Microsoft Access likely exist. RDS file saving . See figure 3.3 (one for WIT and one for WAVE)
+Both WAVE and WIT need to connect and access data from the four Access Databases. Connections are made with an open Database Connectivity (ODBC) application program interface to externally fetch data from a database and to write data to a database. WIT, wich is used to process and import data to the database, both writes adn reads data to and from the database. WAVE only needs to read in data from the database. There are commonly two schemes of reading data with an application, either read all data in at first and close the connection or connect each time the user asks for specific information and only return that information. Although the latter approach is more common, both applications use the prior approach to load in all data to the R session at the start of a user session. This is beneficial in our case for less opening and closing of connections since creating and removing a connection in Microsoft Access can be timely as well as lock the database fromother use if a proper system is not put in place to avoid this. In many cases, there may be too much data to be feasible to load in all at once. See figure 3.3 (one for WIT and one for WAVE)
 
 In the future it may makes sense to move towards a different database software due to the the outdating of Microsoft Access or whether be the DCR terminating the Microsoft Access license. If so this will likley to a relativiely smooth process in converting to anohter relational database since the all have a common API, SQL. 
 
+## RDS files
 
+Reading Data into the R session during a WAVE session was actually modified further make start up time faster. The time that it takes to fetch all the related data from R and make neccesary data transformations was about 15 seconds which is undesirable. There likely exists other alternative database maanagemment sytems which are faster at this process, though Microsoft Access use has famiarity at the DCR and keeping this database management system provides some stability in an otherwise quickly changing data environment. In R, RDS files are the fastest format to be read and saved [ ]. Based on this knowlege, a decision was made to have the App read in directly from data in RDS files that have already been transformed to the desired format of WAVE. Reading in data from RDS files upon starting a WAVE session takes about 2 seconds compared to 15 seconds of the database fetching. There needs to be a means of how and when the RDS files become updated. Since WIT is used for data import, every time the user closes a WIT session, this cuases the action to run a batch file which runs a R file behind the scenes which will update the RDS files. The RDS files can also be updated by directly clicking on and running the batch file, to ensure that the data in WAVE is the most up to date, although this will likely not be neccesary. The date of the RDS files were lst updated is also saved and displayed in WAVE. Each dataframe is stored in its own RDS file with a descriptive name (e.g. df_trib_quab).
 
-## Code Development
-
-R is the primary language used to write the code, although there are also direct uses of CSS and one or two instances where direct javascript is usesd. Other languages are used indirectly if a function in R is written in another language.
-
-R is a language and environment for statistical computing and graphics. It is a GNU project which is similar to the S language and environment which was developed at Bell Laboratories (formerly AT&T, now Lucent Technologies) by John Chambers and colleagues. R provides a wide variety of statistical (linear and nonlinear modelling, classical statistical tests, time-series analysis, classification, clustering, .) and graphical techniques, and is highly extensible. One of R's strengths is the ease with which well-designed publication-quality plots can be produced, including mathematical symbols and formulae where needed. R is available as Free Software under the terms of the Free Software Foundation's GNU General Public License in source code form. It compiles and runs on UNIX, Windows and MacOS. @R
-
-Many users think of R as a statistics system. We prefer to think of it of an environment within which statistical techniques are implemented. R can be extended (easily) via packages. There are about eight packages supplied with the R distribution and many more are available through the CRAN family of Internet sites covering a very wide range of modern statistics. R has its own LaTeX-like documentation format, which is used to supply comprehensive documentation, both on-line in a number of formats and in hardcopy.
-
-RStudio is the leading (IDE) for the R language. RStudio creates a number of packages that have driven R to be highly used. Among some of the more highly used packages in R are ggplot, dplyr, tidyr, RMArkdown, and Shiny. Many of RStudio's packages are contained under the " " called tidyverse which can savetime and be loaded all together.
-
-Shiny is 
-
-Github
-
-### WAVE
-
-Modules and Functions
-
-Naming Conventions
-
-Developer Manual
-
-### WIT
-
-
-There are many different effective ways to go about data importation but importing data by hand is no longer one of them. Most always data that one collects is not in the same format as how the data is store. Data transformations must be made including but not limited to column name changes, adding or removing columns, data type, and spreading or gathering columns. Spreadsheets also can be used to import data, though manually typing data and making format changes can be timely and prone to errors. Programming languages can be used as a tool to transform data to a particular format. R and Python are just two of the many programming languages that can be used for this process. A code script written with a programming languages can additional perform set quality control measures including checking for duplicate data or alerting a user when their is an usual data value. Even further, a user interface can be created for a user to be able to run this code without being familiar with the programming language or integrated development environment (IDE) is note required. A common user interface can be built to input data of all types.
-
-## Application Deployment
+## Deployment
 
 There were many possibilities of ways to launch hte application. A large driver of this decision is based on the answer to the question: who do we want to be able to have access to the app. Becuase this application is to be used primarily by the DCR internally, it was not neccesary to host the application on the worled wide web. Since there was a discrete small set of computers that need to have access to the application, it is feasible to install this application on each of these computers to run locally. This would not be possible if it was desired for an application with access from users on any computer connected to teh internet. If it was neccesary to do so we would have had to set uop our own server, pay for the hosting service taht Shiny drectly offers, or pay for another outside cloud hosting sevice. This also felt like the safer bet for any data security purposes since not hosting the data on the web allows for the data to stay on the DCR's internal network.
 
@@ -246,24 +236,135 @@ Although a user does not need a copy of the code on the user's computer, using R
 
 The Application can also be packaged. Include link to this details. A portable Chrome and portable R 
 
+```{r dev WIT Launch, echo=FALSE, out.width = "6.5in", fig.cap="WIT Launch"}
+knitr::include_graphics("images/development/WIT_Launch.pdf")
+```
+
+```{r dev WAVE Launch, echo=FALSE, out.width = "4.5in", fig.align="center", fig.cap="WAVE Launch"}
+knitr::include_graphics("images/development/WAVE_Launch.pdf")
+```
+
+
+
+
+\newpage
+# Code Development
+
+## Overview
+
+R is the primary language used to write the code, although there are also direct uses of CSS and one or two instances where direct javascript is usesd. Other languages are used indirectly if a function in R is written in another language.
+
+R is a language and environment for statistical computing and graphics. It is a GNU project which is similar to the S language and environment which was developed at Bell Laboratories (formerly AT&T, now Lucent Technologies) by John Chambers and colleagues. R provides a wide variety of statistical (linear and nonlinear modelling, classical statistical tests, time-series analysis, classification, clustering, .) and graphical techniques, and is highly extensible. One of R's strengths is the ease with which well-designed publication-quality plots can be produced, including mathematical symbols and formulae where needed. R is available as Free Software under the terms of the Free Software Foundation's GNU General Public License in source code form. It compiles and runs on UNIX, Windows and MacOS. @R
+
+Many users think of R as a statistics system. We prefer to think of it of an environment within which statistical techniques are implemented. R can be extended (easily) via packages. There are about eight packages supplied with the R distribution and many more are available through the CRAN family of Internet sites covering a very wide range of modern statistics. R has its own LaTeX-like documentation format, which is used to supply comprehensive documentation, both on-line in a number of formats and in hardcopy.
+
+RStudio is the leading (IDE) for the R language. RStudio creates a number of packages that have driven R to be highly used. Among some of the more highly used packages in R are ggplot, dplyr, tidyr, RMArkdown, and Shiny. Many of RStudio's packages are contained under the " " called tidyverse which can savetime and be loaded all together.
+
+Dataframes are a concept used in R and also the Pandaas package in Python that are built for efficient data science. A dataframe is technically a list of named vectors. This differs from a matrix which is a two dimensional vector. In a datafrmae, each list item is a named vector and relates to the column. rows are observations
+
+Shiny is 
+
+Other libraries that the code uses include Dplyr, ggplot, . These packages are also created by RStudio and most of them are included in the tidyverse 
+
+The code lives on Github. Github is a great tool for web developement and code collobaration. GitHub has version control and ...
+
+## WIT
+
+There are many different effective ways to go about data importation but importing data by hand is no longer one of them. Most always data that one collects is not in the same format as how the data is store. Data transformations must be made including but not limited to column name changes, adding or removing columns, data type, and spreading or gathering columns. Spreadsheets also can be used to import data, though manually typing data and making format changes can be timely and prone to errors. Programming languages can be used as a tool to transform data to a particular format. R and Python are just two of the many programming languages that can be used for this process. A code script written with a programming languages can additional perform set quality control measures including checking for duplicate data or alerting a user when their is an usual data value. Even further, a user interface can be created for a user to be able to run this code without being familiar with the programming language or integrated development environment (IDE) is note required. A common user interface can be built to input data of all types.
+
+
+```{r dev WIT Session, echo=FALSE, out.width = "8.5in", fig.cap="WAVE Architecture", out.extra='angle=90'}
+knitr::include_graphics("images/development/WIT_Session.pdf")
+```
+
+
+## WAVE
+
+The features WAVE offers results in a large code (base?) (there is roughly 10,000 lines of code with minimal repitition). Thus, organization of the code is crucial for efficient fixes, updates, and additions. The application as a whole can be viewed as a collection of individual dashboards organized in various tabs in the user interface. The user only evers sees one tab and thus one dashboard at a time. Each dashboard tab is essentially its own smaller application as it contains its own user interface components (inputs and outputs) as well as a server script which describes how each output is created. In the Shiny framework, modules are a way of defining these independent, self-containing pieces of Shiny code, seperate than in the main application user interface or server code. A module consists of a user interface function and a server function. Modules also reduce code repition in the same way as functions reduce code repitition. A module can be defined once, yet used in multiple locations. This is very beneficial becuase many features in the application are used for All three watersheds or both reservoirs. Just like functions, the modules can take arguments which allow for variations in their use. For organization purposes, the code for each modules user interface and server function are stored together in a seperate script file which is named based on the name of the module name.
+
+The modules in WAVE are grouped in different categories and stored in folders accordingly. These categories includes Filter, Plots, Statistics, Metadata, and other. The Module layout can be seen in Figure  . A module connected to the right of another module indicates that the module on the right is used within the module on the left. The breaking down modules into more modules is done for similiar reasons as why the application is broken down into modules. Having isoloatd specific code allows for more easier understanding of code. If one is working on a specific feature contained in a module, he/she will not be able unintenitionally alter other pieces of the code. 
+
+Diagram of Modules
+
+### Filter Modules
+
+There is a group of module scripts in the application which are the part of the code which is responsible for the user selecting and filtering data. The largest filter module is the main water quality filter which is used for both tributary and all reservoirs selecting and filtering data. Arguments are used to create variations of the filter tab, for example adding a depth select range for profile data selection. The filter module also has the option to select all data, which if the user selects this preference, none of the filters will be used and the whole dataframe will be selected. The selected/filtered data that the user selects in the filter tab is also used in the plot and statistics tabs. Sending the filtered dataframe to the plot and statistics tabs is preffered rather than each of the plot and statistics tabs having there own data filters due to code repetition
+
+Filter modules also include smaller modules which are used inside the main water quality filter module (Modules on Modules!). These include modules that are essentially customized / souped up  versions of the avaiable shiny widgets. They include site selections, parameter selection, data selection, a select input with select all capability, and check box input with select all capability.
+
+### Plot Modules
+
+There are a number of modules that are considered plotting modules. These modules include the time-series plot, correlation plot, distribution, and profile plots. These plot modules use the data that the user selects in the filter tab. Depeding on the desired data that each plot uses, additional selections/filters will be promted for the user to narrow down the selected data. For example the time-series plot can only handle one or two parameters at a time, on its primary y-axis and secondary y-axis, respectively. The user is thus given an additional parameter seelction specific for the plot, which will narrow down the list of selected parameters to jsut one or two. The plots in the applicaiton are generated with ggplot (the ggplot2 library in R) which is Hadley or RStudiod?. ggplot allows for easy grouping by aesthetics (x, y, color, shape, size, facets).
+
+Including in the plot modules, are also plot input widgets which have been seperated out to reduce the clutter in the main plots. These widgets inluded title and label widget, plot save widget, . These widgets are called within the larger plot functions and serve to adjust the plot via user inputs. For example, the title and lable widget contains user interface components to allow the user to choose their title and axis labels and on the server side it will take an intermediate plot object and add the indicated titles and labels to the intermediate plot object. The save plot, acts differently as it does not adjust the plot, yet creates the UI and server for outputting the plot.
+
+### Statistic Modules
+
+There are a number of statistical modules that are used. R was built for statistical programming. The combination of a group_by and summarze funcitons in Dyplyr allow for an easy way to generate statistics from a dataframe groupedwith various user selected inputs. The pearson correlation coefficient is also calculated using the __ library. The Mann-Kendall library is also used to calculate the Mann-Kendall Statistic of set of data of a certain parameter at a site.
+
+### Metadata Modules.
+
+The Metadata Hey for 
+
+
+### Other Modules
+
+Other modules, that do not fall into the precious categories include the geospatial plot, met
+
+### Functions
+
+### Naming Conventions
+
+Naming conventions have been set to allow for an easier understanding of the code. Due to the large amounts of objects, it can be 
+
+\begin{table}
+\centering
+\caption{Naming Conventions}
+\label{table-paramvalues}
+\begin{tabular}{| l | l | l | l |}
+\hline \\ [-1.5ex]
+Input Object & input object name \\ [1ex]
+Output Object & output object name \\ [1ex]
+function & FunctionName \\ [1ex]
+Reactive Expression & Reactive Expression Name \\ [1ex]
+Module Server Function & MODULE NAME \\ [1ex]
+Module UI Function & MODULE NAME UI \\ [1ex]
+file & file name.R \\ [1ex]
+\end{tabular}
+\end{table}
+
+### Developer Manual
+
+
 
 
 \newpage 
-# WIT Features
+# Application Features
+
+## WIT
 
 ## Raw Data File Lookup
 
+WIT will provide an easy selection of the raw data files on ones computer. The user will first select the dataset cetegory that he/she desires to import. Since WIT is configured to read from specified directories on ones computer, the user will then select a raw data file from a dropdown list. The file list in the application will consist of the raw datafiles that are saved in the appropriate directory on a users computer. After the user imports the data, the raw data file is moved from the ___ folder to the processed folder. 
+
 ## Data Processing
+
+The data is processed to convert raw data into the format of the same type of data in the database. Each raw data source varies in the format or data. The application will automatically process a raw data file into the diesired format, by one of a number of processing script files for that specific raw dataset type. If the processing is succesful, the data will appear in a table for the user to examine.
 
 ## Quality Control
 
+There are many quality controls that are placed in the processing scripts. Some are general ot all scripts and some ore specific for each.
+
 ## Data Importation
 
-\newpage 
-# WAVE Features
+Data is imported into the correct location of the database with a click from of a button.
 
 
-## Data Query and Export
+
+## WAVE Features
+
+
+### Data Query and Export
 
 It is advantageous, if not essential, to have fast access to water quality and other watershed data. It is beneficial for any scientist or engineer to be able to acess this data with ease. In practice, this is often not the case due to all data not being stored in a location known by all scientists and engineers. Lack of experience with certain technologies can also inhibit a person from being able to access timely data. Although spreadsheets are commonplace among most workplace settings, being able to query this data for the exact data that a perrson is looking for can be timely and troublesome. Queries in a relational database is a better approach to this common task. 
 
@@ -273,11 +374,11 @@ The application queries the data based on the user selected input. The user is p
 
 
 
-## Data Visualization
+### Data Visualization
 
 This appliaction allows for water quality visualization of temporal trends and temporal statistical analysis. 
 
-### Time Series Scatter Plot
+#### Time Series Scatter Plot
 
 A scatter plot is avaiable to see a water quality parameters trends over a specified duration of time. The data is queried in a similiar manner as discussed previously and a user is able to plot data from multiple Locations and one or two parameters. The user can chooose to group or facet by Location or Flags. A Facet creates multiple plots, all with similiar mapping techniques, to allow for easy comparison across plots.
 
@@ -290,7 +391,7 @@ Three methods for trendlines are available in this application. The first method
 The user can choose to add a secondary parameter to the plot by introducting a secondary y-axis. This feature allows the user to compare temporal trends of two water quality parameters. A plot comparig of two parameters, on the x-axis and y-axis can usually display a clearer picture of the relationship between two parameters which will be discussed in the Correlation Section. A benefit of the two parameter temporal plot is to keep more of the temporal information and can allow one to visuallly see a more complex trend like a delayed response trend. (Is there a scientific word for this?)
 
 
-### Correlation Scatter Plot
+#### Correlation Scatter Plot
 
 The applcation has a scatter plot feature designed for a scatter plot between two water quality variables. Water Quality data of two parameters are paired based on location and day of sampling. The two water quality observations are thus converted into one data point on the plot with the x location determined by the value of the first water quality parameter and the y location determined by the value of the second water quality parameter.
 
@@ -304,24 +405,24 @@ This anaylsis will be extended for water quality parameters to be correlated wit
 The distribution of Results of a particlular water quality parameter can be visualized in the application. Based on the user selected Locations, Parameter, and Date Range, the user can create a histogram, Density Plot, or box plots. 
 
 
-### Heatmap (Interpolated Color Profile Plot)
+#### Heatmap (Interpolated Color Profile Plot)
 
 The 
 
-### Profile Line Plot
+#### Profile Line Plot
 
-### Phytoplankton
+#### Phytoplankton
 
-## Statistics
+### Statistics
 
-### Spatial and Temporal Statistics
+#### Spatial and Temporal Statistics
 
 Temporal Statistics can be computed with minimal effort in the application. Based on the user selected query of Locations, Parameters, and Date Range, the following statistics will be calcluated for each parameter: number of samples, average result, minimum result, maximum result, 1st quartile (25 percentile), median, 3rd quartile (75 percentile), variance, standard deviation, geometric mean, and Mann-Kendall statistic. Any blank data (represented by NA in R) is ignored for these statistic calculations. The geometric mean is " ". The Mann-Kendall statistic 
 
 Before Statistical calculation, the data can be grouped by Location as well as various types of temporal schemes. The data can be grouped by year, season (independent of year), month (independent of year), season and year, and month and year.
 
 
-### Pearson Correlation Matrix
+#### Pearson Correlation Matrix
 
 A pearson correlation matrix can be created in this application. Based on the user selected query information, a correlation matrix is generated to show the corrlation of parameters across all of the parameters that the user has selected (the user must select more than one parameter). Positive correlation statistics, R values, are shown in red and negative R values are shown in blue. 
 
@@ -331,16 +432,16 @@ Confidence intervals are calcualted to determine the significance of the pearson
 
 
 
-## Geospatial Data Mapping
+### Geospatial Data Mapping
 
 Home Tab
 
 Spatial trend analysis is incorporated in many locations in the app but primarily lives on the map plot tab. Geospatial plots allows the user to easily compare a parameter statistic across all sites in a visual of plots on their choice of map. Spatial analysis also exists in any tab when multiple sites are chosen for analysis.
 
 
-## MetaData
+### MetaData
 
-## Data Import
+### Data Import
 
 The Watershed data Importer Tool (WIT) facilitates importing raw data from multiple sources into the database. Each Data Type has a formatting function script that is written in R to format the data. As more data sources are added or data sources are changed, these can be uploaded into the database. The user is prompted to select dataset type and the user will be shown a list of raw data files in the appropriate dataset type location on their computer. The user then selects a file from their computer and then press a button to format the data. A Warning message will be sent to the user if their was a problem with the data or if the data already exists in the database. After a successful formatting, the user will be able to see the formatted data in a table on the screen and an import button will appear that the user can press to import the data if they are satisfied with how the data looks.  Once the data is imported, the raw data file is moved from the unprocessed folder on their computer to the processed folder.
 

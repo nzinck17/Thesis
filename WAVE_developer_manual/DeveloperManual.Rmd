@@ -8,9 +8,6 @@ output:
     toc_depth: 3
     fig_caption: true
     number_sections: true
-bibliography: "F:/Nick Zinck/Shiny Water Quality/GitHub/DCRShinyApp/Manual/DeveloperManual/Thesis.bib"
-urlcolor: black
-linkcolor: black
 fontsize: 12pt
 geometry: margin = 1.2in
 header-includes:
@@ -21,8 +18,6 @@ header-includes:
 - \counterwithin{figure}{section}
 - \counterwithin{table}{section}
 
-nocite: | 
-  @noauthor_shiny_nodate, @noauthor_shiny_nodate-1
 ---
 
 ```{r loadpack, include=FALSE}
