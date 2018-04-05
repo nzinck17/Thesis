@@ -166,21 +166,25 @@ R and Python are common programming languages for data science and both have the
 
 ## System Architecture
 
-WAVE and WIT have a relatively simple application architecture relatively to other web applications. Shiny is both a front-end and back-end framework which allows one unified server component, rather than a seperate front-end server and a back-end server. The application also ran locally at the DCR which means that the client and server are both being ran on the users computer . Figure 3.1 depicts a simplified version of the system components. The user (or the client) uses with the application on their computer. In this case the application server that handles the users requests is the users own computer, which defines running the application locally. An application that is hosted on the web has an additional process of sending the requests of a user through a proxy to the. Also, depending on the amount traffic to the application site, there can be need of multiple servers and the proxies help balance the amount of traffic that each server takes on. The server is Shiny that both executes R code for data computations and creates the user interface through rendering javascript and HTML. The user (client) sends information to the server through interactions with the user interface and the server will update the user interface accordingly. The server also will reach can fetch and retrieve data from the database (or intermediary data storage). Each application is individually more complex and unique that the simple architecture depicted in Figure 3.1.
+A system architecture is the conceptual model that defines the high level structure for the many working parts of an application (wikipedia). WAVE and WIT have a relatively simple system architecture relative to other web applications. Shiny is both a front-end and back-end framework which allows one unified server component, rather than a seperate front-end server and a back-end server. The Shiny server executes R code for data computations and creates the user interface through rendering javascript and HTML. The application also ran locally at the DCR which means that the client and server are both being ran on the users computer. An application that is hosted on the web has an additional process of sending the requests of a user through a proxy to help balance the amount of traffic that each server takes on.  The user (client) sends information to the server through interactions with the user interface and the server will update the user interface accordingly. The server can fetch and retrieve data from the database (or intermediary data storage).
 
-Prior to the start of a session, a configuration file is read into R which gives information about the desired configuraration adn settings like the location of database, Github repository, the office the user is in, and other settings. The configuration file is used for the purpose of allowing variability in application per user preferences. The Wachusett and Quabbin Office have different raw data and thus they will need different. They also have different databases and different directories where they store the raw data files. The configuration file can be the place of any future settings. Once the configuration file is read, the application files are fetched from the specified GitHub repository and ran which opens the application and starts at a session.
-
-The WIT application acrhitecture can be seen in Figure 3.2. This architecture differs than the more basic previously described architecture with the added components of raw data, RDS files, and USGS NOAA data. WIT allows raw data on a users computer to be selected, processed, and imported into a database. When the session terminates, an R script is ran which fetches data from a database and transforms it and saves in as RDS files. As previously mentioned, this essentially works to keep the RDS files updated as new data is added to the database. The RDS files containing USGS and NOAA data is also updated be fetching USGS and NOAA data from _____ on the portal.
+The WIT and WAVE system architecture can be seen in Figure 3.2 and figure 3.3, respectively. The common components that both systems have include the Server, User (Client), Github Code Script, Configuration File, and stored data (either in a database or RDS files). Prior to the start of a session for either WAVE and WIT, a configuration file with user settings is read and the latest application code is pulled from Github. After this step, the application system process differs as is seen in Figures 3.2 and 3.3.  Each component of the system architecture are discussed in more detail in the following sectins.
 
 ```{r dev WIT, echo=FALSE, out.width = "6.5in", fig.cap="WIT Architecture - update remove green from db"}
-knitr::include_graphics("images/development/WIT_Arch.pdf")
+knitr::include_graphics("images/system dev/WIT_Arch.pdf")
 ```
-
-The WAVE applcication architecture can be seen in figure 3.3. The WAVE applciation runs as peviously discussed with the added features of outputs in the form of visualizations and data and statistic tables. It is not desired to have a user of WAVE alter the database or data, so there is a on-way flow of data into the aplication. The data is read in to R prior to thw application session. As previously discussed the data that is read in is in the form of RDS files for mainly speed considerations. The RDS files also already have the dataframes (a data storage ___ in R ) in organized and seperated in the way that the Application uses them which simplifies the application code.
 
 ```{r dev WAVE, echo=FALSE, out.width = "6.5in", fig.cap="WAVE Architecture"}
-knitr::include_graphics("images/development/WAVE_Arch.pdf")
+knitr::include_graphics("images/system dev/WAVE_Arch.pdf")
 ```
+
+## Configuration File
+
+Prior to the start of a session, a configuration file is read into R which gives information about the desired configuration settings like the location of database, Github repository, the office the user is in, and other settings. The configuration file is used for the purpose of allowing variability in application per user preferences. The Wachusett and Quabbin Office have different raw data and thus they will need different settings. They also have different databases and different directories where they store the raw data files. The configuration file can be the place of any future settings. The configuration file differs for WAVE and WIT. WIT has the more detailed elaborate configuration file due to difference in data sources. Once the configuration file is read, the application files are fetched from the specified GitHub repository and ran which opens the application and starts at a session.  ## Github Code Files
+
+## Github
+
+The code lives on Github. Github is a great tool for web developement and code collobaration. GitHub has version control and ...
 
 ## Database development
 
@@ -223,6 +227,17 @@ In the future it may makes sense to move towards a different database software d
 
 Reading Data into the R session during a WAVE session was actually modified further make start up time faster. The time that it takes to fetch all the related data from R and make neccesary data transformations was about 15 seconds which is undesirable. There likely exists other alternative database maanagemment sytems which are faster at this process, though Microsoft Access use has famiarity at the DCR and keeping this database management system provides some stability in an otherwise quickly changing data environment. In R, RDS files are the fastest format to be read and saved [ ]. Based on this knowlege, a decision was made to have the App read in directly from data in RDS files that have already been transformed to the desired format of WAVE. Reading in data from RDS files upon starting a WAVE session takes about 2 seconds compared to 15 seconds of the database fetching. There needs to be a means of how and when the RDS files become updated. Since WIT is used for data import, every time the user closes a WIT session, this cuases the action to run a batch file which runs a R file behind the scenes which will update the RDS files. The RDS files can also be updated by directly clicking on and running the batch file, to ensure that the data in WAVE is the most up to date, although this will likely not be neccesary. The date of the RDS files were lst updated is also saved and displayed in WAVE. Each dataframe is stored in its own RDS file with a descriptive name (e.g. df_trib_quab).
 
+As previously discussed the data that is read in is in the form of RDS files for mainly speed considerations. The RDS files also already have the dataframes (a data storage ___ in R ) in organized and seperated in the way that the Application uses them which simplifies the application code.
+
+
+## USGS and NOAA data
+
+This architecture differs than the more basic previously described architecture with the added components of raw data, RDS files, and USGS NOAA data. WIT allows raw data on a users computer to be selected, processed, and imported into a database. When the session terminates, an R script is ran which fetches data from a database and transforms it and saves in as RDS files. As previously mentioned, this essentially works to keep the RDS files updated as new data is added to the database. The RDS files containing USGS and NOAA data is also updated be fetching USGS and NOAA data from _____ on the portal.
+
+## Visuals and Statistics
+
+The WAVE application runs as peviously discussed with the added features of outputs in the form of visualizations and data and statistic tables. It is not desired to have a user of WAVE alter the database or data, so there is a one-way flow of data into the aplication. The data is read in to R prior to the application session from RDS files. 
+
 ## Deployment
 
 There were many possibilities of ways to launch hte application. A large driver of this decision is based on the answer to the question: who do we want to be able to have access to the app. Becuase this application is to be used primarily by the DCR internally, it was not neccesary to host the application on the worled wide web. Since there was a discrete small set of computers that need to have access to the application, it is feasible to install this application on each of these computers to run locally. This would not be possible if it was desired for an application with access from users on any computer connected to teh internet. If it was neccesary to do so we would have had to set uop our own server, pay for the hosting service taht Shiny drectly offers, or pay for another outside cloud hosting sevice. This also felt like the safer bet for any data security purposes since not hosting the data on the web allows for the data to stay on the DCR's internal network.
@@ -237,11 +252,11 @@ Although a user does not need a copy of the code on the user's computer, using R
 The Application can also be packaged. Include link to this details. A portable Chrome and portable R 
 
 ```{r dev WIT Launch, echo=FALSE, out.width = "6.5in", fig.cap="WIT Launch"}
-knitr::include_graphics("images/development/WIT_Launch.pdf")
+knitr::include_graphics("images/system dev/WIT_Launch.pdf")
 ```
 
 ```{r dev WAVE Launch, echo=FALSE, out.width = "4.5in", fig.align="center", fig.cap="WAVE Launch"}
-knitr::include_graphics("images/development/WAVE_Launch.pdf")
+knitr::include_graphics("images/system dev/WAVE_Launch.pdf")
 ```
 
 
@@ -266,15 +281,15 @@ Shiny is
 
 Other libraries that the code uses include Dplyr, ggplot, . These packages are also created by RStudio and most of them are included in the tidyverse 
 
-The code lives on Github. Github is a great tool for web developement and code collobaration. GitHub has version control and ...
+
 
 ## WIT
 
 There are many different effective ways to go about data importation but importing data by hand is no longer one of them. Most always data that one collects is not in the same format as how the data is store. Data transformations must be made including but not limited to column name changes, adding or removing columns, data type, and spreading or gathering columns. Spreadsheets also can be used to import data, though manually typing data and making format changes can be timely and prone to errors. Programming languages can be used as a tool to transform data to a particular format. R and Python are just two of the many programming languages that can be used for this process. A code script written with a programming languages can additional perform set quality control measures including checking for duplicate data or alerting a user when their is an usual data value. Even further, a user interface can be created for a user to be able to run this code without being familiar with the programming language or integrated development environment (IDE) is note required. A common user interface can be built to input data of all types.
 
 
-```{r dev WIT Session, echo=FALSE, out.width = "8.5in", fig.cap="WAVE Architecture", out.extra='angle=90'}
-knitr::include_graphics("images/development/WIT_Session.pdf")
+```{r dev WIT Session, echo=FALSE, out.width = "8.5in", fig.cap="WIT Session Flow", out.extra='angle=90'}
+knitr::include_graphics("images/code dev/WIT_Session.pdf")
 ```
 
 
@@ -285,6 +300,30 @@ The features WAVE offers results in a large code (base?) (there is roughly 10,00
 The modules in WAVE are grouped in different categories and stored in folders accordingly. These categories includes Filter, Plots, Statistics, Metadata, and other. The Module layout can be seen in Figure  . A module connected to the right of another module indicates that the module on the right is used within the module on the left. The breaking down modules into more modules is done for similiar reasons as why the application is broken down into modules. Having isoloatd specific code allows for more easier understanding of code. If one is working on a specific feature contained in a module, he/she will not be able unintenitionally alter other pieces of the code. 
 
 Diagram of Modules
+
+```{r code App, echo=FALSE, out.width = "4in", fig.align="center", fig.cap="App Highest Level Tab Layout in the Top Navigation Bar"}
+knitr::include_graphics("images/code dev/app_tabs.pdf")
+```
+
+```{r code other 1, echo=FALSE, out.width = "5in", fig.align="center", fig.cap="Tab Layout Structure for Home, Met / Hydro, Forestry, and Report Tabs"}
+knitr::include_graphics("images/code dev/other_main_tabs.pdf")
+```
+
+```{r code trib, echo=FALSE, out.width = "5.5in", fig.align="center", fig.cap="Tab Layout Structure of Tributary Tab. To be continued in Figure 4.6 and Figure 4.7"}
+knitr::include_graphics("images/code dev/trib_tabs.pdf")
+```
+
+```{r code res, echo=FALSE, out.width = "6.5in", fig.cap="Tab Layout Structure of Reservior Tab. To be continued in Figure 4.6 and Figure 4.7"}
+knitr::include_graphics("images/code dev/res_tabs.pdf")
+```
+
+```{r code plot, echo=FALSE, out.width = "6.5in", fig.cap="Tab Layout and Module Structure of Plots Tab. The Plots Tab appears in multiple locations in the Tributary and Reservoir Tabs. Plots for Reservoir Profile data differ compared with the Plots for Tributary and other Reservoir data, and this is reflected in a difference in layout"}
+knitr::include_graphics("images/code dev/plot_tabs.pdf")
+```
+
+```{r code other 2, echo=FALSE, out.width = "6.5in", fig.cap="Tab Layout and Module Structure of Select / Filter, Phytoplankton, Geospatial, Statistics, and Metadata Tabs"}
+knitr::include_graphics("images/code dev/other_tabs_mods.pdf")
+```
 
 ### Filter Modules
 
