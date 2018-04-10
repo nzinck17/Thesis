@@ -466,6 +466,27 @@ knitr::include_graphics("SummaryDepth.pdf", dpi = 60)
 
 
 
+### Naming Conventions
+
+Naming conventions have been set to allow for an easier understanding of the code. Due to the large amounts of objects, it can be 
+
+\begin{table}
+\centering
+\caption{Naming Conventions}
+\label{table-paramvalues}
+\begin{tabular}{| l | l | l | l |}
+\hline \\ [-1.5ex]
+Input Object & input object name \\ [1ex]
+Output Object & output object name \\ [1ex]
+function & FunctionName \\ [1ex]
+Reactive Expression & Reactive Expression Name \\ [1ex]
+Module Server Function & MODULE NAME \\ [1ex]
+Module UI Function & MODULE NAME UI \\ [1ex]
+file & file name.R \\ [1ex]
+\end{tabular}
+\end{table}
+
+
 # Functions
 
 ## GetSeasons.R
