@@ -131,6 +131,12 @@ A potential troublesome area is that it is sometimes neccesary to put the UI fun
 
 Filter module
 
+# Filter
+
+
+The first widget the user selects is whether the user wants to use the full dataset or the filtered dataset which is determined by the filter tab. The second widget is the site location widget where the user selects the locations of interest. The locations are separated into location categories based on the categories in the database. The primary locations are always shown, while the sites in the other categories can be toggled to be displayed or hidden. Once a site is selected it appears as a red circle in the minimal, rather than a blue circle.
+
+The Parameter Widget displays all the parameters that the data has based on the site selected. The parameter list updates each time a site location is added or removed to the list. The Date Range Widget is programmed to display the earliest and latest dates of the data corresponding to the selected site locations. The User can use the calendar view to select the desired date range of the data. 
 
 ## Primary Modules
 

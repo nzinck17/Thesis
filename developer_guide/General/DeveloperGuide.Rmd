@@ -71,6 +71,12 @@ https://github.com/blog/1436-moving-and-renaming-files-on-github
 
 ## Shiny
 
+
+The DWSPA App is created with RStudio's Shiny free software. Shiny is a package in R that enables an App creator to use the R programming language to create an application that consists of a front-end HTML and JavaScript user interface in which the user interacts with the data. Shiny video and written tutorials [@____] are a great resource on how Shiny works. The Application fetches data that is in the Access Databases stored on the internal network. Upon starting the App, the App will fetch the latest data that is in the databases. The App Code is stored on Github which is an open source code sharing site. The latest Shiny Application code on Github is ran every time the App is opened. The Code that is on Github should be the most up-to-date working code that the App builders have sent to Github.
+
+Shiny's components that the user can see consists of two categories: Input objects and Output Objects. Input objects essentially allow the user to communicate with the App and the  output objects are the App communicate with the User. input objects will be refered to as Input Widgets in this user manual and can take the form of checkboxs, selection drop-down lists, and Date Range Calendar inputs. The full list of Shiny Widgets can be seen in the Shiny Widget Gallery (@) . Output objects include plots, tables, maps, images, and tables. Shiny takes the input of from the user and executes code which are essentially directions for a sequence of computations and other operations to create the outputs that the user sees.
+
+The Shiny Widget Gallery shows all of the available widgets in Shiny in an operational form. The 
 ### What is a Shiny App
 
 ### User Interface
