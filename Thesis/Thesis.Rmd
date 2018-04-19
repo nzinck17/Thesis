@@ -279,9 +279,48 @@ Naming conventions have been established to facilitate the readability of the co
 
 ## WIT
 
-There are many different effective ways to go about data processing and importation but typing in or handwriting data from raw data files to a database is not one of them. Most always the measurement data recorded from field instruments or laboratory instruments are not in the same format as how the data is stored in a database. For simplicity, we will define data processing as both data transformation and data quality assurance and control. Data transformations must be made including but not limited to adding or removing columns, column name changes, data type changes, and spreading or gathering columns. Spreadsheet interfaces are commonly used to transform data, though manually manipulating data in this way can be timely and prone to errors. 
+### OVerview
 
-Programming languages can be used as a tool to transform data to a particular format. A code script is written in R for each data source to transform the raw data the database format. In addition, the scripts perform set quality control measures including checking for duplicate data or alerting a user when their is an usual data value. The configuration file is read by WIT which reads in the data processing scripts that are specific to each office. When the user selects to process a data file, WIT will read in the data from the database to ensure that the data has not already been imported to the database. WIT also connects to the database again when the import data button is clicked and imports the data to the database. Figure 4.1 shows the sequence of the Application Session Flow.
+Application Software can facilitate database entry of water system data. Without specially designed software, manual labor can be extensive. Water system data are collected from a variety of sources in a variety of formats. It is a multiple step procedure to enter data into a database. First, raw data must be tranformed to the format of the data in the database. Secondly, qualitiy control and quality assurance will have to be conducted to ensure that the raw data is adequate and was transformed correctly. Other quality measures can be taken. Thirdly, The transformed data will be imported to the database. WIT helps a user perform these steps of data entry by automating much of this process.
+
+WIT has a relatively simple user interface, and consists of much fewer inputs and outputs than WAVE. The main inputs of WIT are for data selection, data processing, and data importing. In WIT, the data selection inputs are for user selection of a raw data file and the type of data source to be read into the session. The data process input is for the execution of the R script to transform the data and perform quality assurance and quality control measures. The data import input is for the execution of the R script to import the data to the correct location in the database.
+
+The WIT is rather flexible in a sense that users can set preferences in a configuration file to alter the settings of the session. The configuration file consists of a table of user settings. Many of these settings are folder and file ?path directories?.  WIT also reads in basic Windows user accont info for additional automatic ettings.
+
+### Development Process
+
+WIT was developed in collaborative effort of the DCR Wachusett Office and UMass Amherst. UMass Amherst focus was the development of the Shiny Application code itself while the DCR Wachusett Office focused on the scripts for data processing of raw data source files as well as the organization of these data related files within the DCR's network. The DCR Quabbin Office had previously largely relied on Visual Basic Macros for their data processing and importing needs. R is much faster at this process due to more timely and efficient data maniupulation. The addition of the Shiny Application User Interface also allows for a more freindly interface for a user to upload data as well as more advanced features that the user can view and interact with.
+
+The R scripts that process and import data used by the WIT application can also be used independently, outside of WIT. This allowed for the DCR to use these R scripts for data entry while WIT was being developed. This also makes the process of developing and testing a new R script for the data entry of a new data source easier.
+
+
+### Data Selection
+
+The 
+The user is first prompted to select from a choice of raw data sources. The list of data sources is determined from the configuration file and is unique to each user's Office. 
+
+
+The data selection process is  The Data selection process relies heavily on the configuration file. The configuration file consists of a table of user settings. Many of these settings are folder and file ?path directories?.  
+
+### Data Processing
+Transformation
+QAQC
+
+An R script is written in R for each data source to transform the raw data the database format. In addition, the scripts perform set quality control measures including checking for duplicate data or alerting a user when their is an usual data value. The configuration file is read by WIT which reads in the data processing scripts that are specific to each office. When the user selects to process a data file, WIT will read in the data from the database to ensure that the data has not already been imported to the database. WIT also connects to the database again when the import data button is clicked and imports the data to the database. Figure 4.1 shows the sequence of the Application Session Flow.
+
+we will define data processing as both data transformation and data quality assurance and control. Data transformations must be made including but not limited to adding or removing columns, column name changes, data type changes, and spreading or gathering columns. Spreadsheet interfaces are commonly used to transform data, though manually manipulating data in this way can be timely and prone to errors. 
+
+### Data Importing
+
+View data
+
+Manual add flags
+
+UPload to databse
+
+
+
+
 
 
 ```{r dev WIT Session, echo=FALSE, out.width = "8.5in", fig.cap="WIT Session Flow", out.extra='angle=90'}
@@ -291,7 +330,11 @@ knitr::include_graphics("images/code dev/WIT_Session.pdf")
 
 ## WAVE
 
-### WAVE Development Process
+### Overview 
+
+WAVE is a large application that has many features on its many tabs. All of the files related to the WAVE code are stored on GitHub in a public repository. It is seperated into many R script files containing pieces of the application code, each generally for a particualr feature. These features are special R functions called modules. WAVE also uses a number of functions that defined in separate files. WAVE uses GIS files and images whichi are stored with the application code on GitHub. The code and associated files have an MIT License agreement.
+
+### Development Process
 
 WAVE has transformed many times to get to the product that it is today. It was not possible to foresee the specific direction that WAVE was going take when the idea was first proposed for many reasons. The first reason is that the developers of the application had little to none application development experience. The second is that the Office was not sure of the capabilities of Shiny and overall not too familiar with application software so it was difficult to receive direct ideas and suggestions of the features that WAVE would have. The third is that, WAVE is a unique product and there is no product that it tries to mimic. The DCR sampling and needs are unique and no similar application was found that was able to fit the needs of visualization and analysis of tributary water quality and water quantity data. Justifiably, WAVE meets the water system data visualization and analysis needs of the DCR better than any other software, as it should because it was built specifically for the DCR.
 
@@ -394,6 +437,14 @@ Modules that are used to view Metadata information are grouped into the Metadata
 Modules that do not fit in the previously mentioned categories are grouped into the Other category. These Modules include "Home", "Map Plot", . talk about leaflet.
 
 ### Functions
+
+### GIS
+
+### Images
+
+### License
+
+MIT license
 
 ### Developer Manual
 
