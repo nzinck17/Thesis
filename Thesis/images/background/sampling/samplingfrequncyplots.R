@@ -145,16 +145,19 @@ p2 <- ggplot(DF1, aes(x = Watershed, y = Parameter)) +
 #              c(1,1,1,2,2))
 # p <- grid.arrange(p1,p2, layout_matrix = lay)
 
-df_trib <- read_csv("TribSamplinPlan.csv")
-df_res <- read_csv("ResSamplinPlan.csv")
+df_trib <- read_csv("F:/Nick Zinck/Shiny Apps/GitHub/Thesis/Thesis/images/background/sampling/TribSamplinPlanNew.csv")
+df_res <- read_csv("F:/Nick Zinck/Shiny Apps/GitHub/Thesis/Thesis/images/background/sampling/ResSamplinPlanNew.csv")
 
 df <- rbind(df_res, df_trib) %>% filter(!is.na(Parameter))
 
+df$Method <- factor(df$Method, levels = c("One Sample", "Three Depths", "Profile"))
+df$Type <- factor(df$Type, levels = c("Tributary", "Reservoir"))
+df$Location <- factor(df$Location, levels = c("Quabbin", "Ware River", "Wachusett"))
 
 p <- ggplot(df, aes(x = Location, y = Parameter)) +
-  geom_tile(aes(fill = Frequency), colour = "black") + #
-  scale_fill_manual(limits = c("Weekly", "Biweekly", "Monthly", "Quarterly", "Variable"),
-                    values = c("dodgerblue4", "dodgerblue3", "steelblue2", "lightskyblue1","gray70")) +
+  geom_tile(aes(fill = Method), colour = "black") + 
+  #scale_fill_manual(limits = c("One Sample", "Three Depths", "Profile")) + 
+  #                  values = c("dodgerblue4", "dodgerblue3", "steelblue2", "lightskyblue1","gray70")) +
   
   facet_grid(.~Type, scales = "free", space = "free") +
   #scale_x_discrete(position = "top") +
@@ -166,7 +169,7 @@ p <- ggplot(df, aes(x = Location, y = Parameter)) +
 
 
 
-ggplot2::ggsave("sampling_frequencies.pdf", p, width = 6, height = 7.5, units = c("in"))
+ggplot2::ggsave("sampling_frequencies.png", p, width = 5.0, height = 7.0, units = c("in"))
 
 
 

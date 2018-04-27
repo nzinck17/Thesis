@@ -1,0 +1,42 @@
+Parameter,Type,Location,Method
+Alkalinity,Reservoir,Quabbin,Three Depths
+Ammonia,Reservoir,Quabbin,Three Depths
+Nitrate,Reservoir,Quabbin,Three Depths
+Total Kjeldahl Nitrogen,Reservoir,Quabbin,Three Depths
+Total Phosphorus,Reservoir,Quabbin,Three Depths
+Mean UV254,Reservoir,Quabbin,Three Depths
+Turbidity,Reservoir,Quabbin,Three Depths
+Specific Conductance,Reservoir,Quabbin,Three Depths
+Total Coliform,Reservoir,Quabbin,Three Depths
+Fecal Coliform,Reservoir,Quabbin,Three Depths
+E. coli,Reservoir,Quabbin,Three Depths
+Mean UV254,Reservoir,Quabbin,Three Depths
+Silicon Dioxide,Reservoir,Quabbin,Three Depths
+Specific Conductance,Reservoir,Quabbin,Profile
+Water Temperature,Reservoir,Quabbin,Profile
+Dissolved Oxygen,Reservoir,Quabbin,Profile
+Dissolved Oxygen Saturation,Reservoir,Quabbin,Profile
+pH,Reservoir,Quabbin,Profile
+Chlorophyll,Reservoir,Quabbin,Profile
+Blue Green Algae,Reservoir,Quabbin,Profile
+E. coli,Reservoir,Wachusett,One Sample
+Fecal Coliform,Reservoir,Wachusett,One Sample
+Calcium(II),Reservoir,Wachusett,One Sample
+Alkalinity,Reservoir,Wachusett,Three Depths
+Ammonia,Reservoir,Wachusett,Three Depths
+Nitrate,Reservoir,Wachusett,Three Depths
+Total Kjeldahl Nitrogen,Reservoir,Wachusett,Three Depths
+Total Phosphorus,Reservoir,Wachusett,Three Depths
+Silicon Dioxide,Reservoir,Wachusett,Three Depths
+Mean UV254,Reservoir,Wachusett,Three Depths
+Dissolved Silica,Reservoir,Wachusett,Three Depths
+Total Suspended Solids,Reservoir,Wachusett,Three Depths
+Specific Conductance,Reservoir,Wachusett,Profile
+Water Temperature,Reservoir,Wachusett,Profile
+Dissolved Oxygen,Reservoir,Wachusett,Profile
+Dissolved Oxygen Saturation,Reservoir,Wachusett,Profile
+pH,Reservoir,Wachusett,Profile
+Chlorophyll,Reservoir,Wachusett,Profile
+Blue Green Algae,Reservoir,Wachusett,Profile
+Turbidity,Reservoir,Wachusett,Profile
+Total Dissolved Solids,Reservoir,Wachusett,Profile

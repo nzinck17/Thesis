@@ -18,6 +18,7 @@ header-includes:
 - \usepackage{placeins}
 - \usepackage{setspace}
 - \usepackage{chngcntr}
+- \usepackage{rotating}
 - \doublespacing  #\onehalfspacing
 - \counterwithin{figure}{section}
 - \counterwithin{table}{section}
@@ -65,7 +66,7 @@ Water System Data Analysis and Visualization Environment (WAVE) is the larger of
 
 WAVE consists of numerous visualization and analysis tools to provide more insight on a queried dataset. Visualization tools for tributary and reservoir data include time-series plots, correlation plots, and distribution charts (histograms, density curves, and box-and-whisker plots) to visualize trends and patterns for selected water quality parameters. Geospatial data visualization and analysis allows one to spatially view data statistics on an interactive map. Heatmap and profile line plot tools are also available for reservoir profile data. Statistics can be quickly generated with WAVE including minimum, maximum, and average for user selected temporal and spatial groupings. More advanced statistical analysis includes Mann-Kendall statistics and Pearson correlation matrices. WAVE also makes information related to the sampling history of a specific site or a specific parameters easily accessible.
 
-Both WAVE and WIT are shared openly through Github and are ran locally on a computer with minimal setup, although hosting the application online is also a possibility. The application is organized in a modular manner which eases future updates to the code as well as minimizes code repetition. Future additions to WAVE can be added as separate and independent modules. A developer manual was also created to help future developers of WAVE as well as user setup guides for WAVE and WIT. As the needs of the DCR change, both applications can dynamically change with it.
+Both WAVE and WIT are shared openly through GitHub and are ran locally on a computer with minimal setup, although hosting the application online is also a possibility. The application is organized in a modular manner which eases future updates to the code as well as minimizes code repetition. Future additions to WAVE can be added as separate and independent modules. A developer manual was also created to help future developers of WAVE as well as user setup guides for WAVE and WIT. As the needs of the DCR change, both applications can dynamically change with it.
 
 
 
@@ -86,7 +87,7 @@ The Massachusetts Department of Conservation and Recreation (DCR), Division of W
 \centering
 \caption{Watershed Acreage}
 \label{table-paramvalues}
-\begin{tabular}{p{2in} P{1.1in} P{1.1in} P{1.1in}}
+\begin{tabular}{p{2in} P{1.1in} P{1.1in} P{1.1in}} \\ [-1ex]
 \hline \\ [-1.5ex]
 Watershed & Land area (acres) & Reservoir area (acres) & Total watershed area (acres)\\ [1ex]
 \hline \\ [-1.5ex]
@@ -101,7 +102,7 @@ Wachusett Reservoir & 70,678 & 4,122 & 74,800 \\ [1ex]
 \centering
 \caption{Watershed Land Use Percentage}
 \label{table-paramvalues}
-\begin{tabular}{ p{2in} p{0.7in} p{0.7in} p{0.7in} p{0.7in} p{0.7in}}
+\begin{tabular}{ p{2in} p{0.7in} p{0.7in} p{0.7in} p{0.7in} p{0.7in}} \\ [-1ex]
 \hline \\ [-1.5ex]
 Watershed & Forestry & Wetland & Agriculture & Residential & Other\\ [1ex]
 \hline \\ [-1.5ex]
@@ -124,22 +125,22 @@ DCR conducts extensive water quality monitoring of the surface waters (tributari
 knitr::include_graphics("images/background/Sampling_Map2.png")
 ```
 
-The Quabbin Office's tributary water quality monitoring program has included as many as fourteen sampling stations in the Quabbin Reservoir watershed, and ten sampling stations in the Ware River watershed [DCR, 2013]. Core sites are long-term monitoring stations, while Environmental Quality Assessment (EQA) sites support ongoing evaluations of threats to water quality by sanitary district [DCR, 2013]. Tributary temperature, dissolved oxygen, pH, and specific conductance levels are measured biweekly with a multiprobe meter. Samples from core sites are collected by hand biweekly for turbidity, bacteria, and calcium analyses, while samples for nutrient analysis are collected quarterly. Samples from EQA Sites are collected biweekly for alkalinity, turbidity, bacteria, nutrients, calcium, and UV254 [DCR, 2013]. Water quality parameters measured in tributaries by the DCR Quabbin Office are shown in Table 2.3.
+The Quabbin Office's tributary water quality monitoring program has included as many as fourteen sampling stations in the Quabbin Reservoir watershed, and ten sampling stations in the Ware River watershed [DCR, 2013]. Core sites are long-term monitoring stations, while Environmental Quality Assessment (EQA) sites support ongoing evaluations of threats to water quality by sanitary district [DCR, 2013]. Tributary temperature, dissolved oxygen, pH, and specific conductance levels are measured biweekly with a multiprobe meter. Samples from core sites are collected by hand biweekly for turbidity, bacteria, and calcium analyses, while samples for nutrient analysis are collected quarterly. Samples from EQA Sites are collected biweekly for alkalinity, turbidity, bacteria, nutrients, calcium, and UV254 [DCR, 2013]. Water quality parameters measured in tributaries by the DCR Quabbin Office are shown in Figure 2.3.
 
-The Wachusett Office samples each tributary station weekly or biweekly throughout the entire year, except for during inadequate flow conditions. Temperature and specific conductance are measured in the field and samples are collected for analysis of E. coli and measurement of turbidity. Nutrient samples are collected monthly for total phosphorus, ammonia, nitrate-nitrogen, nitrite-nitrogen, total Kjeldahl nitrogen, total organic carbon, total suspended solids, and UV-254.  Reactive phosphorus (orthophosphate) samples were collected monthly and UV-254 samples were collected weekly from the Stillwater and Quinapoxet Rivers.  Depth was recorded manually or using automated depth sensors at seven of the nutrient stations and flow calculated using rating curves developed and updated by DWSP Environmental Quality staff. Water quality and quantity parameters measured in tributaries by the DCR Wachusett Office are also shown in Table 2.3.
+```{r res, echo=FALSE, out.width = "6.5in", fig.align="center", fig.cap="Water Quality Parameters Sampled within Tributaries and Reservoirs"}
+knitr::include_graphics("images/background/sampling_frequencies.png")
+```
 
-Both the Quabbin and Wachusett Reservoirs are monitored monthly by boat during the months of April through December, weather-permitting. Reservoir water column profile data for temperature, specific conductance, chlorophyll a, dissolved oxygen concentration and percent saturation, are collected at several locations within both reservoirs. Nutrient samples are collected at three depths, the epilimnion, metalimnion, and hypolimnion, and analyzed for water quality parameters including nitrate-nitrogen, ammonia-nitrogen, total Kjeldahl nitrogen, total phosphorus, silica, UV-254, and alkalinity. Phytoplankton data are also collected at both Reservoirs. Surface grab samples are collected in the Wachusett Reservoir for E. coli and fecal coliform. Water quality parameters measured in each reservoir by the respective office are shown in Table 2.4.
+The Wachusett Office samples each tributary station weekly or biweekly throughout the entire year, except for during inadequate flow conditions. Temperature and specific conductance are measured in the field and samples are collected for analysis of E. coli and measurement of turbidity. Nutrient samples are collected monthly for total phosphorus, ammonia, nitrate-nitrogen, nitrite-nitrogen, total Kjeldahl nitrogen, total organic carbon, total suspended solids, and UV-254.  Reactive phosphorus (orthophosphate) samples were collected monthly and UV-254 samples were collected weekly from the Stillwater and Quinapoxet Rivers.  Depth was recorded manually or using automated depth sensors at seven of the nutrient stations and flow calculated using rating curves developed and updated by DWSP Environmental Quality staff. Water quality parameters measured in tributaries by the DCR Wachusett Office are also shown in Figure 2.3.
+
+Both the Quabbin and Wachusett Reservoirs are monitored monthly by boat during the months of April through December, weather-permitting. Reservoir water column profile data for temperature, specific conductance, chlorophyll a, dissolved oxygen concentration and percent saturation, are collected at several locations within both reservoirs. Nutrient samples are collected at three depths, the epilimnion, metalimnion, and hypolimnion, and analyzed for water quality parameters including nitrate-nitrogen, ammonia-nitrogen, total Kjeldahl nitrogen, total phosphorus, silica, UV-254, and alkalinity. Phytoplankton data are also collected at both Reservoirs. Surface grab samples are collected in the Wachusett Reservoir for E. coli and fecal coliform. Water quality parameters measured in each reservoir by the respective office are shown in Figure 2.3.
 
 DCR DWSP and MWRA cooperate with the U.S. Geological Survey to maintain continuous, real time recording gauges at a total of ten sites including sites at the Stillwater River, Quinapoxet River, West Branch Swift River, and East Branch Swift River [DCR, 2013]. Precipitation and other meteorological data is obtained from NOAA weather stations. Additional sampling related to forestry practices is also conducted to compare water quality between managed and unmanaged forests.
-
-```{r res, echo=FALSE, out.width = "6.5in", fig.cap="Needs to be changed!! (incorrect data!)"}
-knitr::include_graphics("images/background/sampling_frequencies.pdf")
-```
 
 
 ### Previous Water System Studies
 
-Many studies have been conducted as a result of the partnership of University of Massachusetts and the DCR. Data analysis and model calibration and validation in many of these studies have benefited from the vast amount of water quality and hydrological data that are collected in the Quabbin, Ware River, and Wachusett watersheds. The water quality impacts from extreme precipitation events have been examined through statistical analysis of potential loads coupled with a reservoir hydrodynamic and water quality model [Jeznach Hageman]. The fate of hypothetical contaminant spills in the Wachusett Reservoir have also been modeled [Jeznach, 2013; Devonis 2011; Sojkowski; Stauben?; Mathews?]. Other water quality modeling topics have included the effects of climate change on the Wachusett reservoir [Jeznach, ] and modeling the fate of natural organic matter and fecal pollution [ ]. Presumably, having a thorough sampling plan and well maintained data can allow for more informed and facilitated research studies.
+Many studies have been conducted as a result of the partnership of University of Massachusetts and the DCR. Data analysis and model calibration and validation in many of these studies have benefited from the vast amount of water quality and hydrological data that are collected in the Quabbin, Ware River, and Wachusett watersheds. The water quality impacts from extreme precipitation events have been examined through statistical analysis of potential loads coupled with a reservoir hydrodynamic and water quality model [@jeznach_proactive_2017]. The fate of hypothetical contaminant spills in the Wachusett Reservoir have also been modeled [Jeznach, 2016; Devonis 2011; Sojkowski, 2011; Stauber, 2009]. Other water quality modeling topics have included the effects of climate change on the Wachusett reservoir [Jeznach, 2016] and modeling the fate of natural organic matter and fecal pollution [Mathews, 2007; Buttrick, 2005]. Presumably, having a thorough sampling plan and well maintained data can allow for more informed and facilitated research studies.
 
 
 ## Water System Data Management
@@ -190,7 +191,7 @@ There is one configuration file for both WIT and WAVE. Most of the information i
 
 ## Github
 
-Github is used as the storages mechanism for the application code, the version control collaboration, and is integral in the launching (deply) method of the application. Github is a great tool for web development and code collaboration. GitHub has version control. [Get some cited info].
+Github is used for many purposes related to WIT and WAVE development and system processes. The application code is stored on GitHub which offers advanced version control and collaboration features during development. GitHub is also integral in the launching method of the application. GitHub is a web-based hosting service for version control using Git. It offers all of the distributed version control and source code management functionality of Git as well as adding its own features. It provides access control and several collaboration features such as bug tracking, feature requests, task management, and wikis for every project. [@noauthor_github_2012]
 
 The configuration file tells the application which GitHub repository to fetch the application from. Currently there are two repositories of the application (a main repository and a forked repository). Although the application is mainly ran from the main repository, there has been sometimes when it has been useful to run the appliaction off of the forked repository. Fetching the application directly from GitHub ensures that the latest version of the application is being used by all users. There is no need for a user to ever have to install an update.
 
@@ -202,88 +203,7 @@ A user interacts with the client through the Google Chrome Browser. A client is 
 
 A server is a computer that provides and serves data [Techterms] during an application session. In this case, the computer refers to the local computer of a user in which the application script is executed. The main app script contains a line of code that launches the application in an R session. In WIT, the server listens to the user's requests and performs the data processing computations and data import services. In WAVE, the server listens to the user's requests and creates data visualizations and performs statistical analysis on the data.
 
-The server can connect to a database or another type of data storage. The WIT server reads and writes data, while the WAVE server only reads data. There are commonly two schemes of reading data with an application. One scheme is to read all data in at the start of the session and the other is to read in only specific data each time the user asks for specific information. The second approach is more common with large data sets, becuase it can be timely to read in all data at the start. Although there is a substantial amount of data, WAVE actually reads in all the data at the start of the session, yet does so in a way that most of this work is already done before the user tries to open the application. This will in turn speed up the processes during the session. WIT uses the second approach and reads in data when it is needed. This results in a shorter launching time for WIT. The scheme of reading in data for WIT and WAVE are indicated in Figure 3.2 and 3.3 by the color of the arrow.
-
-The server can connect to a database with an Open Database Connectivity (ODBC) application program interface. This is used to externally fetch data from a database and to write data to a database. WIT uses an ODBC to read and write data to the databases. 
-
-A server can also read data from other data storage methods including flat files (e.g. csv and txt) and RDS files. RDS files preserve the R data structure and is the fastest way to save data from R and read data into R. RDS files are used to make the process of reading in data to WAVE very fast. Due to the comparitively longer time to read data from a database into an R session, the database is actually read after a user closes the WIT application and is saved to RDS files. A user closing WIT is a good indication that the database has been updated. The updating of RDS files happens automatically in the background of a user's computer. One can also trigger this update of RDS files manually as well. WAVE is designed to read data as RDS files that have already been transformed to the desired formatted dataframes of WAVE. Reading in data from RDS files upon starting a WAVE session takes about 2 seconds compared to 15-20 seconds of reading data from the database.
-
-## Database
-
-The DCR has collected water quality data for over fourty years. The data storage methods have changed greatly over the years of sampling. In the early years, paper records were used as the means of storing data. As computers became more prelevant a mix of spreadsheet storage and database storage slowly became the means of data storage. Today, an effort is being made to store all new data and move all existing data into relational database management systems (RDBMS), commonly reffered to as just databases. Databases are a more efficient method of storing large amounts of data than either paper records or spreadsheets. The DCR currently uses Microsoft Access as their database software. The Wachusett Office has three databases, one for water quality data, one for aquatic biology and profile data, and one for hydrological data. Each database of the Wachusett Office has a similar format. The Quabbin Office has one database for all of its water quality data. The needs and practices of the department determine whether it is appropriate to have one or multiple databases. This being said, directly related tables (i.e. have common keys that link them) should likely be stored within the same database.
-
-There are many tables within a database, in which each contains different sets of information, where similar objects are contained in rows [Oracle]. Many tables contain sampling measurements, in which each row is a unique sampling observation from the field or laboratory. Each observation gets its own row and is unique in the combination of location, date, and parameter. Data formatted so each row is a unique observation is considered to be "tidy" [Hadley]. Storing data in a "tidy" fashion facilitates data science in the R programming language (and presumably most advanced programming languages). An example of "non-tidy" data and "tidy" data can be seen in Tables 3.1 and 3.2. In this case, columns named "Parameter"" and "Result" are used in the "tidy" data example rather than including a column for each parameter. The "tidy" data format in this example also allows for additional columns like "Units" and other information specific to that one observation to be recorded in the database. Many packages in R, like "ggplot2" and "dplyr" are designed for "tidy" data.
-
-\begin{table}
-\centering
-\caption{non-Tidy Sample Data}
-\label{table-paramvalues}
-\begin{tabular}{| l | l | l | l | l | l |}
-\hline \\ [-1.5ex]
-Location & Date & Turbidity & Nitrate & Ammonium & Specific Conductance \\ [1ex]
-\hline \\ [-1.5ex]
-Riverbend & 01/01/2020 & 12 & 13 & 14 & 15\\ [1ex]
-\hline \\ [-1.5ex]
-\end{tabular}
-\end{table}
-
-\begin{table}
-\centering
-\caption{Tidy Sample Data}
-\label{table-paramvalues}
-\begin{tabular}{| l | l | l | l |}
-\hline \\ [-1.5ex]
-Location & Date & Parameter & Result\\ [1ex]
-\hline \\ [-1.5ex]
-Riverbend & 01/01/2020 & Turbidity & 12\\ [1ex]
-Riverbend & 01/01/2020 & Nitrate & 13\\ [1ex]
-Riverbend & 01/01/2020 & Ammonium & 14\\ [1ex]
-Riverbend & 01/01/2020 & Spec. Cond & 15\\ [1ex]
-\hline \\ [-1.5ex]
-\end{tabular}
-\end{table}
-
-In this work, the majority of the data is from sampling measurements which is the main data of focus. Data other than sampling measurements are thus considered metadata. Metadata is a term used for a set of data that describes and gives information about other data [Google]. Metadata tables in the database include tables with information on parameters, locations, flags, sample flag index, and more. Location Tables store information related to sampling site loactions (e.g. site ID, lattitude, longitide, elevation). Parameter tables store information related to parameters (e.g. parameter abbreviation). Flag tables store information related to flags (e.g. flag code, flag description). Sample flag index tables sre used to relate the sample tables with the flag tables which is needed due to the many-to-many relationship of samples and flags. Because a sample measurement can have zero, one, or many flags associated with it, an intermediate table is used to relate a sample ID with a flag ID, which are both foreign keys.
-
-In the future it may make sense to use a different database software due the outdating of Microsoft Access. This switch should be a smooth process since the all RDBMSs have a common API, Structured Query Language (SQL). There likely exists alternative RDBMSs which are faster at reading and writing data. As of now the DCR is familiar with Microsoft Access and there is no strong reason to move away from it at this point.
-
-## RDS Files
-
-In R, RDS files are the fastest format to be read and saved [ ]. As discussed, RDS files are used speed up the loading process of WAVE. Each dataframe is stored in its own RDS file with the same descriptive name that the WAVE App uses (e.g. df_trib_quab). The date that the RDS files are last updated are also recorded and displayed in WAVE. 
-
-RDS files are updated after WIT is closed, due to this being the sole means of data entry to the databases. Every time the user closes a WIT session, a batch file will be triggered to run an R script behind the scenes which will update the RDS files. The RDS files can also be updated by directly clicking on and running this batch file, to ensure that the data in WAVE is the most up to date, although this will likely not be neccesary.
-
-As of now, these RDS files are stored locally on the DCR internal network, though will likely be moved to GitHub cloud storage. Cloud storage will allow a user outside of the DCR network to have access to the most up-to-date data. As of now, GitHub is only used to manage the updates of appication code. It is possible to also "push" the lastest RDS files to the cloud storage. Likely, another GitHub account will be created which sole use will be to automatically "push" the RDS files to GitHub everytime that these RDS files are updated. This will benefit the user experience at UMass Amherst and at the MWRA who are interested to be able to use WAVE as well. 
-
-The RDS files also act as a common storage location for all the data that WAVE uses. WAVE is not limited to the data that is collected by the DCR and plans to include data from outside organizations including the USGS and the National Oceanic and Atmospheric Administration (NOAA) National Climatic Data Center (NCDC). WAVE plans to utilize stream flow data from USGS and meteorology data from the NCDC. As of now, the USGS and NCDC data is also updated upon WIT closing. An independent schedule for updating this data may be more appropriate (e.g. daily RDS updates).
-
-The MWRA also has reservoir water quality data that is desired to be incorporated into WAVE. This data for the most part is stored on the MWRA internal network. There is no efficient data sharing system in place in which WAVE could retrieve the most up-to-date data online. Thus, in the future, it is likely a good idea to store the internal MWRA data with the internal DCR data in RDS files on GitHub. These RDS files could be automatically updated and pushed to GitHub upon some trigger related to MWRA data entry.
-
-```{r dev WIT Launch, echo=FALSE, out.width = "6.5in", fig.cap="WIT Launch"}
-knitr::include_graphics("images/system dev/WIT_Launch.pdf")
-```
-
-```{r dev WAVE Launch, echo=FALSE, out.width = "4.5in", fig.align="center", fig.cap="WAVE Launch"}
-knitr::include_graphics("images/system dev/WAVE_Launch.pdf")
-```
-
-## Application Package and Launching
-
-All of the neccesary files needed to run both applications are packaged into a folder for easy distribution amongst users, wither at the DCR or outside of the DCR. This package includes the configuration file, the launch R scripts, desktop shortcuts, associated batch files, Portable R, and Portable Google Chrome. There is no actual installation required to run either of the applications. The user will not need R or Google Chrome directly installed on their desktop due to the portable versions included in the packaged folder. Further, using Portable Chrome allows the application to open in a fresh clean Google Chrome Browser without any user customization (e.g. Bookmarks).
-
-There are several ways to launch a Shiny application, many of which are web hosted methods. The relatively small userbase of WIT and WAVE led to a local launch method to be chosen. Because this application is to be used primarily by the DCR internally, it was agreed upon that it was not neccesary to host the application on the internet. It is feasible to share a packaged application folder with all of the intended users of the application. Running an application locally is gnerally simpler than hosting an application online.
-
-A desktop shortcut was created to allow the user to launch the application with a double click of the mouse. The desktop shortcut when clicked triggers a batch file that runs an R script to install/load all neccesary R libraries and then execute the "RunGitHub" function. "RunGitHub" is a built-in function in the Shiny Library which will fetch the most updated application code stored in a Github Repository and run the app locally in a Portable R session and open a new Google Chrome Browser.
-
-
-
-
-\newpage
-# Application Code
-
-## Overview
-
-Both WIT and WAVE are built in the R language with the Shiny development framework. Shiny is implemented in R, yet also allows the developer to incorporate direct CSS, HTML, and Javascript. RStudio is the leading (IDE) for the R language and is the creator of the "Shiny" library as well as many other popular R libraries (e.g. "ggplot2", "dplyr", "tidyr", "RMarkdown"). The application utilizes many libraries in R which can be seen in table 4.1. 
+The bahavior of the server for WIT and WAVE is defined by the Shiny Development Framework. Shiny is implemented in the R programming language, yet also allows the developer to incorporate direct CSS, HTML, and Javascript. RStudio is the leading (IDE) for the R language and is the creator of the "Shiny" library as well as many other popular R libraries (e.g. "ggplot2", "dplyr", "tidyr", "RMarkdown"). The applications utilize many libraries in R which can be seen in table 4.1. 
 
 Dataframes are a data structure used in R (and also in the Pandas package in Python) that are built for efficient data science. A dataframe is technically a list of named vectors of equal length [R tutorial]. This differs from a matrix which is a common data structure in programming languages which is technically a two dimensional array. Dataframes are the data structures that these applications and RDS files use to hold data.
 
@@ -291,7 +211,7 @@ Dataframes are a data structure used in R (and also in the Pandas package in Pyt
 \centering
 \caption{R Libraries used in Applications}
 \label{table-paramvalues}
-\begin{tabular}{| l | l | l | l |}
+\begin{tabular}{p{1.5in} P{1.5in}} \\ [-1ex]
 \hline \\ [-1.5ex]
 WIT & WAVE \\ [1ex]
 \hline \\ [-1.5ex]
@@ -313,24 +233,88 @@ magrittr & cowplot \\
 openxlsx & rgdal \\
 V8 & reshape2 \\
 sendmailR & corrplot \\
-dataRetrieval & \\
+dataRetrieval & \\ [1ex]
 \hline \\
 \end{tabular}
 \end{table}
 
 A Shiny application code consists of two parts: code for the front-end server (referred to as the "user interface" component) and code for the back-end server (referred to as the "server" component). The Shiny "user interface" code is made up of input and output objects. Input objects consist of a variety of JavaScript widgets (e.g. "Checkbox Input" and "Select Input"). Output objects include plots, images, tables, and etc. In general, input objects are defined within the user interface code. Instructions of how output objects are made are defined within the server code. The "placeholders" of these output objects are defined in the user interface code. Shiny applies the concept of reactivity to automatically update output objects when a user changes input objects that they are dependent on. Reactive expressions can be used as intermediary functions between output and input objects which continue the reactive chain between these objects. More information on the Shiny Framework can be found online. 
 
-In this work, a large effort has been made to keep the code well organized. The code scripts are all written in a similar style which follow guidelines put forward by Hadley Wickhem and Google [R or Data Science; Google's R Style Guide]. The application code is concisely commented. Naming conventions have been established to facilitate the readability of the code. Due to the large amounts of objects, a large effort was made to be descriptive and concise in the naming of objects so a developer can determine the purpose of an object by its name. Objects of the same class (or type) use the same naming style which are created from variations of lowercase, uppercase, underscores, and camel case formats.
+The server can connect to a database or another type of data storage. The WIT server reads and writes data, while the WAVE server only reads data. There are commonly two schemes of reading data with an application. One scheme is to read all data in at the start of the session and the other is to read in only specific data each time the user asks for specific information. The second approach is more common with large data sets, becuase it can be timely to read in all data at the start. Although there is a substantial amount of data, WAVE actually reads in all the data at the start of the session, yet does so in a way that most of this work is already done before the user tries to open the application. This will in turn speed up the processes during the session. WIT uses the second approach and reads in data when it is needed. This results in a shorter launching time for WIT. The scheme of reading in data for WIT and WAVE are indicated in Figure 3.2 and 3.3 by the color of the arrow.
 
-## WIT
+The server can connect to a database with an Open Database Connectivity (ODBC) application program interface. This is used to externally fetch data from a database and to write data to a database. WIT uses an ODBC to read and write data to the databases. A server can also read data from other data storage methods including flat files (e.g. csv and txt) and RDS files. RDS files preserve the R data structure and is the fastest way to save data from R and read data into R. WAVE reads in data from RDS files which makes the process of reading in data to WAVE very fast. 
 
-### Overview
 
-Application Software can facilitate database entry of water system data. The manual labor for database entry can be extensive without specially designed software. Water system data are collected from a variety of sources in a variety of formats. It is a multiple step procedure to enter data into a database. First, raw data must be tranformed to the format of the data in the database. Secondly, measures must be taken to ensure raw data quality as well as that it was tranformed correctly. Other quality measures also can be taken. Thirdly, transformed data must be imported to the database. WIT helps a user perform these steps of data entry through the automation of much of this process.
+
+## Database
+
+The DCR has collected water quality data for over fourty years. The data storage methods have changed greatly over the years of sampling. In the early years, paper records were used as the means of storing data. As computers became more prelevant a mix of spreadsheet storage and database storage slowly became the means of data storage. Today, an effort is being made to store all new data and move all existing data into relational database management systems (RDBMS), commonly reffered to as just databases. Databases are a more efficient method of storing large amounts of data than either paper records or spreadsheets. The DCR currently uses Microsoft Access as their database software. The Wachusett Office has three databases, one for water quality data, one for aquatic biology and profile data, and one for hydrological data. Each database of the Wachusett Office has a similar format. The Quabbin Office has one database for all of its water quality data. The needs and practices of the department determine whether it is appropriate to have one or multiple databases. This being said, directly related tables (i.e. have common keys that link them) should likely be stored within the same database.
+
+There are many tables within a database, in which each contains different sets of information, where similar objects are contained in rows [Oracle]. Many tables contain sampling measurements, in which each row is a unique sampling observation from the field or laboratory. Each observation gets its own row and is unique in the combination of location, date, and parameter. Data formatted so each row is a unique observation is considered to be "tidy". Tidy datasets have a specific structure: each variable is a column, each observation is a row, and each type of observational unit is a table [Hadley]. Tidy datasets are easy to manipulate, model and visualize [Hadley]. Storing data in a "tidy" fashion facilitates data science in the R programming language (and presumably most advanced programming languages). An example of "non-tidy" data and "tidy" data can be seen in Tables 3.1 and 3.2. In this case, columns named "Parameter"" and "Result" are used in the "tidy" data example rather than including a column for each parameter. The "tidy" data format in this example also allows for additional columns like "Units" and other information specific to that one observation to be recorded in the database. Many packages in R, like "ggplot2" and "dplyr" are designed for "tidy" data.
+
+\begin{table}
+\centering
+\caption{Non-Tidy Sample Data}
+\label{table-paramvalues}
+\begin{tabular}{p{1.0in} P{1.0in} p{0.8in} P{0.8in} p{0.8in} P{0.8in}} \\ [-1ex]
+\hline \\ [-1.5ex]
+Location & Date & Turbidity & Nitrate & Ammonium & Specific Conductance \\ [1ex]
+\hline \\ [-1.5ex]
+Station 1 & 01/01/2020 & 12 & 13 & 14 & 15\\ [1ex]
+\hline \\ [-1.5ex]
+\end{tabular}
+\end{table}
+
+\begin{table}
+\centering
+\caption{Tidy Sample Data}
+\label{table-paramvalues}
+\begin{tabular}{p{1.0in} P{1.0in} p{1.0in} P{1.0in}} \\ [-1ex]
+\hline \\ [-1.5ex]
+Location & Date & Parameter & Result\\ [1ex]
+\hline \\ [-1.5ex]
+Station 1 & 01/01/2020 & Turbidity & 12\\ [1ex]
+Station 1 & 01/01/2020 & Nitrate & 13\\ [1ex]
+Station 1 & 01/01/2020 & Ammonium & 14\\ [1ex]
+Station 1 & 01/01/2020 & Spec. Cond & 15\\ [1ex]
+\hline \\ [-1.5ex]
+\end{tabular}
+\end{table}
+
+In this work, the majority of the data is from sampling measurements which is the main data of focus. Data other than sampling measurements are thus considered metadata. Metadata is a term used for a set of data that describes and gives information about other data [Google]. Metadata tables in the database include tables with information on parameters, locations, flags, sample flag index, and more. Location Tables store information related to sampling site loactions (e.g. site ID, lattitude, longitide, elevation). Parameter tables store information related to parameters (e.g. parameter abbreviation). Flag tables store information related to flags (e.g. flag code, flag description). Sample flag index tables sre used to relate the sample tables with the flag tables which is needed due to the many-to-many relationship of samples and flags. Because a sample measurement can have zero, one, or many flags associated with it, an intermediate table is used to relate a sample ID with a flag ID, which are both foreign keys.
+
+In the future it may make sense to use a different database software due the outdating of Microsoft Access. This switch should be a smooth process since all RDBMSs have a common API, Structured Query Language (SQL). There likely exists alternative RDBMSs which are faster at reading and writing data. As of now the DCR is familiar with Microsoft Access and there is no strong reason to move away from it at this point.
+
+## RDS Files
+
+In R, RDS files are the fastest format to be read and saved [ ]. The RDS files also act as a common storage location for all the data that WAVE uses including internal DCR data and data from outside organizations including the USGS and the National Oceanic and Atmospheric Administration (NOAA) National Climatic Data Center (NCDC). RDS files make the process of reading data into WAVE very fast. Each dataframe is stored in its own RDS file with the same descriptive name that the WAVE App uses (e.g. df_trib_wach). The date that the RDS files are last updated are also recorded and displayed in WAVE. RDS files are updated after the WIT is closed, which will be explained later in more detail
+
+## Application Package and Launching
+
+All of the neccesary files needed to run both applications are packaged into a folder for easy distribution amongst users, wither at the DCR or outside of the DCR. This package includes the configuration file, the launch R scripts, desktop shortcuts, associated batch files, Portable R, and Portable Google Chrome. There is no actual installation required to run either of the applications. The user will not need R or Google Chrome directly installed on their desktop due to the portable versions included in the packaged folder. Further, using Portable Chrome allows the application to open in a fresh clean Google Chrome Browser without any user customization (e.g. Bookmarks).
+
+There are several ways to launch a Shiny application, many of which are web hosted methods. The relatively small userbase of WIT and WAVE led to a local launch method to be chosen. Because this application is to be used primarily by the DCR internally, it was agreed upon that it was not neccesary to host the application on the internet. It is feasible to share a packaged application folder with all of the intended users of the application. Running an application locally is gnerally simpler than hosting an application online.
+
+A desktop shortcut was created to allow the user to launch the application with a double click of the mouse. The desktop shortcut when clicked triggers a batch file that runs an R script to install/load all neccesary R libraries and then execute the "RunGitHub" function. "RunGitHub" is a built-in function in the Shiny Library which will fetch the most updated application code stored in a Github Repository and run the app locally in a Portable R session and open a new Google Chrome Browser.
+
+
+
+
+
+
+
+
+
+\newpage
+# WIT Development and Features
+
+## Overview
+
+Application Software can facilitate database entry of water system data. The manual labor for database entry can be extensive without specially designed software. Water system data are collected from a variety of sources in a variety of formats. It is a multiple step procedure to enter data into a database. First, raw data must be tranformed to the format of the data in the database. Secondly, measures must be taken to ensure raw data quality as well as that it was tranformed correctly. Other quality measures also can be taken. Thirdly, transformed data must be imported to the database. WIT helps a user perform these steps of data entry through the automation of much of this process. WIT facilitates database entry of water quality and water quantity sampling data from various sources.
 
 WIT is rather flexible in that users can set preferences in a configuration file to alter the settings of the session. The configuration file consists of a table of user settings. The configuration file includes the neccesary information on all the data sources of a particular DCR Office. WIT also reads in basic Windows user account information to automatically set some additional settings.
 
-### Development Process
+## Development Process
 
 WIT was developed in a collaborative effort between UMass Amherst and the DCR. During the beginning of the development process, UMass Amherst focused on the development of the Shiny Application code itself, while the DCR Wachusett Office focused on the scripts for data processing of raw data source files. The DCR also handled the organization of these data files and databases within the DCR's network. UMass proposed multiple test versions of the application which received feedback from the DCR. The main parts of the application were finalized and the DCR later expanded on the application to allow for the ability to manually flag data upon entry. Additional user preferences and setting were also added to the application for increased variability between offices or other groups.
 
@@ -338,29 +322,47 @@ The DCR Wachusett Office had previously largely relied on Visual Basic Macros fo
 
 The R scripts that process and import data used by the WIT application can also be used independently, outside of WIT. This allowed for the DCR to use these R scripts for data entry while WIT was being developed. This also facilites the process of developing and testing a new R script for the data processing or data importing of a new data source. If an office adds a new data source, new scripts can be created and the new data source information can be recorded appropriately in the configuration file.
 
-### Session Flow
+## Session Flow
 
 WIT has a relatively simple user interface, and consists of much fewer inputs and outputs than WAVE. The main inputs of WIT are for data selection, data processing, and data importing. The data selection inputs include user selection of the type of data source and the raw data files to be read into the session. The data process input is a button to run the R script to transform the data and perform quality assurance and quality control measures. The data import input is a button to run the R script to import the data to the correct location in the database. In addition to these main user interface inputs, other inputs include those for manually adding flags and also inputs specific to certain data sources (e.g. "instrument used").
 
-The main steps a user takes during a WIT Session are shown in Figure 4.1. The user first clicks on the WIT desktop shortcut which will open WIT in a Google Chrome Browser. The user thenselects a data source type and raw data file.  A process button will appear on the screen that the user can press to transform the data and perfrom quality tests. The user can also manually add flags to the data. If the data passes the quality tests, an import button will appear as well as a table of the processed data. After inspecting the data in the table the user may press the import button which will import the data to the database. The user can enter multiple data files to the database in a session by repeating the prior steps. When the user is finished, they will close out of the Google Chrome Browser which will end the session. This will trigger an R script to run that will update the RDS files.
+The main steps a user takes during a WIT Session are shown in Figure 4.1. The user first clicks on the WIT desktop shortcut which will open WIT in a Google Chrome Browser. The user thenselects a data source type and raw data file.  A process button will appear on the screen that the user can press to transform the data and perfrom quality tests. The user can also manually add flags to the data. If the data passes the quality tests, an import button will appear as well as a table of the processed data. After inspecting the data in the table the user may press the import button which will import the data to the database. The user can enter multiple data files to the database in a session by repeating the prior steps. When the user is finished, they will close out of the Google Chrome Browser which will end the session. This will trigger an R script to run which will update the RDS files.
 
-Figure - Human
+```{r WIT Session user, echo=FALSE, out.width = "6.5in", fig.cap="Flow of WIT User Session"}
+knitr::include_graphics("images/WIT/WIT_user_session.pdf")
+```
 
-### Data Selection
+## Launching
+
+The user first double clicks the icon located on the desktop which triggers two batch files. The first batch file notifies the user that the App will open shortly. The second batch file will read the information from the Configuration File. Included in this informatin is the GitHub Repository for which to fetch the Application code from. Once the code is fetched the code is read in a local R session in the background and the application is started. A fresh Google Chrome Browser with the application user interface will appear. Figure 4.2 illustrates the WIT starting process.
+
+```{r WIT Session start, echo=FALSE, out.width = "6.5in", fig.cap="Flow of events before launching WIT"}
+knitr::include_graphics("images/WIT/WIT_session_start.pdf")
+```
+
+## Data Selection
 
 The user is first prompted to select from a choice of data sources. The list of data sources is determined from the configuration file and is unique to each user's Office. Based on the selected data source, a corresponding file path from the configuration file is used to locate the folder on one's computer where they designtated to save the raw data files of that file source type. The user will be prompted to select a choice of the raw data files that are in the folder. Once the user selects a raw data file, a "process data" button will appear for the user to press when ready. If the user changes their mind, and would like to select a raw data file or change the data source type, they are free to do so. If the user does change the data source type, the "process data" button will go back to hiding. This ensures that the application does not accidentally process a raw data file that it believes to be of a different data source than it actually is. As will be discussed, once a file has been succesfully imported it will no longer be available for selection.
 
-### Data Processing
+## Data Processing
 
 In this work, data processing includes both data format transformation and data quality assurance and control. An R script is written for the processing of data from each each data source that is stored in the database and/or is used in the WAVE application. The configuration file is read by WIT which reads in the list of data processing R scripts that a particular DCR office uses. When the user presses the "process button" the corresponding data processing R script is ran.
 
 Data format transformations take data in the raw data format (i.e the format in which they are uploaded to the computer), and transforms it to the desired format of the database to be effectively and correctly imported. These transformations include adding or removing columns, column name changes, data type changes, and data rearranging (e.g. spreading or gathering columns). The extent of which raw data has to be transformed varies greatly from each data source.
 
-The processing scripts are also designed to give a descriptive error to the user when there is a suspected problem with the raw data that the user is trying to upload to the database. Each data source processing script has a number of quality control tests to minimize poor quality data from being uploaded. Some of these tests are common for all data sources, while most are specific to the individual data source. All new rata data files are checked to make sure no duplicate observations are within the file (i.e. all observations must be unique). The process script also will read in the data from the database to ensure that the data has not already been imported to the database by a similar method of checking for duplicates. The process scripts will also alert a user when their is an unusual data value. There are also additional quality control tests specific to each data source. When the user gets notified of an error, the user should try and address the problem outide of the WIT application, by altering the raw data file or seeking a solution to the cause of the error.
+The processing scripts are also designed to give a descriptive error to the user when there is a suspected problem with the raw data that the user is trying to upload to the database. Each data source processing script has a number of quality control tests to minimize poor quality data from being uploaded. Some of these tests are common for all data sources, while most are specific to the individual data source. All new rata data files are checked to make sure no duplicate observations are within the file (i.e. all observations must be unique). The process script also will read in the data from the database to ensure that the data has not already been imported to the database by a similar method of checking for duplicates. The process scripts will also alert a user when their is an unusual data value. There are also additional quality control tests specific to each data source. When the user gets notified of an error, the user should try and address the problem outide of the WIT application, by altering the raw data file or seeking a solution to the cause of the error. Figures 4.4 and 4.5 illustrate the flow of events that occur when WIT processes data for the cases of when the quality control tests are succesful and unsuccessful, respectively. 
 
 Ideally, all potential raw data errors will be caught by the processing scripts and a descriptive error message will be shown to the user. In reality, when developing these processing scripts, it is likely to only anticipate common raw data problems and write descriptive error messages for these problems. Unanticipated problems are likely not cuaght by one of our quality control tests, yet would likely draw an error within R. In this case, the defualt R error handling message will be shown to the user. This message will likely only be helpful to the user if they are familiar with the R script. In this case of an unanticipated problem, there is still a benefit that the processing data is haulted and that the user is given an error message, even if the description in the message itself is not helpful.
 
 Some of the data is also flagged during the data processing process with the same data processing R scripts. A flag is used to indicate additional information about a data observation, some are which are added automatically (in the processing R scripts) and some are added manually by the user. An example of a flag is automatically added by the processing script is "below detection limit". In the case of the raw data from the MWRA lab, observations that fall below the detection limits are recorded with a "less than" symbol and than the value of the detection limit (e.g. "<5.0"). Thus, for this data source, the R script will look for the "less than" sign, and assign the corresponding flag code to that observation. The user can also manually add flags to the data with various input options to do so. These manual flags usually relate to observations of a DCR scientist during the sampling process (e.g. "ice cover" or "low flow conditions").
+
+```{r WIT Session proc suc, echo=FALSE, out.width = "6.5in", fig.cap="Flow of events during WIT succesfully processing data"}
+knitr::include_graphics("images/WIT/WIT_session_proc_suc.pdf")
+```
+
+```{r WIT Session proc fail, echo=FALSE, out.width = "6.5in", fig.cap="Flow of events during WIT unsuccesfully processing data"}
+knitr::include_graphics("images/WIT/WIT_session_proc_fail.pdf")
+```
 
 The process of assigning a flag code to a data observation is actually a bit more complicated due to the many to many relationship between data observations and flag codes (i.e. an observation can have more than one flag code). Thus, a column in the table of data observations for flag code columns is not adequate for the potential multiple flag code values. A solution is to make an intermediate table, in this case called "Sample Flag Index", to link a Sample ID foregn key with a Flag Code foreign key.
 
@@ -368,47 +370,27 @@ Once the data has been processed, an "import data" button will appear on the scr
 
 A great benefit of WIT is that it allows the actual person who collected the data to also import it. This increases the ability of that user to add meaningful flags as well as perform a better visual quality control becuase they know better than anyone what they expect the data to look like. Previously this was not always possible due to the technical abilities of the some data collector
 
-Figure
+## Data Importing
 
-### Data Importing
+In this work, data importing means the physical process of moving data which already in a desired format into the correct location in a database. WIT allows data is imported with a click of the "import data" button. An import R script is written for each of the data sources. When a user clicks the "import button" this tells the server to run the specific R script for the data source type. Each R script utilizes an open database connectivity (odbc) application program interface (api) to connect with a Microsoft Access database. The R script first makes a connection with the corresponding database and finds the corresponding Table and reads in the ID column. Reading in the ID column is necceasry for writing to a Microsoft Access database, to direct the database where to store the data. The maximum value of the ID column is calcualted and a column containing a sequence of ID values greater than the maximum existing values are added to the raw data. The raw data is then ready to be imported to the database and will naturally fall at the end of the Table (if the data is sorted by ID). This ID column has no use outside of the Microsoft Access database.
 
-In this work, data importing means the physical process of moving data which already in a desired format into the correct location in a database. WIT allows data is imported with a click of the "import data" button. An import R script is written for each of the data sources. When a user clicks the "import button" this tells the server to run the specific R script for the data source type. Each R script utilizes an open database connectivity (odbc) application program interface (api) to connect with a Microsoft Access database. The R script first makes a connection with the corresponding database and finds the corresponding Tabel and  reads in theID column. Reading in the ID column is necceasry for writing to a Microsoft Access database, to direct the database where to store the data. The maximum value of the ID column is calcualted and a column containing a sequence of ID values greater than the maximum existing values are added to the raw data. The raw data is then ready to be imported to the database and will naturally fall at the end of the Table (if the data is sorted by ID). This ID column has no use outside of the Microsoft Access database.
-
-Once the data is imported, the raw data file will be moved from a folder of data that has not been impoted to a data that has been imported. This helps with the organization process of data and will make it so the user will not be able to select a raw data file that was previously imported with WIT. 
-
-Figure
-
-### Updated RDS files
-
-As was discussed in teh RDS files section, when the user closes the WIT session this casues an R script to launch that will update the RDS files that are used by WAVE.
-
-!!Should remove it from Server definition and put it here.
-
-### Session Flow
-
-The user will be able to upload multiple files suring user session. A flowchart of hte session flow can be seen in Figure 4.2. 
-
-
-```{r dev WIT Session, echo=FALSE, out.width = "8.5in", fig.cap="WIT Session Flow", out.extra='angle=90'}
-knitr::include_graphics("images/code dev/WIT_Session.pdf")
+```{r WIT Session import, echo=FALSE, out.width = "6.5in", fig.cap="Flow of events during WIT importing data"}
+knitr::include_graphics("images/WIT/WIT_session_import.pdf")
 ```
 
-Raw Data File Lookup
+Once the data is imported, the raw data file will be moved from a folder of data that has not been impoted to a data that has been imported. This helps with the organization process of data and will make it so the user will not be able to select a raw data file that was previously imported with WIT. The flow of events during WIT importing data is illustrated in Figure 4.5.
 
-WIT will provide an easy selection of the raw data files on ones computer. The user will first select the dataset category that he/she desires to import. Since WIT is configured to read from specified directories on ones computer, the user will then select a raw data file from a drop-down list. The file list in the application will consist of the raw data files that are saved in the appropriate directory on a users computer. After the user imports the data, the raw data file is moved from the ___ folder to the processed folder. 
+## Exiting and Updating RDS Files
 
-Data Processing
+When the user ends the WIT session by closing the app, an R script will be automatically launched which will update the RDS files that are used by WAVE. Due to the comparitively longer time to read data from a database into an R session, this method expediates the launching of WAVE becuase updated data from the database will already be in the desired data format of (RDS files). A user closing WIT is a good indication that the database has been updated, since this is the sole means of data entry to the databases. The updating of RDS files happens automatically in the background of a user's computer. One can also trigger the update of RDS files manually as well. Reading in data from RDS files upon starting a WAVE session takes about 2 seconds compared to 15-20 seconds of reading data from the database. The flow of events after a user exits WIT can be seen in Figure 4.6.
 
-The data is processed to convert raw data into the format of the same type of data in the database. Each raw data source varies in the format or data. The application will automatically process a raw data file into the desired format, by one of a number of processing script files for that specific raw dataset type. If the processing is successful, the data will appear in a table for the user to examine.
+```{r WIT Session exit, echo=FALSE, out.width = "6.5in", fig.cap="Flow of events after a user exits WIT"}
+knitr::include_graphics("images/WIT/WIT_session_exit.pdf")
+```
 
-Quality Control
+As of now, these RDS files are stored locally on the DCR internal network, though will likely be moved to GitHub cloud storage. Cloud storage will allow a user outside of the DCR network to have access to the most up-to-date data. As of now, GitHub is only used to manage the updates of appication code. It is possible to also "push" the lastest RDS files to the cloud storage. Likely, another GitHub account will be created which sole use will be to automatically "push" the RDS files to GitHub everytime that these RDS files are updated. This will benefit the user experience at UMass Amherst and at the MWRA who are interested to be able to use WAVE as well. 
 
-
-Data Importation
-
-
-
-The Watershed data Importer Tool (WIT) facilitates importing raw data from multiple sources into the database. Each Data Type has a formatting function script that is written in R to format the data.  The user is prompted to select dataset type and the user will be shown a list of raw data files in the appropriate dataset type location on their computer. The user then selects a file from their computer and then press a button to format the data. A Warning message will be sent to the user if their was a problem with the data or if the data already exists in the database. After a successful formatting, the user will be able to see the formatted data in a table on the screen and an import button will appear that the user can press to import the data if they are satisfied with how the data looks.  Once the data is imported, the raw data file is moved from the unprocessed folder on their computer to the processed folder.
+The RDS files contain all the internal DCR data that is used in WAVE and also includes data from outside organizations including the USGS and the NOAA NCDC. As of now, the USGS and NCDC data is also updated upon WIT closing. An independent schedule for updating this data may be more appropriate (e.g. daily RDS updates). The MWRA also has reservoir water quality data that is desired to be incorporated into WAVE and thus into the RDS files. This data for the most part is stored on the MWRA internal network. There is no efficient data sharing system in place in which the most up-to-date data can be retrieved online. Thus, in the future, it is likely a good idea to store the internal MWRA data in RDS files on GitHub. These RDS files could be automatically updated and pushed to GitHub upon some trigger related to MWRA data entry.
 
 
 
@@ -418,13 +400,18 @@ The Watershed data Importer Tool (WIT) facilitates importing raw data from multi
 
 
 
-## WAVE
 
-### Overview 
 
-WAVE is a large application that has many features on its many tabs. All of the files related to the WAVE code are stored on GitHub in a public repository. It is seperated into many R script files containing pieces of the application code, each generally for a particualr feature. These features are special R functions called modules. WAVE also uses a number of functions that defined in separate files. WAVE uses GIS files and images whichi are stored with the application code on GitHub. The code and associated files have an MIT License agreement.
+\newpage
+# WAVE Development
 
-### Development Process
+## Overview 
+
+WAVE is a large application that has many features on its many tabs. All of the files related to the WAVE code are stored on GitHub in a public repository. It is seperated into many R script files containing pieces of the application code, each generally for a particualr feature. These features are special R functions called modules. WAVE also uses a number of functions that defined in separate files. WAVE uses GIS files and images which are stored with the application code on GitHub. The code and associated files have an MIT License agreement.
+
+In this work, a large effort has been made to keep the code well organized. The code scripts are all written in a similar style which follow guidelines put forward by Hadley Wickhem and Google [R or Data Science; Google's R Style Guide]. The application code is concisely commented. Naming conventions have been established to facilitate the readability of the code. Due to the large amounts of objects, a large effort was made to be descriptive and concise in the naming of objects so a developer can determine the purpose of an object by its name. Objects of the same class (or type) use the same naming style which are created from variations of lowercase, uppercase, underscores, and camel case formats.
+
+## Development Process
 
 WAVE has transformed many times to get to the product that it is today. It was not possible to foresee the specific direction that WAVE was going take when the idea was first proposed for many reasons. The first reason is that the developers of the application had little to none application development experience. The second is that the Office was not sure of the capabilities of Shiny and overall not too familiar with application software so it was difficult to receive direct ideas and suggestions of the features that WAVE would have. The third is that, WAVE is a unique product and there is no product that it tries to mimic. The DCR sampling and needs are unique and no similar application was found that was able to fit the needs of visualization and analysis of tributary water quality and water quantity data. Justifiably, WAVE meets the water system data visualization and analysis needs of the DCR better than any other software, as it should because it was built specifically for the DCR.
 
@@ -432,7 +419,11 @@ The model for the original Shiny Application was a Macro VBA code for querying. 
 
 The Application was developed in multiple iterations. The first Application was developed to show the potential of the Application to the DCR to gain interest on the project. This was a quick Application creation which tried to develop a wide range of features that were not really fine-tuned. After this process, feedback was received and the application was directed toward . The application process was a series of application and user feedback. The Application has been activated and used at the DCR offices to allow for this feedback.
 
-### Tab Layout
+## Reading Data
+
+WAVE is designed to read data as RDS files that have already been transformed to the desired formatted dataframes of WAVE. 
+
+## Tab Layout
 
 The many features WAVE offers results in a large code (base?) (there is roughly 10,000 lines of code with minimal repetition). Thus, organization of the code is crucial for efficient updates and additions. The application as a whole can be viewed as a collection of individual dashboards organized in various tabs in the user interface. The user only ever sees one tab at a time and thus one dashboard at a time. The highest level tabs of the App takes form in a navigation bar, also commonly known as the "ribbon". A snapshot of the navigation bar is shown in figure 4.2 which consists of the following tabs: Home, Tributary, Reservoir, Met Hydro, Forestry, Reports.
 
@@ -474,19 +465,20 @@ knitr::include_graphics("images/code dev/other_tabs_mods.pdf")
 knitr::include_graphics("images/code dev/plot_tabs.pdf")
 ```
 
-### Modules
+## Modules
 
 The previous section discussed the overall tab layout of WAVE, yet did not discuss how each tab is programmed. Each tab that contains a dashboard-like feature essentially can be thought of as it's own smaller application as it contains its own user interface components (inputs and outputs) as well as a server script which describes how each output is created. It makes sense to define these self-containing dashboards in separate files. In the Shiny framework, modules are a way of defining these independent, self-containing pieces of Shiny code, separate from the main application user interface or server code. A module consists of a user interface function and a server function. The utilization of modules in WAVE reduce code repetition in the same way as functions reduce code repetition. A module can be defined once, yet used in multiple instances. This is very beneficial because many tabs in the application that execute a module script are used for all three watersheds or both reservoirs. Just like functions, modules can take arguments which allow for variations in their use. For organization purposes, the code for each modules user interface and server function are stored together in a separate script file which is named similar to the module name. In general, isolating related specific code pieces can increase code readability. 
 
 Modules used in WAVE are shown throughout figures 4.4, 4.5, 4.6, 4.7, and 4.8. The majority of modules are used under the Tributary and Reservoir navigation bar (first-level) tabs, at some lower level. A module connected to the right of another module indicates that the module on the right is used within the module on the left. The breaking down modules into more modules is done for similar reasons as why the application is broken down into modules. Modules in WAVE are grouped in different categories and stored in folders accordingly. These categories includes Filter, Plots, Statistics, Metadata, and Other which can be seen in table __ . When a new unique feature is added to WAVE it will likely be added as a module, and the list of modules will grow as WAVE grows.
 
-\begin{table}
+
+\begin{sidewaystable}
 \centering
 \caption{WAVE Modules}
 \label{table-paramvalues}
-\begin{tabular}{| l | l | l | l | l | l |}
+\begin{tabular}{p{1.0in} p{1.0in} p{1.0in} p{1.0in} p{1.0in} p{1.0in} p{1.0in}} \\ [-1ex]
 \hline \\ [-1.5ex]
-Filter & Plots & Plot Options & Statistics & Metadata & Other\\ [1ex]
+Filter & Plots & Plot Options & Stats & Metadata & Maps & Reports\\ [1ex]
 \hline \\ [-1.5ex]
 Filter WQ & Plot Time WQ & Plot Save & Summary Stats & Location & Home\\ [1ex]
 Parameter Select & Plot Corr WQ & Plot Hline & Pearson Corr & Parameter & Phytoplankton\\ [1ex]
@@ -494,9 +486,10 @@ Date Select Select & Distribution & Plot Vline &   & Flags & Map Plot\\ [1ex]
 Checkbox Select All & Profile Heatmap & Plot Text &   & Flag Sample Index & Report Custom\\ [1ex]
 Select Select All & Profile Line Plot &  &   &   &  \\ [1ex]
 \end{tabular}
-\end{table}
+\end{sidewaystable}
 
-#### Filter
+
+### Filter
 
 Modules that are used in the "select / filter data" tab are grouped into the filter category. Together, these modules allow the user to selecting and filter data. The largest filter module is the main water quality filter, "Filter WQ" which is used for both tributary and all reservoirs selecting and filtering data. Arguments are used to create variations of the filter tab for different data types (e.g. depth select range for profile data selection). The selected/filtered data that the user selects in the filter tab will be used in the plot and statistics tabs. Sending the filtered dataframe to the plot and statistics tabs is preferred rather than each of the plot and statistics tabs having there own data filters for code repetition reasons. The filter tab produces a list of three reactive dataframes that can be passed to these other modules. The first reactive dataframe is the data in the unaltered long format which will be passed to the majority of the other modules. The second dataframe in the list is in the wide format which will be passed to any module involving correlation (e.g. the correlation plot and  Pearson correlation matrix). The wide format facilitates comparing results across different parameter in the same location and same date. The third dataframe is a dataframe of the data in the long format with the additional columns: Year, Month, and Season, for use in modules which incorporate temporal groupings (e.g. Summary Stats and Distribution).
 
@@ -504,13 +497,13 @@ In addition to "Filer WQ" (the main filter module), there are additional smaller
 
 The "Checkbox Select All" module combines the group checkbox input widget with two action buttons which when pressed updates the Group Checkbox Input to have all or none of the choices selected. This is used in the Month Selection The "Select Select All" module combines the select input widget with two action button which when pressed updates the select input to have all or none of the choices selected which is used in the flag selection. Both the "Checkbox Input" and "Select Select All" are built to be used elsewhere in WAVE seamlessly.
 
-#### Plots
+### Plots
 
 Modules that produce a plot are grouped into the plot category. These modules include the "Time-Series Plot", "Correlation Plot", "Distribution", "Profile Heatmap", and "Profile Line Plot". These plot modules use the data that the user selects in the "Select / Filter Data" tab. Depending on the desired data that each plot uses, the user is given additional selections/filters to narrow down the selected data for the specific plot. For example, the Time-Series plot module is built to plot either one or two parameters at a time (on  primary y-axis and secondary y-axis), so the user is thus given an additional parameter selection which will narrow down the list of selected parameters to just one or two. The plots in the application are generated with ggplot (the ggplot2 package in R) which is Hadley or RStudio?. Ggplot allows for easy grouping by aesthetics (e.g. x, y, color, shape, size, facets) which is used widely throughout the plots. In many cases, the user is given the ability to adjust the groupings of the plots for various plot layout schemes. Many other options are given to the user, like the ability to adjust the theme, titles, and labels of the plot and add horizontal and vertical lines as well as text to the plot. Many of these options are built as separate smaller modules to be able to be applied to more than one plot module. These will be discussed further in the next section.
 
 The application uses Plotly to create interactive plots from static ggplot plots. Plotly is a Javascript library, which is a leader in interactive web plots. Plotly is implemented in R and plotly interactive plots can be written directly or a ggplot can be transformed into a plotly plot. The latter is chosen due to the desire to export static plots from WAVE and also due to previous familiarity with ggplot. Ggvis is a young data visualization package in R for creating rich interactive graphics similar in spirit to ggplot [GGVIS]. Once Ggvis is more developed and there is more documentation on implementation within Shiny applications, it is likely a good alternative for interactive plotting.
 
-#### Plot Options
+### Plot Options
 
 As previously discussed, modules that serve as additional user options for plots are grouped into the plot options category. Separating some plot options from plots allows for these modules to be used within more than one of the plot modules in WAVE. Also, separation also reduces the amount of code in the main plots which can be quite cumbersome with all the user options. These plot option modules include "Plot Title and Labels", "Plot Save", "Plot Hline", and "Plot Vline", and "Plot Text". These modules are called within a Plot Module and serve to make adjustments to the plot via user inputs. For the most part, these modules will take an intermediate plot object as its input argument, make modifications to the plot object based on user input, and return a new adjusted intermediate plot object. The "Plot Save" module is a bit different than previously described, as the save options do not modify the plot seen on the screen yet they affect the plot that is saved and output from WAVE. The "Plot Save" module also contains the action button and corresponding server code to save the plot to one's computer. The features that these options provide the user will be talked about in more detail in the Application Features Chapter.
 
@@ -518,7 +511,7 @@ As previously discussed, modules that serve as additional user options for plots
 
 Modules that produce statistics either in a table or a graphic are grouped into the statistic category. R was built for statistical programming and is thus a very powerful tool for statistical analysis. The statistic modules in WAVE include "Summary Statistics" and "Pearson Correlation Matrix". The Dyplyr package is used in "Summary Statistics" module for the grouping feature. A combination of dplyr's "group_by" and "summarize" function allows for an easy way to generate statistics from a dataframe grouped by various user selected inputs (e.g. temporal and spatial groupings). The "Correlation Matrix" is calculated using the "cor" function in the "stats" package and the plot is created with the "corrplot" package. The "Kendall" package is also used to calculate the Mann-Kendall statistic of time-series data.
 
-#### Metadata Modules
+### Metadata Modules
 
 Modules that are used to view Metadata information are grouped into the Metadata category. The Metadata modules include "Location", "Parameter", "Flags", and "Flag Sample Index". These modules leverage the DT package which is a JavaScript package for creating interactive data tables. DT data tables allow a user to search through data with a search bar and also order the table in ascending and descending order based on a column. Another beneficial feature of DT tables is that Shiny can be programmed to register a click on the data table as a user input. In these modules, a user selected row in the data table is used as an import to query the water quality data related to the selection to obtain additional up-to-date information on the selection. For example, in the "Location" module, the user first sees a data table with metadata basic information, and can click on the row of a specific location which will generate an additional table with computed up-to-date information including the total number of sample collected at each site, first date of sampling, most recent date of sampling, and also this same information for each parameter that has been collected at the location.
 
@@ -526,17 +519,17 @@ Modules that are used to view Metadata information are grouped into the Metadata
 
 Modules that do not fit in the previously mentioned categories are grouped into the Other category. These Modules include "Home", "Map Plot", . talk about leaflet.
 
-### Functions
+## Functions
 
-### GIS
+## GIS
 
-### Images
+## Images
 
-### License
+## License
 
 MIT license
 
-### Developer Manual
+## Developer Manual
 
 
 
@@ -637,6 +630,8 @@ Spatial trend analysis is incorporated in many locations in the app but primaril
 ### Sample Flag Index Table
 
 ## Hydrology
+
+ WAVE is not limited to the data that is collected by the DCR and plans to include data from outside organizations including the USGS and the NOAA NCDC. WAVE plans to utilize stream flow data from USGS and meteorology data from the NCDC. 
 
 ### Hydrographs
 
