@@ -1,8 +1,8 @@
 ---
 title: | 
-  | \vspace{2cm} \Large{Development of Application Software for Water Supply Data Management, Visualization, and Analysis with Shiny Framework}
+  | \vspace{2cm} \Large{Development of Application Software for Water System Data Management, Visualization, and Analysis with Shiny Framework}
 author: "Nick Zinck, University of Massachusetts"
-date: "March 2018"
+date: "April 30 2018"
 indent: true
 output: 
   pdf_document:
@@ -85,7 +85,7 @@ The Massachusetts Department of Conservation and Recreation (DCR), Division of W
 
 \begin{table}
 \centering
-\caption{Watershed Acreage}
+\caption{Watershed and reservoir acreage}
 \label{table-paramvalues}
 \begin{tabular}{p{2in} P{1.1in} P{1.1in} P{1.1in}} \\ [-1ex]
 \hline \\ [-1.5ex]
@@ -100,7 +100,7 @@ Wachusett Reservoir & 70,678 & 4,122 & 74,800 \\ [1ex]
 
 \begin{table}
 \centering
-\caption{Watershed Land Use Percentage}
+\caption{Watershed land use percentage}
 \label{table-paramvalues}
 \begin{tabular}{ p{2in} p{0.7in} p{0.7in} p{0.7in} p{0.7in} p{0.7in}} \\ [-1ex]
 \hline \\ [-1.5ex]
@@ -113,7 +113,7 @@ Wachusett Reservoir & 67.3 & 7.7 & 5.7 & 10.8 & 8.4 \\ [1ex]
 \end{tabular}
 \end{table}
 
-```{r MWRA System, echo=FALSE, out.width = "6.5in", fig.cap="MWRA Water Supply System"}
+```{r MWRA System, echo=FALSE, out.width = "6.5in", fig.cap="MWRA water supply system showing the two active reservoirs (Quabbin and Wachusett), three watersheds (QUabbin, Ware River, and Wachusett), water treatment facilities (Brutsch and Carroll), and aquaduct system."}
 knitr::include_graphics("images/background/MWRAsystem.png") #
 ```
 
@@ -121,13 +121,13 @@ knitr::include_graphics("images/background/MWRAsystem.png") #
 
 DCR conducts extensive water quality monitoring of the surface waters (tributaries and reservoirs) in the water supply system. Monitoring data is used to assess current water quality conditions and to establish ranges of values for parameters considered normal or typical [@dcr_watershed_2013]. Data collected in routine sampling over several years are used to assess watershed trends while shorter term studies may be conducted to evaluate specific issues [@dcr_watershed_2013]. The task of water quality sampling and analysis in the three watersheds in the water supply system are divided between the Quabbin and Wachusett office of the DCR Water Supply Protection Division as well as the MWRA. The DCR Quabbin Office is responsible for the sampling of the tributaries in the Quabbin and Ware River watersheds and sampling in the Quabbin Reservoir while the DCR Wachusett Office is responsible for the sampling of the tributaries in the Wachusett watershed and the Wachusett Reservoir. Each office creates their own sampling plan for the reservoirs and tributaries in their respective watersheds which consists of a schedule of routine sampling and storm sampling at various sites. Each watershed is divided into sanitary districts [@dcr_watershed_2013]. Figure 2.2 shows all of the historical and active documented sampling locations of the DCR. More detailed sampling maps of each reservoir developed by the DCR are appended to this document.
 
-```{r Watershed Sampling, echo=FALSE, out.width = "6.5in", fig.cap="Watershed Sampling Locations"}
+```{r Watershed Sampling, echo=FALSE, out.width = "6.5in", fig.cap="Watershed sampling locations of the DCR that have been documented throughout the history of water quality and water quantity sampling. An orange circle depicts a reservoir sampling location and red circle depicts a tributary sampling location. The three watershed boundaries are shown: Quabbin (left), Ware River (center), Wachusett (right)."}
 knitr::include_graphics("images/background/Sampling_Map2.png")
 ```
 
 The Quabbin Office's tributary water quality monitoring program has included as many as fourteen sampling stations in the Quabbin Reservoir watershed, and ten sampling stations in the Ware River watershed [@dcr_watershed_2013]. Core sites are long-term monitoring stations, while Environmental Quality Assessment (EQA) sites support ongoing evaluations of threats to water quality by sanitary district [@dcr_watershed_2013]. Tributary temperature, dissolved oxygen, pH, and specific conductance levels are measured biweekly with a multiprobe meter. Samples from core sites are collected by hand biweekly for turbidity, bacteria, and calcium analyses, while samples for nutrient analysis are collected quarterly. Samples from EQA Sites are collected biweekly for alkalinity, turbidity, bacteria, nutrients, calcium, and UV254 [@dcr_watershed_2013]. Water quality parameters measured in tributaries by the DCR Quabbin Office are shown in Figure 2.3.
 
-```{r res, echo=FALSE, out.width = "6.5in", fig.align="center", fig.cap="Water Quality Parameters Sampled within Tributaries and Reservoirs"}
+```{r res, echo=FALSE, out.width = "6.5in", fig.align="center", fig.cap="Water quality parameters sampled within tributaries and reservoirs by the DCR in 2016. Red indicates that either one sample was collected or one measurement was made at each station. Green indicates that three samples or measurements, each at a different depth, were collected or made at each reservoir station. Blue indicates that profile measurements were made at a continuous sequence of depths at each reservoir station."}
 knitr::include_graphics("images/background/sampling_frequencies.png")
 ```
 
@@ -175,11 +175,11 @@ WIT and WAVE have relatively similar system architectures which differ in a few 
 
 The system architecture of WIT and WAVE can be seen in Figures 3.2 and 3.3, respectively. The common components that both systems have include the Server, User (Client), GitHub Code Script, Configuration File, and a form of data storage. Prior to the start of a session in either WIT or WAVE, a configuration file with user settings is read and the latest application code is pulled from GitHub. After this step, the system processes of the two applications differ. The components of the system architecture are discussed in more detail in the following sections.
 
-```{r dev WIT, echo=FALSE, out.width = "6.5in", fig.cap="WIT Architecture - update remove green from db"}
-knitr::include_graphics("images/system dev/WIT_Arch.pdf")
+```{r dev WIT, echo=FALSE, out.width = "6.5in", fig.cap="WIT system architecture showing the conceptual model that defines the structure and behavior of the WIT application. Green Arrows indicate processes that occur before an application session is actually started. Blue indicates processes that occur during a session which are controlled by the user. Red indicates processes that occur after a user ends a session by closing the application."}
+knitr::include_graphics("images/system dev/WIT_Arch_all.png")
 ```
 
-```{r dev WAVE, echo=FALSE, out.width = "6.5in", fig.cap="WAVE Architecture"}
+```{r dev WAVE, echo=FALSE, out.width = "5.5in", fig.align="center", fig.cap="WAVE system architecture showing the conceptual model that defines the structure and behavior of the WAVE application. Green Arrows indicate processes that occur before an application session is actually started. Blue indicates processes that occur during a session which are controlled by the user."}
 knitr::include_graphics("images/system dev/WAVE_Arch.pdf")
 ```
 
@@ -209,7 +209,7 @@ Dataframes are a data structure used in R (and also in the Pandas package in Pyt
 
 \begin{table}
 \centering
-\caption{R Packages Utilized in Applications}
+\caption{List of R packages utilized in WIT and WAVE applications. This list is likely to grow.}
 \label{table-paramvalues}
 \begin{tabular}{p{1.5in} P{1.5in}} \\ [-1ex]
 \hline \\ [-1.5ex]
@@ -254,7 +254,7 @@ There are many tables within a database, in which each contains different sets o
 
 \begin{table}
 \centering
-\caption{Non-Tidy Sample Data}
+\caption{An example of non-tidy water quality sampling data}
 \label{table-paramvalues}
 \begin{tabular}{p{1.0in} P{1.0in} p{0.8in} P{0.8in} p{0.8in} P{0.8in}} \\ [-1ex]
 \hline \\ [-1.5ex]
@@ -267,7 +267,7 @@ Station 1 & 01/01/2020 & 12 & 13 & 14 & 15\\ [1ex]
 
 \begin{table}
 \centering
-\caption{Tidy Sample Data}
+\caption{An example of tidy water quality sampling data}
 \label{table-paramvalues}
 \begin{tabular}{p{1.0in} P{1.0in} p{1.0in} P{1.0in}} \\ [-1ex]
 \hline \\ [-1.5ex]
@@ -328,7 +328,7 @@ WIT has a relatively simple user interface, and consists of much fewer inputs an
 
 The main steps a user takes during a WIT Session are shown in Figure 4.1. The user first clicks on the WIT desktop shortcut which will open WIT in a Google Chrome Browser. The user then selects a data source type and raw data file.  A process button will appear on the screen that the user can press to transform the data and perform quality tests. The user can also manually add flags to the data. If the data passes the quality tests, an import button will appear as well as a table of the processed data. After inspecting the data in the table the user may press the import button which will import the data to the database. The user can enter multiple data files to the database in a session by repeating the prior steps. When the user is finished, they will close out of the Google Chrome Browser which will end the session. This will trigger an R script to run which will update the RDS files.
 
-```{r WIT Session user, echo=FALSE, out.width = "6.5in", fig.cap="Flow of WIT User Session"}
+```{r WIT Session user, echo=FALSE, out.width = "6.5in", fig.cap="Flow of a WIT user session from clicking on the desktop icon to closing the application. The reverse arrow from 'data processing' to 'data selected' represents the user deciding to not import the processed data. The reverse arrow from 'data importing' to 'data selection' represents the user importing multiple data files per session. Although not shown, the user can exit the application at any time."}
 knitr::include_graphics("images/WIT/WIT_user_session.pdf")
 ```
 
@@ -336,7 +336,7 @@ knitr::include_graphics("images/WIT/WIT_user_session.pdf")
 
 The user first double clicks the icon located on the desktop which triggers two batch files. The first batch file notifies the user that the App will open shortly. The second batch file will read the information from the Configuration File. Included in this information is the GitHub Repository for which to fetch the Application code from. Once the code is fetched the code is read in a local R session in the background and the application is started. A fresh Google Chrome Browser with the application user interface will appear. Figure 4.2 illustrates the WIT starting process.
 
-```{r WIT Session start, echo=FALSE, out.width = "6.5in", fig.cap="Flow of events before launching WIT"}
+```{r WIT Session start, echo=FALSE, out.width = "6.5in", fig.cap="Flow of events that occur when a user wants to launch WIT."}
 knitr::include_graphics("images/WIT/WIT_session_start.pdf")
 ```
 
@@ -356,11 +356,11 @@ Ideally, all potential raw data errors will be caught by the processing scripts 
 
 Some of the data is also flagged during the data processing process with the same data processing R scripts. A flag is used to indicate additional information about a data observation, some are which are added automatically (in the processing R scripts) and some are added manually by the user. An example of a flag is automatically added by the processing script is "below detection limit". In the case of the raw data from the MWRA lab, observations that fall below the detection limits are recorded with a "less than" symbol and than the value of the detection limit (e.g. "<5.0"). Thus, for this data source, the R script will look for the "less than" sign, and assign the corresponding flag code to that observation. The user can also manually add flags to the data with various input options to do so. These manual flags usually relate to observations of a DCR scientist during the sampling process (e.g. "ice cover" or "low flow conditions").
 
-```{r WIT Session proc suc, echo=FALSE, out.width = "6.5in", fig.cap="Flow of events during WIT succesfully processing data"}
+```{r WIT Session proc suc, echo=FALSE, out.width = "6.5in", fig.cap="Flow of events that occur during a WIT session for the task of succesfully processing data"}
 knitr::include_graphics("images/WIT/WIT_session_proc_suc.pdf")
 ```
 
-```{r WIT Session proc fail, echo=FALSE, out.width = "6.5in", fig.cap="Flow of events during WIT unsuccesfully processing data"}
+```{r WIT Session proc fail, echo=FALSE, out.width = "6.5in", fig.cap="Flow of events that occur during a WIT session for the task of unsuccesfully processing data"}
 knitr::include_graphics("images/WIT/WIT_session_proc_fail.pdf")
 ```
 
@@ -374,7 +374,7 @@ A great benefit of WIT is that it allows the actual person who collected the dat
 
 In this work, data importing means the physical process of moving data which already in a desired format into the correct location in a database. WIT allows data is imported with a click of the "import data" button. An import R script is written for each of the data sources. When a user clicks the "import button" this tells the server to run the specific R script for the data source type. Each R script utilizes an open database connectivity (odbc) application program interface (API) to connect with a Microsoft Access database. The R script first makes a connection with the corresponding database and finds the corresponding Table and reads in the ID column. Reading in the ID column is necessary for writing to a Microsoft Access database, to direct the database where to store the data. The maximum value of the ID column is calculated and a column containing a sequence of ID values greater than the maximum existing values are added to the raw data. The raw data is then ready to be imported to the database and will naturally fall at the end of the Table (if the data is sorted by ID). This ID column has no use outside of the Microsoft Access database.
 
-```{r WIT Session import, echo=FALSE, out.width = "6.5in", fig.cap="Flow of events during WIT importing data"}
+```{r WIT Session import, echo=FALSE, out.width = "6.5in", fig.cap="Flow of events that occur during a WIT session for the  task of importing data"}
 knitr::include_graphics("images/WIT/WIT_session_import.pdf")
 ```
 
@@ -384,7 +384,7 @@ Once the data is imported, the raw data file will be moved from a folder of data
 
 When the user ends the WIT session by closing the app, an R script will be automatically launched which will update the RDS files that are used by WAVE. Due to the comparatively longer time to read data from a database into an R session, this method expedites the launching of WAVE because updated data from the database will already be in the desired data format of (RDS files). A user closing WIT is a good indication that the database has been updated, since this is the sole means of data entry to the databases. The updating of RDS files happens automatically in the background of a user's computer. One can also trigger the update of RDS files manually as well. Reading in data from RDS files upon starting a WAVE session takes about 2 seconds compared to 15-20 seconds of reading data from the database. The flow of events after a user exits WIT can be seen in Figure 4.6.
 
-```{r WIT Session exit, echo=FALSE, out.width = "6.5in", fig.cap="Flow of events after a user exits WIT"}
+```{r WIT Session exit, echo=FALSE, out.width = "6.5in", fig.cap="Flow of events that occur after a user exits a WIT session"}
 knitr::include_graphics("images/WIT/WIT_session_exit.pdf")
 ```
 
@@ -407,61 +407,61 @@ The RDS files contain all the internal DCR data that is used in WAVE and also in
 
 ## Overview 
 
-WAVE is a large application consisting of many tabs with many features. All of the files that contain WAVe code or are related to the WAVE code are stored on GitHub in a public repository. The application code is separated into many R script files containing pieces of the application code, each generally for a particular feature. These pieces of code are special R functions created specifically for the Shiny Framework and are called modules. In addtion to modules, WAVE also uses a number of functions that are used throughout the app which are defined in a separate file stored on GitHub. WAVE uses GIS and image files which are stored with the application code on GitHub. The application code is public so therefor can be viewed by anyone with internet access. The application has an MIT License which is expressed in the GitHub repository which states that the application is free of charge for use without restriction.
+WAVE is a large application consisting of many tabs with many features. All of the files that contain WAVE code or are related to the WAVE code are stored on GitHub in a public repository. The application code is separated into many R script files containing pieces of the application code, each generally for a particular feature. These pieces of code are special R functions created specifically for the Shiny Framework and are called modules. In addition to modules, WAVE also uses a number of functions that are used throughout the app which are defined in a separate file stored on GitHub. WAVE uses GIS and image files which are stored with the application code on GitHub. The application code is public so therefor can be viewed by anyone with internet access. The application has an MIT License which is expressed in the GitHub repository which states that the application is free of charge for use without restriction.
 
 In this work, a large effort has been made to keep the code well organized. The code scripts are all written in a similar style which follow guidelines put forward by Hadley Wickham and Google [@wickham_r_nodate; @google_googles_nodate]. The application code is concisely commented. Naming conventions have been established to facilitate the readability of the code. Due to the large amounts of objects, a large effort was made to be descriptive and concise in the naming of objects so a developer can determine the purpose of an object by its name. Objects of the same class (or type) use the same naming style which are created from variations of lowercase, uppercase, underscores, and camel case formats.
 
 ## Development Process
 
-A precendent model for WAVE was a Visual Basic Macro application for data querying and analysis built at the DCR. This Macro served to facilitate searching for data at the DCR and was a better method than searching through the database manually. It also facilitated grouping and statistics. The Macro also utilized Microsoft Excel plots for data visualization. Visual Basic Macros are limited in user friendliness and speed. The Shiny App is much more powerful method to create an application that is user friendly and fast. The visualization and statistical power of R is much more advanced than Visual Basic.
+A precedent model for WAVE was a Visual Basic Macro application for data querying and analysis built at the DCR. This Macro served to facilitate searching for data at the DCR and was a better method than searching through the database manually. It also facilitated grouping and statistics. The Macro also utilized Microsoft Excel plots for data visualization. Visual Basic Macros are limited in user friendliness and speed. The Shiny App is much more powerful method to create an application that is user friendly and fast. The visualization and statistical power of R is much more advanced than Visual Basic.
 
 WAVE has gone through many transformation and updates to get to the product that it is today. It was not possible to foresee the exact direction that WAVE was going take when the idea was first proposed for a few reasons. The developers of WAVE had little to no application development experience. Also, most DCR staff were unfamiliar with Shiny and application software in general, so it was difficult to receive ideas and suggestions. WAVE is also a relatively unique product. The needs of the DCR are unique to this organization, and WAVE tries to meet these specific needs. The DCR sampling and needs are unique and no similar application was found that was able to fit the needs of visualization and analysis of tributary water quality and water quantity data. Justifiably, WAVE meets the water system data visualization and analysis needs of the DCR better than any other software, as it should because it was built specifically for the DCR.
 
-The Application was developed in multiple iterations. The first Application was developed to show the potential of the Application to the DCR to gain interest on the project. This was a quick Application creation which tried to develop a wide range of features that were not really fine-tuned. After this process, feedback was received and the path of the application was narrowed. The cycle continured and a series of applications were suggested and user feedback was received. The Application has been accesible and used at the DCR starting mid-late 2017 to allow for sufficient feedback.
+The Application was developed in multiple iterations. The first Application was developed to show the potential of the Application to the DCR to gain interest on the project. This was a quick Application creation which tried to develop a wide range of features that were not really fine-tuned. After this process, feedback was received and the path of the application was narrowed. The cycle continued and a series of applications were suggested and user feedback was received. The Application has been accessible and used at the DCR starting mid-late 2017 to allow for sufficient feedback.
 
 ## Reading Data
 
-WAVE is designed to read data as RDS files that have already been transformed to the desired formatted dataframes of WAVE. The data that WAVE reads in includes water quality and water quantity data of the DCR that are stored in a total of four Microsoft Access databases across the two DCR offices. WAVE also reads data from the USGS and NOAA for hydrology and metereology data. WAVE will soon read data from the MWRA as well. The list of data that WAVE reads will likely grow as new needs are realized.
+WAVE is designed to read data as RDS files that have already been transformed to the desired formatted dataframes of WAVE. The data that WAVE reads in includes water quality and water quantity data of the DCR that are stored in a total of four Microsoft Access databases across the two DCR offices. WAVE also reads data from the USGS and NOAA for hydrology and meteorology data. WAVE will soon read data from the MWRA as well. The list of data that WAVE reads will likely grow as new needs are realized.
 
 ## Tab Layout
 
 The many features WAVE offers results in a lot of code (roughly 10,000 lines of code with minimal repetition). Organization of the code is crucial for efficient updates and additions. WAVE as a whole can be viewed as a collection of individual dashboards organized in various tabs in the user interface. The user only ever sees one tab at a time and thus one dashboard at a time. The highest level tabs of WAVE form the navigation bar, also commonly known as the "ribbon". The top-level navigation bar consists of the following tabs: Home, Tributary, Reservoir, Met Hydro, Forestry, Reports which can be seen in Figure 5.1.
 
-```{r code App navbar, echo=FALSE, out.width = "4in", fig.align="center", fig.cap="App Navigation Bar"}
+```{r code App navbar, echo=FALSE, out.width = "4in", fig.align="center", fig.cap="WAVE navigation bar for the top-level tabs."}
 knitr::include_graphics("images/code dev/app_navbar.png")
 ```
 
-```{r code App, echo=FALSE, out.width = "4in", fig.align="center", fig.cap="App High Level Tab Layout Flowchart of the Top Navigation Bar"}
+```{r code App, echo=FALSE, out.width = "4in", fig.align="center", fig.cap="WAVE top-level tab structure (navigation bar)."}
 knitr::include_graphics("images/code dev/app_tabs.pdf")
 ```
 
 The organization structure beneath the top level navigation bar can be seen in figures 5.3, 5.5, and 5.6. As of now, the "Home", "Met / Hydro", "Forestry", and "Report" tabs are relatively simple and have only a few or no lower level tabs as shown in Figure 4.4. The "Home" tab is the default tab that the application opens too. This is chosen as the "Home" Page because it gives a nice visual of the overall watershed and the sampling locations. The "Met / Hydro" navigation bar (first-level) tab is currently a place holder for the soon-to-come meteorology and hydrology tab. This tab is being currently under work and will include the selection, visualization, and analysis tools for NOAA, USGS, and in-house meteorology data. The "Forestry" tab is a placeholder for a future forestry tab that will attempt to help users better understand the water quality effects of forestry practices. The Report tab is currently under construction with a goal of facilitating the process of report creation. This includes facilitated predetermined reports like the annual and monthly water quality reports and also the ability to make custom reports.
 
-```{r code other 1, echo=FALSE, out.width = "5in", fig.align="center", fig.cap="Tab Layout Structure for Home, Met / Hydro, Forestry, and Report Tabs"}
+```{r code other 1, echo=FALSE, out.width = "5in", fig.align="center", fig.cap="WAVE tab structure for 'Home', 'Met / Hydro', 'Forestry', and 'Report' (top-level) tabs."}
 knitr::include_graphics("images/code dev/other_main_tabs.pdf")
 ```
 
-The "Tributary" and "Reservoir" tabs are by far the most substantial tabs in the navigation bar, and the upper portion of their organization are shown in Figures 5.5 and 5.6. The Tributary and Reservoir tabs have many additional lower level tabs under these top-level navigation bar tabs. Both of these tabs have a set of second-level tabs which contains the options of the watersheds or reservoirs (e.g. "Quabbin" and "Wachusett"). This allows the application features to be separated by watershed or reservoir, to allow for differences between each Offices needs. Having this option at an upper level (second-level) is ideal becuase the user is usually only concerned with only one watershed or reservoir during a session. This makes it so the user will only have to select the desired watershed or reservoir one or two times during a session. The third-level tabs are relatively consistent for each water quality data type (e.g. tributary or reservoir chemical), and consist of the tabs "Select / Filter Data", "Plots", "Statistics", "Metadata", and sometimes "Geospatial". A Snapshot of the "Tributary-Wachusett" tablist is shown in Figure 5.4. The "Geospatial" tab is only available for tributary water quality and reservoir bacteria grab samples due to the difficulty of representing the depth component of multi-depth sampling in the reservoir. Also, the "Reservoir-Wachusett" tab has more third-level tabs than the "Reservoir-Quabbin" Tab due to the additional bacteria and phytoplankton data.
+The "Tributary" and "Reservoir" tabs are by far the most substantial tabs in the navigation bar, and the upper portion of their organization are shown in Figures 5.5 and 5.6. The Tributary and Reservoir tabs have many additional lower level tabs under these top-level navigation bar tabs. Both of these tabs have a set of second-level tabs which contains the options of the watersheds or reservoirs (e.g. "Quabbin" and "Wachusett"). This allows the application features to be separated by watershed or reservoir, to allow for differences between each Offices needs. Having this option at an upper level (second-level) is ideal because the user is usually only concerned with only one watershed or reservoir during a session. This makes it so the user will only have to select the desired watershed or reservoir one or two times during a session. The third-level tabs are relatively consistent for each water quality data type (e.g. tributary or reservoir chemical), and consist of the tabs "Select / Filter Data", "Plots", "Statistics", "Metadata", and sometimes "Geospatial". A Snapshot of the "Tributary-Wachusett" tablist is shown in Figure 5.4. The "Geospatial" tab is only available for tributary water quality and reservoir bacteria grab samples due to the difficulty of representing the depth component of multi-depth sampling in the reservoir. Also, the "Reservoir-Wachusett" tab has more third-level tabs than the "Reservoir-Quabbin" Tab due to the additional bacteria and phytoplankton data.
 
-```{r code App navlist, echo=FALSE, out.width = "4in", fig.align="center", fig.cap="Tributary second-level and third-level tabs"}
+```{r code App navlist, echo=FALSE, out.width = "4in", fig.align="center", fig.cap="WAVE second-level and third-level tabs within the 'Tributary' (top-level) tab."}
 knitr::include_graphics("images/code dev/trib_navlist.png")
 ```
 
-```{r code trib, echo=FALSE, out.width = "5.5in", fig.align="center", fig.cap="Tab Layout Structure of Tributary Tab. To be continued in Figure 4.6 and Figure 4.7"}
+```{r code trib, echo=FALSE, out.width = "5.5in", fig.align="center", fig.cap="WAVE second-level and third-level tab structure for the 'Tributary' (top-level) tab. To be continued in Figure 5.7 and Figure 5.8."}
 knitr::include_graphics("images/code dev/trib_tabs.pdf")
 ```
 
-```{r code res, echo=FALSE, out.width = "6.5in", fig.cap="Tab Layout Structure of Reservior Tab. To be continued in Figure 4.6 and Figure 4.7"}
+```{r code res, echo=FALSE, out.width = "6.5in", fig.cap="WAVE second-level and third-level tab structure for the 'Reservoir' (top-level) tab. To be continued in Figure 5.7 and Figure 5.8."}
 knitr::include_graphics("images/code dev/res_tabs.pdf")
 ```
  
 The "Tributary" and "Reservoir" tab organization trees are actually larger than Figures 5.5 and 5.6 depict. Figures 5.7 and 5.8 show how the "Select / Filter Data", "Plots", "Statistics", and "Metadata" are further divided into more tabs. "Select/ Filter" tabs is separated further, one for the data selection and filter widgets and the other to view and output the resulting data table which can be seen in Figure 5.7. The "Plots" tabs are separated into further tabs for each type of plot which is shown in Figure 5.8. These plots can differ depending on the type of water quality data being visualized. The "Phytoplankton" tabs is further separated into three plot tabs and one filter and export data tab seen in figure 5.7. The "Statistics" tabs is further separated into a "Summary Statistics" and "Pearson Correlation Matrix" which is seen in Figure 5.7. The Metadata tabs are further separated into "Locations", "Parameters", "Flags", and "Flag Sample Index" in figure 5.7.
 
-```{r code other 2, echo=FALSE, out.width = "6.5in", fig.cap="Tab Layout and Module Structure of Select / Filter, Phytoplankton, Geospatial, Statistics, and Metadata Tabs"}
+```{r code other 2, echo=FALSE, out.width = "6.5in", fig.cap="WAVE tab and module structure of 'Select / Filter Data', 'Phytoplankton', 'Geospatial', 'Statistics', and 'Metadata' (third-level) Tabs. These tabs appear in multiple locations in the 'Tributary' and 'Reservoir' (first-level) tabs."}
 knitr::include_graphics("images/code dev/other_tabs_mods.pdf")
 ```
 
-```{r code plot, echo=FALSE, out.width = "6.5in", fig.cap="Tab Layout and Module Structure of Plots Tab. The Plots Tab appears in multiple locations in the Tributary and Reservoir Tabs. Plots for Reservoir Profile data differ compared with the Plots for Tributary and other Reservoir data, and this is reflected in a difference in layout"}
+```{r code plot, echo=FALSE, out.width = "6.5in", fig.cap="WAVE tab and module structure of the 'Plots' (third-level) tab. The 'Plots' tab appears in multiple locations in the 'Tributary' and 'Reservoir' (first-level) tabs. Plots for reservoir profile data differ compared with the plots for tributary and other reservoir data which is reflected in the tab and module structure shown in the figure."}
 knitr::include_graphics("images/code dev/plot_tabs.pdf")
 ```
 
@@ -471,12 +471,12 @@ The previous section discussed the overall tab layout of WAVE; this section will
 
 The majority of modules are used within the Tributary and Reservoir navigation bar (top-level) tabs. Modules used in WAVE are shown throughout figures 5.3, 5.7, and 5.8. A module connected to the right of another module indicates that the module on the right is used within the module on the left. The breaking down modules into more modules is done for similar reasons as why the application is broken down into modules. 
 
-Modules in WAVE are grouped into different categories and stored in folders accordingly. These categories includes Filter, Plots, Plot Options, Statistics, Metadata, Maps, and Reports which can be seen in table 5.1. The list of modules will grow as the WAVE application grows. When a new unique feature is added to WAVE it will likely be added as a new module. More catergories of Modules can also be created as need be.
+Modules in WAVE are grouped into different categories and stored in folders accordingly. These categories includes Filter, Plots, Plot Options, Statistics, Metadata, Maps, and Reports which can be seen in table 5.1. The list of modules will grow as the WAVE application grows. When a new unique feature is added to WAVE it will likely be added as a new module. More categories of Modules can also be created as need be.
 
 
 \begin{sidewaystable}
 \centering
-\caption{WAVE Modules}
+\caption{List of modules that WAVE is comprised of which are used for a specific feature within WAVE.}
 \label{table-paramvalues}
 \begin{tabular}{P{1.2in} P{1.2in} P{1.2in} P{1.2in} P{1.0in} P{1.0in} P{1.2in}} \\ [-1ex]
 \hline \\ [-1.5ex]
@@ -524,11 +524,11 @@ Modules that are used to view metadata information are grouped into the Metadata
 
 ### Map Modules
 
-Map modules are categorized as those in which use maps generated with Leaflet, a JavaScript Library for web mapping applications. These modules include "Home", "Geospatial Plot", "Site Map", and "Site Map Single". Leaflet can bring in satalite and other maps from OPenstreetMaps and ESRI [ ]. Leaflet can help tranform a static data table of geographic location information to an interactive web map. One can add shape files and other GIS related objects to a leaflet map.
+Map modules are categorized as those in which use maps generated with Leaflet, a JavaScript Library for web mapping applications. These modules include "Home", "Geospatial Plot", "Site Map", and "Site Map Single". Leaflet can bring in satellite imagery and other maps from sources like OpenStreetMap and ESRI. Leaflet can help transform a static data table of geographic location information to an interactive web map. One can add shape files and other GIS related objects to a leaflet map.
 
 ### Report Modules
 
-Report modules are those used for the generation of documents and reports which will utilize the RMarkdown package. This category includes the Reprt Custom module which is used to create custom documents and reports. Although not complete, one will be able to create a document with custom text sections and be able to add images of plots and tables that they create throughout WAVE. Standardized reports can also be added to this section for facilitated reprt generation of common reprts of the DCR including the monthly and annual water quality reports.
+Report modules are those used for the generation of documents and reports which will utilize the RMarkdown package. This category includes the Report Custom module which is used to create custom documents and reports. Although not complete, one will be able to create a document with custom text sections and be able to add images of plots and tables that they create throughout WAVE. Standardized reports can also be added to this section for facilitated report generation of common reports of the DCR including the monthly and annual water quality reports.
 
 
 
@@ -541,80 +541,65 @@ Report modules are those used for the generation of documents and reports which 
 
 ## Data Query and Export
 
-It is very advantageous for all DCR staff to have fast and easy access to water system data. In many organizations this is not the reality due to data not being stored in a common location known by all staff members. Lack of experience with certain technologies can also inhibit a person from being able to timely access data. WAVE helps make it possible for all DCR staff to get easy access to the data they want and need.
+It is very advantageous for all DCR staff to have fast and easy access to water system data. This is not always the reality in many organizations due to data not being stored in a common location known by all staff members. Lack of experience with certain technologies can also inhibit a staff member from timely access data, even if they know where to find the data. WAVE helps make it possible for all DCR staff to get easy access to the data they want and need.
 
-WAVE queries the data based on the user-selected input widgets. The input widgets are divided into two sections, selections and filters. In general, "selections" are inclusive where a user selects choices to add to the selected data observations (e.g. Site, Parameters, Date). If any of the selection widgets are empty, no data will be selected. In general, filters refine the data, removing unwanted data from the previously selected data (e.g. Flags ). A user will not have to select or update any advanced filters in order for data to be selected.
+WAVE queries the data based on the user-selected input widgets. The input widgets are divided into two sections, "Main Selections" and "Advanced Filters". In general, widgets in "Main Selections" are for main data queries (e.g. Site, Parameters, Date). If any of the widgets in the "Main Selection" section are empty, no data will be selected. In general, widgets in the "Advanced Filters" section refine the data, removing specified groups of data from the previously selected data (e.g. Flags and Storm Samples). A user will not have to adjust any advanced filters in order for data to be selected.
 
-The user is prompted to first select one or more Site Locations with a map that indicates which sites are selected. A site map will show the available sites and indicate which sites on the map have been selected. The user is then prompted to select the parameters and date range or years for the selected sites. Additional filters can also be applied to the data which include selection of seasons, months, years, flags, storm event, and other eventually meteorological and hydrological conditions. Queried data can be exported to a csv file with the click of a button.
+The user is prompted to first select one or more Site Locations with a map that indicates which sites are selected. A site map will show the available sites and indicate which sites on the map have been selected. The user is then prompted to select the parameters and date range for the selected sites. The user has several date widget options: a calendar date range widget, a year selection widget, and a month selection widget. The user can then choose to apply the additional advanced filters if desired. These include the exclusion of data with specified flags, the option to choose only storm events or only non-storm events, and eventually filter for other meteorological and hydrological conditions. 
 
-There is an interactive table that the user has. The filter module also has the option to select all data, which if the user selects this preference, none of the filters will be used and the whole dataframe will be selected. 
+Queried data can be viewed in an interactive table and exported to a csv file with the click of a button. The user also has the option to select all data which will let the user view and export the whole dataset. Queried data will be able to be visualized and analyzed in the various plots and stastics features that WAVE offers.
 
 ## Data Visualization
 
-WAVE allows a user to visualize water quality and quantity data to better interprete findings and trends. As humans are visual creatures, it is often hard for us to draw detailed conclusions about data by just looking at it in a table. The user is offered multiple types of visualizations for different types of data. These visualizations include temporal, correlation, and distribution plots. Most of the plots created in WAVE have interactive features on the plot itself in which the user can hover over a data point to display popup information and also toggle the plot in various ways like zooming in and out.
+WAVE allows a user to visualize water quality and quantity data to better see trends and draw conclusions from the data. As humans are visual creatures, it is often hard for us to draw detailed conclusions about data by just looking at it in a table. The user is offered multiple types of visualizations for different types of data. These visualizations include temporal, correlation, and distribution plots. Most of the plots created in WAVE have interactive features on the plot image itself in which the user can hover over a data point to display pop-up information.
 
-The user is given many options to customize how each plot displays the data. The user is given axes preferences where applicable, including an option for linear or logarithmic scales and whether to force an axis to begin at zero. In general, the user can adjust the size of points, lines, and other shapes that represent data or data trends. The user is given options to adjust the point color or color scale of the data in plots. The user can choose form many display themes that are offered in ggplot. The plot automatically creates logical axis labels and a descriptive plot title, which the user can override with custom text or choose to have no labels or title. Where applicable, the user can add a horizontal lines, vertical lines, or floating text to a plot anywhere they specify.  
+The user is given many options to customize how each plot displays the data. The user is given axis preferences where applicable, including an option for linear or logarithmic scales and whether to force an axis to begin at zero. In general, the user can adjust the size of points, lines, and other shapes that represent data or data trends. The user is given options to adjust the point color or color scale of the data in plots. The user can choose from many display themes. The plot automatically creates axis labels and a descriptive plot title, which the user can override with custom text or choose to have no labels or title. Where applicable, the user can add a horizontal lines, vertical lines, or floating text to a plot anywhere they specify.
 
-The user can save a plot for use outside of WAVE which they can share among peers or add to a report. The file can be saved in multiple formats (e.g. pdf, jpg, or pdf) with a user specified plot width and height. The plots in this chapter (Figures 6.1 to 6.5) are examples of plots that were created in WAVE and saved through the saving feature of WAVE.
+The user can use powerful grouping methods to display a lot of data within one plot (or set of faceted plots). If the user desires to show data for multiple Locations, they can choose to have distinct colors or shapes to represent these Locations as well as choose to facet the one plot into a set of multiple aligned plots, each for that Site. Grouping methods are used throughout the various visualization features in WAVE and are implemented in various ways which best fit each plot. Groupings are a great method of comparing data across multiples groups of a particular variable (e.g. Site and Parameter).
 
-Groupings
+Where applicable, trend lines can be added to the plots to assist in visualizing any temporal or correlation trends. The trendlines will automatically group in a fashion identical to the data points. For example, if the data points on a scatter plot are grouped by Location represented by colors, than the trendlines will also appear grouped by these same colors. A user can choose from multiple methods of trendlines and also choose to add a confidence ribbon with various choices of confidence intervals.
 
-Where applicable, trend lines can be added to the plots to assist in visualizing any temporal or correlation trends. The trendlines will automatically group in a fashion identical to the points. If the data points on the scatter plots are grouped by Locations as indicated by colors, than the trendlines will also appear grouped by these same colors. Grouping by shape and faceting works similarly.
-
-Three methods for trendlines are available in this application. The first method is a linear trendline which is the linear line that minimizes the residuals of the fit. The second method is the Loess method which is a . The third method is a Generalized Additive method which . The user can choose to show a confidence ribbon with choices of confidence intervals of 0.90, 0.95, and 0.99. If the user selects a confidence ribbon with 90% confidence, a shaded region will appear on the plot where the data is 95% likely to . This should be used with caution because the linear confidence interval does not take into account the seasonal variation, and assumes that all variation is " ".
+The user can save a plot from WAVE for varius outside uses (e.g. sharing among peers or add to a report). The file can be saved in multiple formats (e.g. pdf, jpg, or pdf) with a user specified plot width and height. The plots shown in this chapter are examples of plots that were created in WAVE.
 
 ### Time Series Scatter Plot
 
-A scatter plot is available to see a water quality parameters trends over a specified duration of time. The data is queried in a similar manner as discussed previously and a user is able to plot data from multiple Locations and one or two parameters. The user can choose to group or facet by Location or Flags. A Facet creates multiple plots, all with similar mapping techniques, to allow for easy comparison across plots.
+WAVE contains a time-series scatter plot feature to visualize temporal trends of water quality parameters. The user can choose to wither plot one or two parameters on the primary y-axis or both primary and secondary y-axes. Plots can be created to see temporal trends for one water quality parameter or to compare temporal trends in water quality parameters. Many of the plot options, grouping functionalities, and trendline features previously discussed are available for this plot. A time-series scatter plot created in WAVE to compare discharge and specific conductance in the main tributaries of the Wachusett Reservoir is shown in Figure 6.1.
 
-The user can choose to add a secondary parameter to the plot by introducing a secondary y-axis. This feature allows the user to compare temporal trends of two water quality parameters. A plot comparing of two parameters, on the x-axis and y-axis can usually display a clearer picture of the relationship between two parameters which will be discussed in the Correlation Section. A benefit of the two parameter temporal plot is to keep more of the temporal information and can allow one to visually see a more complex trend like a delayed response trend. (Is there a scientific word for this?)
-
-"Plot Title and Labels" are used to allow the user to have full control of the plot title and axis labels of a plot. 
-
-
-```{r WAVE plot time, echo=FALSE, out.width = "6.5in", fig.cap="Time Series Plot generated with WAVE showing the Discharge and SPecific Conductance for three major tributaries of the Wachusett Reservoir. The data represents the discharge and flow form the Stillwater River, Quinapoxet River, and Gates Brook for the years 2015 and 2016."}
+```{r WAVE plot time, echo=FALSE, out.width = "6.5in", fig.cap="Time-series scatter plot generated with WAVE showing the discharge and specific conductance for three major tributaries (Stillwater River, Quinapoxet River, and Gates Brook) of the Wachusett Reservoir for the years 2015 and 2016."}
 knitr::include_graphics("F:/Nick Zinck/Shiny Apps/GitHub/Thesis/Thesis/images/WAVE features/plots/Time.png")
 ```
 
-
-
-
 ### Correlation Scatter Plot
 
-The application has a scatter plot feature designed for a scatter plot between two water quality variables. Water Quality data of two parameters are paired based on location and day of sampling. The two water quality observations are thus converted into one data point on the plot with the x location determined by the value of the first water quality parameter and the y location determined by the value of the second water quality parameter.
+WAVE contains a correlation scatter plot feature to visualize trends and determine the relationship between two water quality parameters. Water quality data of two parameters are paired based on the same day and location. The two parameters for a particular day and location are then displayed as one data point on the plot with the x location determined by the measurement result of the first parameter and the y location determined by the measurement result of the second parameter. Many of the plot options, grouping functionalities, and trendline features previously discussed are available for this plot. A correlation scatter plot created in WAVE that shows the relationship between specific conductance and discharge is shown in Figure 6.2. In this example, linear trendlines are used with a confidence ribbon of 0.95 and logarithmic scales for both axes were chosen to better see the relationship between discharge.
 
-Trendlines can be added to. similar to the time-series plots, the methods for the trendlines are linear, Loess, and Generative Additive.
-
-This analysis will be extended for water quality parameters to be correlated with meteorological data and hydrological data.
-
-
-```{r WAVE plot corr, echo=FALSE, out.width = "6.5in", fig.cap="Time Series Plot generated with WAVE showing the Discharge and SPecific Conductance for three major tributaries of the Wachusett Reservoir. The data represents the discharge and flow form the Stillwater River, Quinapoxet River, and Gates Brook for the years 2015 and 2016."}
+```{r WAVE plot corr, echo=FALSE, out.width = "6.5in", fig.cap="Correlation scatter plot generated with WAVE showing the relationship of discharge and specific conductance for three major tributaries (Stillwater River, Quinapoxet River, and Gates Brook) of the Wachusett Reservoir for the years 2015 and 2016. Linear trendlines are shown with a confidence ribbon representing a 0.95 confidence interval. Logarithmic scales are used for both the x-axis and y-axis."}
 knitr::include_graphics("F:/Nick Zinck/Shiny Apps/GitHub/Thesis/Thesis/images/WAVE features/plots/Corr.png")
 ```
 
 ### Distribution
 
-The distribution of Results of a particular water quality parameter can be visualized in the application. Based on the user selected Locations, Parameter, and Date Range, the user can create a histogram, Density Plot, or box plots. The user has many grouping options in which they can choose from. The user can choose to "color" or facet by "None", "Site", "Year", "Month", or "Season" with the click of a button.
+WAVE contains a distribution plot feature which includes a series of distribution chart types. The user can create histograms, density plots, and box plots to visualize the distribution of measurement results of a particular water quality parameter. The user has many grouping options in which they can choose to "color" or "facet" by "None", "Site", "Year", "Month", or "Season" with the click of a button. Distribution charts generated in WAVE are shown in Figures 6.3 to 6.6. These plots illustrate how the same data can be viewed in various ways by changing the grouping options. A particular grouping option may highlight a specific trend and give insights that would not of else have been apparent.
 
-```{r WAVE plot dist 1, echo=FALSE, out.width = "6.5in", fig.cap="Histogram generated with WAVE showing the distribution of specific Conductance for three major tributaries of the Wachusett Reservoir (Stillwater River, Quinapoxet River, and Gates Brook) for the years 2015 and 2016. Colors are used to represent the  grouping and facets are used to represent the  grouping "}
+```{r WAVE plot dist 1, echo=FALSE, out.width = "6.5in", fig.cap="Density curve chart generated with WAVE showing the distribution of specific conductance for three major tributaries of the Wachusett Reservoir (Stillwater River, Quinapoxet River, and Gates Brook) for the years 2015 and 2016. Colors are used to represent each location and facets are used to represent each year."}
 knitr::include_graphics("F:/Nick Zinck/Shiny Apps/GitHub/Thesis/Thesis/images/WAVE features/plots/Dist-1.png")
 ```
 
-```{r WAVE plot dist 2, echo=FALSE, out.width = "6.5in", fig.cap="Histogram generated with WAVE showing the distribution of specific Conductance for three major tributaries of the Wachusett Reservoir (Stillwater River, Quinapoxet River, and Gates Brook) for the years 2015 and 2016. Colors are used to represent the  grouping and facets are used to represent the  grouping "}
+```{r WAVE plot dist 2, echo=FALSE, out.width = "6.5in", fig.cap="Density curve chart generated with WAVE showing the distribution of specific conductance for three major tributaries of the Wachusett Reservoir (Stillwater River, Quinapoxet River, and Gates Brook) for the years 2015 and 2016. Colors are used to represent each year and facets are used to represent each month."}
 knitr::include_graphics("F:/Nick Zinck/Shiny Apps/GitHub/Thesis/Thesis/images/WAVE features/plots/Dist-2.png")
 ```
 
-```{r WAVE plot dist 3, echo=FALSE, out.width = "6.5in", fig.cap="Histogram generated with WAVE showing the distribution of specific Conductance for three major tributaries of the Wachusett Reservoir (Stillwater River, Quinapoxet River, and Gates Brook) for the years 2015 and 2016. Colors are used to represent the  grouping and facets are used to represent the  grouping "}
+```{r WAVE plot dist 3, echo=FALSE, out.width = "6.5in", fig.cap="Histogram chart generated with WAVE showing the distribution of specific conductance for three major tributaries of the Wachusett Reservoir (Stillwater River, Quinapoxet River, and Gates Brook) for the years 2015 and 2016. Colors are used to represent each location and facets are used to represent each month."}
 knitr::include_graphics("F:/Nick Zinck/Shiny Apps/GitHub/Thesis/Thesis/images/WAVE features/plots/Dist-3.png")
 ```
 
-```{r WAVE plot dist 4, echo=FALSE, out.width = "6.5in", fig.cap="Histogram generated with WAVE showing the distribution of specific Conductance for three major tributaries of the Wachusett Reservoir (Stillwater River, Quinapoxet River, and Gates Brook) for the years 2015 and 2016. Colors are used to represent the  grouping and facets are used to represent the  grouping "}
+```{r WAVE plot dist 4, echo=FALSE, out.width = "6.5in", fig.cap="Box Plot generated with WAVE showing the distribution of specific conductance for three major tributaries of the Wachusett Reservoir (Stillwater River, Quinapoxet River, and Gates Brook) for the years 2015 and 2016. Colors are used to represent each location and facets are used to represent each season"}
 knitr::include_graphics("F:/Nick Zinck/Shiny Apps/GitHub/Thesis/Thesis/images/WAVE features/plots/Dist-4.png")
 ```
 
 ### Heatmap (Interpolated Color Profile Plot)
 
-A Heatmap is useful to visualize profile reservoir data at a specific location throughout the year. A heatmap is an interpolated color matrix plot which will interpolate the values between matirc points to create a smooth color map. WAVE uses a heatmap to represent depth on the y-axis, time on the x-axis, and the values of a particular parameter indicated by a color range. The user can also choose to make this a 3 dimensional heatmap as shown in figure .
+A heatmap is useful to visualize profile reservoir data at a specific location throughout the year. A heatmap is an interpolated color matrix plot which will interpolate the values between matrix points to create a smooth color map. WAVE contains a heatmap feature to visually represent profile data of a water quality parameter for a particular year. The heatmap is configured so depth is on the y-axis, date is on the x-axis, and the values of a particular parameter are indicated by a color range. Heatmaps generated with WAVE to show specific conductance and temperature data for 2015 are shown in Figures 6.7 and 6.8, respectively.
 
 ```{r WAVE plot heatmap sc, echo=FALSE, out.width = "6.5in", fig.cap="Heatmap generated with WAVE showing the specific conductance (uS/cm) in the Wachusett Reservoir at the Basin North Station for the year 2015. Specific conductance profile data is collected approximately every week and was interpoloted to create this heatmap."}
 knitr::include_graphics("F:/Nick Zinck/Shiny Apps/GitHub/Thesis/Thesis/images/WAVE features/plots/Heatmap-sc.png")
@@ -626,7 +611,7 @@ knitr::include_graphics("F:/Nick Zinck/Shiny Apps/GitHub/Thesis/Thesis/images/WA
 
 ### Profile Line Plot
 
-Profile Line Plots are used to show profile data similar to the heat plot. The Line plot better maintains the integrity of the data, since it is less interpolated, yet may be more visually dificult to interprete. There are benefits of both Line plots and heatmaps. Future work may include haveing the ability to show data as points rather than just as connected by lines.
+WAVE contains a profile line plot feature used to visualize profile data. The user can create line plots in which lines are used to represent data points of sampling measurements for a particular parameter, day, and location. Overall, line plots better maintain the integrity of the data better than heatmaps since there is less interpolation, yet may less visually attractive and more difficult to interpret temporal changes. Profile Line plots generated with WAVE to show specific conductance and temperature data for the end of 2016 are shown in Figures 6.9 and 6.10, respectively.
 
 ```{r WAVE plot line-sc, echo=FALSE, out.width = "6.5in", fig.cap="Line plot generated with WAVE showing the specific conductance (uS/cm) in the Wachusett Reservoir at the Basin North Station for September through December of 2016."}
 knitr::include_graphics("F:/Nick Zinck/Shiny Apps/GitHub/Thesis/Thesis/images/WAVE features/plots/Lineplot-sc.png")
@@ -638,7 +623,9 @@ knitr::include_graphics("F:/Nick Zinck/Shiny Apps/GitHub/Thesis/Thesis/images/WA
 
 ### Three Dimensional Profile Plots
 
-```{r WAVE plot heatmap 3d, echo=FALSE, out.width = "6.5in", fig.cap="Three-dimensional heatmap generated with WAVE showing the specific conductance (uS/cm) in the Wachusett Reservoir at the Basin North Station for the year 2015. Specific conductance profile data is collected approximately every week and was interpoloted to create this heatmap."}
+WAVE contains three-dimensional plot features used to create three-dimensional surface plots and three-dimensional scatter plots. These three-dimensional plots can be toggled and rotated by the user and may increase the ability to see trends compared to a two-dimensional heatmap or line plot. Three dimensional plots generated with WAVE to show specific conductance data are shown in Figures 6.11 and 6.12
+
+```{r WAVE plot heatmap 3d, echo=FALSE, out.width = "6.5in", fig.cap="Three-dimensional surface plot generated with WAVE showing the specific conductance (uS/cm) in the Wachusett Reservoir at the Basin North Station for the year 2015. Specific conductance profile data is collected approximately every week and was interpoloted to create this surface plot."}
 knitr::include_graphics("F:/Nick Zinck/Shiny Apps/GitHub/Thesis/Thesis/images/WAVE features/plots/Heatmap-3d.png")
 ```
 
@@ -649,30 +636,27 @@ knitr::include_graphics("F:/Nick Zinck/Shiny Apps/GitHub/Thesis/Thesis/images/WA
 
 ### Phytoplankton
 
-There are many plots available tohelp visualize phytoplankton data with minimal user effort. IN most cases the user will just have to select the year of the data that they are interested in and many plots will then be generated.
-
+WAVE contains features for visualizing phytoplankton data which include the phytoplankton overview plot, taxa plots, and historical comparison plots. The phytoplankton overview shows phytoplankton density data for user selected depth ranges as well as secchi transparency data. A phytoplankton plot generated in WAVE for 2017 can be seen in Figure 6.13. Taxa plots show the density of phytoplankton for a particular taxonomic group with the corresponding early monitoring threshold and treatment consideration threshold. There are fourteen phytoplankton taxa groups in which plots can be created for. A taxa plot generated in WAVE of the Uroglenopsis taxa group in 2017 can be seen Figures 6.14. Historical comparison plots allow the user to compare current levels of a particular phytoplankton taxa group with historical levels. The user can choose to view minimum, average, and maximum levels and can see a variety of date ranges of historical data. A historical comparison plot of the Uroglenopsis taxa group, comparing 2017 data to historical data, can be seen in figure 6.15.
 
 ```{r WAVE plot phyto over, echo=FALSE, out.width = "6.5in", fig.cap="Phytoplankton Overview Plot generated with WAVE showing phytoplankton density and secchi transparency depth at two Wachusett Reservoir Stations, Basin North and Cosgrove Intake, for 2017."}
 knitr::include_graphics("F:/Nick Zinck/Shiny Apps/GitHub/Thesis/Thesis/images/WAVE features/plots/Phyto-over.png")
 ```
 
-```{r WAVE plot phyto ura taxa, echo=FALSE, out.width = "6.5in", fig.cap="Phytoplankton Overview Plot generated with WAVE showing phytoplankton density and secchi transparency depth at two Wachusett Reservoir Stations, Basin North and Cosgrove Intake, for 2017."}
+```{r WAVE plot phyto ura taxa, echo=FALSE, out.width = "6.5in", fig.cap="Phytoplankton taxa plot generated with WAVE showing phytoplankton density of the Uroglenopsis taxa group in 2017 at two Wachusett Reservoir Stations, Basin North and Cosgrove Intake. The early monitoring threshold and treatment consideration threshold for Uroglenopsis is indicated."}
 knitr::include_graphics("F:/Nick Zinck/Shiny Apps/GitHub/Thesis/Thesis/images/WAVE features/plots/Phyto-ura-taxa.png")
 ```
 
-```{r WAVE plot phyto ura hist, echo=FALSE, out.width = "6.5in", fig.cap="Heatmap generated with WAVE showing the temperature (Celsius) in the Wachusett Reservoir at the Basin North Station for the year 2015. Temperature profile data is collected about every week and was interpoloted to create this heatmap."}
+```{r WAVE plot phyto ura hist, echo=FALSE, out.width = "6.5in", fig.cap="Phytoplankton historical comparison plot generated with WAVE showing phytoplankton density of the Uroglenopsis taxa group in 2017 compared with historical records at two Wachusett Reservoir Stations, Basin North and Cosgrove Intake, for 2017. The early monitoring threshold and treatment consideration threshold for Uroglenopsis is indicated."}
 knitr::include_graphics("F:/Nick Zinck/Shiny Apps/GitHub/Thesis/Thesis/images/WAVE features/plots/Phyto-ura-hist.png")
 ```
 
-
 ## Statistics
+
+WAVE contains features that perform statistical analysis. These features include summary statistics, pearson correlation statistics, and eventually Mann-Kendall statistics. Statistical analysis can be performed on a set of data to gain additional insight about the set of data.
 
 ### Summary Statistics
 
-Temporal Statistics can be computed with minimal effort in the application. Based on the user selected query of Locations, Parameters, and Date Range, the following statistics will be calculated for each parameter: number of samples, average result, minimum result, maximum result, 1st quartile (25 percentile), median, 3rd quartile (75 percentile), variance, standard deviation, geometric mean, and Mann-Kendall statistic. Any blank data (represented by NA in R) is ignored for these statistic calculations. The geometric mean is " ". The Mann-Kendall statistic 
-
-Before Statistical calculation, the data can be grouped by Location as well as various types of temporal schemes. The data can be grouped by year, season (independent of year), month (independent of year), season and year, and month and year.
-
+WAVE contains a summary statistics feature which will generate a table of statistics for the user-selected data. The table includes the following statistics: number of samples, average, standard deviation, minimum , 1st quartile, median, 3rd quartile, maximum, and geometric mean. The data is automatically grouped by water quality or quantity parameter, so the statistics will represent only one parameter. Spatial and temporal groupings can also be applied to the data. Spatial groupings consist of grouping by location. Temporal groupings consist of grouping by either year, season (independent of year), month (independent of year), season and year, and month and year. A summary statistics table generated in WAVE for discharge and specific conductance data for the three major tributaries of the Wachusett reservoir for the years of 2015 and 2016 can be seen in Figures 6.16 and 6.17. The table in Figure 6.16 is grouped by Parameter and Location with no temporal grouping. The table in figure 6.17 is grouped by Parameter, Location, and Year.
 
 ```{r WAVE sumstat 1, echo=FALSE, out.width = "6.5in", fig.cap="Summary Stats generated in WAVE showing grouped statistics of discharge and specific Conductance for the three major tributaries of the Wachusett Reservoir (Stillwater River, Quinapoxet River, and Gates Brook) for the years 2015 and 2016. Summary statistics are grouped by Parameter and Site"}
 knitr::include_graphics("F:/Nick Zinck/Shiny Apps/GitHub/Thesis/Thesis/images/WAVE features/stats/SummaryStats-1.png")
@@ -682,24 +666,28 @@ knitr::include_graphics("F:/Nick Zinck/Shiny Apps/GitHub/Thesis/Thesis/images/WA
 knitr::include_graphics("F:/Nick Zinck/Shiny Apps/GitHub/Thesis/Thesis/images/WAVE features/stats/SummaryStats-2.png")
 ```
 
-
 ### Pearson Correlation Matrix
 
-A Pearson correlation matrix can be created in this application. Based on the user selected query information, a correlation matrix is generated to show the correlation of parameters across all of the parameters that the user has selected (the user must select more than one parameter). Positive correlation statistics, R values, are shown in red and negative R values are shown in blue. 
-
-Confidence intervals are calculated to determine the significance of the Pearson correlation coefficient. This is crucial in case the user was to falsely interpret the correlation matrix as significant, when not. 
-
-"Find more out about significance. Add to App"
-
-
+WAVE contains a Pearson correlation matrix feature which will generate a matrix-like graphic representing the Pearson correlation coefficients between water quality and quantity parameters. The pearson correlation coefficeinets will be calcualted across all combinations of the parameters in the selected dataset and will be represented in a color scale on a matrix. Confidence intervals are also calculated to determine the significance of the Pearson correlation coefficient.
 
 ## Maps
 
+WAVE utilizes interactive maps for various features in the application. These features include displaying sampling location information as well as plotting data to a geospatial map.
+
 ### Home Tab
+
+The "Home" tab in WAVE consists of an interactive map that shows the watershed boundaries as well as the sampling locations. The sampling locations markers are generated by the location information in the database. Sampling locations added to the Location Table in the database will show up in WAVE the next time it is open. A user can click on a sampling location marker display pop-up information about that location including location name, Site ID, latitude, longitude, and elevation. The user can zoom in and out of the map and the map images will regenerate appropriately.
+
+```{r WAVE Home, echo=FALSE, out.width = "6.5in", fig.cap="Interactive map generated in WAVE that makes up the 'Home' tab of the application to display sampling locations and provide pop-up information on locations."}
+knitr::include_graphics("F:/Nick Zinck/Shiny Apps/GitHub/Thesis/Thesis/images/WAVE features/maps/Home.png")
+```
 
 ### Geospatial Data Mapping
 
-Spatial trend analysis is incorporated in many locations in the app but primarily lives on the map plot tab. Geospatial plots allows the user to easily compare a parameter statistic across all sites in a visual of plots on their choice of map. Spatial analysis also exists in any tab when multiple sites are chosen for analysis.
+Needs work. 
+
+WAVE contains geospatial plots compare a parameter statistic across all sites in a visual of plots on their choice of map. the statistics include  number of samples, average, standard deviation, minimum , 1st quartile, median, 3rd quartile, maximum, and geometric mean
+
 
 ```{r WAVE geospatial 1, echo=FALSE, out.width = "6.5in", fig.cap="Geospatial plot generated in WAVE the showing the average specific conductance at all the tributary sampling locations in the Wachusett Reservoir watershed during 2016. The average values are represented with a color scale on top of the Stamen TonerLite base map."}
 knitr::include_graphics("F:/Nick Zinck/Shiny Apps/GitHub/Thesis/Thesis/images/WAVE features/maps/Geospatial-1.png")
@@ -709,61 +697,51 @@ knitr::include_graphics("F:/Nick Zinck/Shiny Apps/GitHub/Thesis/Thesis/images/WA
 knitr::include_graphics("F:/Nick Zinck/Shiny Apps/GitHub/Thesis/Thesis/images/WAVE features/maps/Geospatial-2.png")
 ```
 
-
 ## MetaData
 
-Site Locations
+WAVE consists of features to explore metadata further than the information that is contained within the database. The Locations, Parameters, Flag, Sample Flag Index Table
 
 ```{r WAVE meta loc, echo=FALSE, out.width = "6.5in", fig.cap="Location Statistics generated in WAVE showing up-to-date sampling information for the user-selected Stillwater River sampling site."}
 knitr::include_graphics("F:/Nick Zinck/Shiny Apps/GitHub/Thesis/Thesis/images/WAVE features/other/Meta-Location.png")
 ```
 
-
-
-
-Parameters
-
-Flag
-
-Sample Flag Index Table
-
 ## Hydrology
 
  WAVE is not limited to the data that is collected by the DCR and plans to include data from outside organizations including the USGS and the NOAA NCDC. WAVE plans to utilize stream flow data from USGS and meteorology data from the NCDC. 
 
-### Hydrographs
+Hydrographs
 
-### Rating Curves
+Rating Curves
 
-### Loadings
+Loadings
 
 
 
 
 
 \newpage 
-# Discussion and Reccomendations
+# Conclusion
 
-Data science technologies are advancing rapidly which means more efficient methods of dealing with data are available. Much of this technology is available for free and is open source. Companies and industries adopt these technologies at different rates presumably due largely to enconomic incentives. Organizations that utilize the latest data science technologies will likely be more productive and efficient at dealing with their data than those that do not. It is important to adopt new technologies and develop a system to encourage future growth by adopting even newer technologies when timing is ideal. Not all new technology is better, but as more options become available, there will likely be tools that are developed which may fit ones needs better than the previous one that they are using.
+Data science technologies are advancing rapidly which means more efficient methods of dealing with data are available. Much of this technology is available for free and is open source. Companies and industries adopt these technologies at different rates presumably due largely to economic incentives. Organizations that utilize the latest data science technologies will likely be more productive and efficient at dealing with their data than those that do not. It is important to adopt new technologies and develop a system to encourage future growth by adopting even newer technologies when timing is ideal. Not all new technology is better, but as more options become available, there will likely be tools that are developed which may fit ones needs better than the previous one that they are using.
 
-It seems like WIT and WAVE will be integral at the DCR for data entry, query, visualization, and analysis in the foreseable future. Debatably more important that the current application today, is the data organization and thought anout data more.  that this work has . Much unseen effort was put into building (and rebuilding) the application into a well structured organized application built in a way to allow for efficient updates.  The tabular layouts allow for an independent module to be attached to the existing applicaitn.  One can work on an independent module, not attached to the larger applicaiton and the. Shiny is beneficial becuase it is a relatively easy to learn and has a finite amount of learnign associated with it. Python is another Language that could be considered if one was to undergo another application, though it seems like R and Shiny were the best choice for this project. Hopefully in the future, several people are knowlegeable on how the application works and is . Collaboration is very easy with an applcition like this and should be taken advantage of.
+It seems like WIT and WAVE will be integral at the DCR for data entry, query, visualization, and analysis in the foreseeable future. Debatably more important that the current application today, is the data organization and thought about data more.  that this work has . Much unseen effort was put into building (and rebuilding) the application into a well structured organized application built in a way to allow for efficient updates.  The tabular layouts allow for an independent module to be attached to the existing application.  One can work on an independent module, not attached to the larger application and the. Shiny is beneficial because it is a relatively easy to learn and has a finite amount of learning associated with it. Python is another Language that could be considered if one was to undergo another application, though it seems like R and Shiny were the best choice for this project. Hopefully in the future, several people are knowledgeable on how the application works and is . Collaboration is very easy with an application like this and should be taken advantage of.
 
-This project has really set the foundation for the WIT and WAVE application, yet there is growth to come for these applications. There is already a long list of potential new features to add to WAVE. Some of these features are currently in the development includeing Hydrology and Meteorology tabs which involve stage, rating curves, loading, and precipitation. Other features that may come in the foreseaable future include report generation, more advanced statistical analysis (e.g Mann-Kendall statistic), and and the inclusion of forestry data and MWRA data. 
+This project has really set the foundation for the WIT and WAVE application, yet there is growth to come for these applications. There is already a long list of potential new features to add to WAVE. Some of these features are currently in the development including Hydrology and Meteorology tabs which involve stage, rating curves, loading, and precipitation. Other features that may come in the foreseeable future include report generation, more advanced statistical analysis (e.g Mann-Kendall statistic), and and the inclusion of forestry data and MWRA data. 
 A system 
 
 
-This also includes having a system in place for sufficient growth in the future. Data needs to be in the apprporaite accessible format to be utilized with these programs. A proper system should be set in place to allow for. less time on day to day and more time on analyzing and visualizing data. This new data can also lead to smarter data gathering methods and further improved efficieny which thus frees up more time for studies. The 
+This also includes having a system in place for sufficient growth in the future. Data needs to be in the appropriate accessible format to be utilized with these programs. A proper system should be set in place to allow for. less time on day to day and more time on analyzing and visualizing data. This new data can also lead to smarter data gathering methods and further improved efficiency which thus frees up more time for studies. The 
 
 
-It is important that a system is put in place to allow for data science to occur efficiently and to allow for the grouwth in the future. The development of a dynamic application that can adapt to changing technologies is a great feature to have. Moving away from daily spreadsheet storage and computations and through automation is a huge step that many organizations should take in making their activities more productive.
+It is important that a system is put in place to allow for data science to occur efficiently and to allow for the growth in the future. The development of a dynamic application that can adapt to changing technologies is a great feature to have. Moving away from daily spreadsheet storage and computations and through automation is a huge step that many organizations should take in making their activities more productive.
 
 This work has attempted to provide a next step in the data work of the DCR. WAVE and WIT are not finished projects and they never intend to be so. 
 
 
 
-The insights that WAVE will bring will hopefully modify the direction of WIT and WAVE. ew insights could lead to further invesitgation and more specific visualization and analysis techniques which will be incorporated into WAVE. New insights could alter sampling routine or procedures which will have an effect on how WIT operates. 
+The insights that WAVE will bring will hopefully modify the direction of WIT and WAVE. new insights could lead to further investigation and more specific visualization and analysis techniques which will be incorporated into WAVE. New insights could alter sampling routine or procedures which will have an effect on how WIT operates. 
 
-Will help with emerging Water qulaity concerns.
+Will help with emerging Water quality concerns.
 
 
 
