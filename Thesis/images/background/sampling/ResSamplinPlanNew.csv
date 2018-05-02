@@ -21,7 +21,6 @@ Chlorophyll,Reservoir,Quabbin,Profile
 Blue Green Algae,Reservoir,Quabbin,Profile
 E. coli,Reservoir,Wachusett,One Sample
 Fecal Coliform,Reservoir,Wachusett,One Sample
-Calcium(II),Reservoir,Wachusett,One Sample
 Alkalinity,Reservoir,Wachusett,Three Depths
 Ammonia,Reservoir,Wachusett,Three Depths
 Nitrate,Reservoir,Wachusett,Three Depths
@@ -30,7 +29,6 @@ Total Phosphorus,Reservoir,Wachusett,Three Depths
 Silicon Dioxide,Reservoir,Wachusett,Three Depths
 Mean UV254,Reservoir,Wachusett,Three Depths
 Dissolved Silica,Reservoir,Wachusett,Three Depths
-Total Suspended Solids,Reservoir,Wachusett,Three Depths
 Specific Conductance,Reservoir,Wachusett,Profile
 Water Temperature,Reservoir,Wachusett,Profile
 Dissolved Oxygen,Reservoir,Wachusett,Profile

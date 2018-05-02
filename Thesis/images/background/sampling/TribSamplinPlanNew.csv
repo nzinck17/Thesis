@@ -1,5 +1,4 @@
 Parameter,Type,Location,Method
-,,,
 Specific Conductance,Tributary,Quabbin,One Sample
 Turbidity,Tributary,Quabbin,One Sample
 Water Temperature,Tributary,Quabbin,One Sample
@@ -44,5 +43,5 @@ Nitrate,Tributary,Wachusett,One Sample
 Total Phosphorus,Tributary,Wachusett,One Sample
 Total Kjeldahl Nitrogen,Tributary,Wachusett,One Sample
 Total Organic Carbon,Tributary,Wachusett,One Sample
-Total Suspended Solids,Tributary,Wachusett,One Sample
-Discharge,Tributary,Wachusett,One Sample
+Orthophosphate,Tributary,Wachusett,One Sample
+Nitrite,Tributary,Wachusett,One Sample
